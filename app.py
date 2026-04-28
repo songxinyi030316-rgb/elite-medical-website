@@ -9,6 +9,12 @@ ROOT = Path(__file__).parent
 DATA_PATH = ROOT / "data" / "products.json"
 HERO_IMAGE = "/public/hero/cover.png"
 HERO_IMAGE_PATH = ROOT / HERO_IMAGE.lstrip("/")
+ICON_DIR = ROOT / "public" / "icons"
+LOGO_PATH = ICON_DIR / "logo.png"
+EXPERIENCE_ICON_PATH = ICON_DIR / "experience.png"
+CE_ICON_PATH = ICON_DIR / "ce.png"
+ISO_ICON_PATH = ICON_DIR / "iso.png"
+SERVICE_ICON_PATH = ICON_DIR / "service.png"
 
 GREEN = "#118457"
 DARK = "#25302b"
@@ -211,6 +217,10 @@ hero_background_css = (
     if hero_background
     else "linear-gradient(90deg, rgba(7, 74, 50, .94) 0%, rgba(11, 108, 70, .24) 100%)"
 )
+experience_icon = image_data_uri(EXPERIENCE_ICON_PATH)
+ce_icon = image_data_uri(CE_ICON_PATH)
+iso_icon = image_data_uri(ISO_ICON_PATH)
+service_icon = image_data_uri(SERVICE_ICON_PATH)
 
 st.set_page_config(page_title="Elite Medical Product Catalog", layout="wide")
 
@@ -248,6 +258,10 @@ st.markdown(
     section[data-testid="stSidebar"] {{
         background: #f4fbf7;
         border-right: 1px solid #dcefe5;
+    }}
+    section[data-testid="stSidebar"] img {{
+        max-width: 160px;
+        margin-bottom: .5rem;
     }}
     .section-card, .trust-card, .category-card, .product-shell, .quote-card, .contact-card {{
         border: 1px solid #dcefe5;
@@ -381,20 +395,13 @@ st.markdown(
         border: 1px solid #e0eee6;
         border-radius: 14px;
         background: #ffffff;
-        padding: .85rem;
-        min-height: 120px;
+        padding: 1rem .85rem;
+        min-height: 154px;
         box-shadow: 0 10px 28px rgba(17, 132, 87, .08);
-    }}
-    .feature-icon {{
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
-        display: grid;
-        place-items: center;
-        background: #e8f7ef;
-        color: {GREEN};
-        font-weight: 950;
-        margin-bottom: .55rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }}
     .feature-card strong {{
         display: block;
@@ -402,6 +409,13 @@ st.markdown(
         font-size: .98rem;
         line-height: 1.2;
         margin-bottom: .28rem;
+    }}
+    .feature-icon-img {{
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+        margin: 0 auto .6rem;
+        display: block;
     }}
     .feature-card span {{
         color: {MUTED};
@@ -624,6 +638,9 @@ st.radio(
     label_visibility="collapsed",
 )
 
+if LOGO_PATH.exists():
+    st.sidebar.image(str(LOGO_PATH), width=150)
+
 if st.session_state.current_page == "Products":
     st.sidebar.header("Product Navigation")
     st.sidebar.selectbox(
@@ -700,7 +717,7 @@ if st.session_state.current_page == "Home":
         )
 
     st.markdown(
-        """
+        f"""
         <section class="company-section">
           <div class="company-layout">
             <div class="company-text">
@@ -721,24 +738,24 @@ if st.session_state.current_page == "Home":
             </div>
             <div class="feature-grid">
               <div class="feature-card">
-                <div class="feature-icon">10+</div>
+                <img class="feature-icon-img" src="{experience_icon}" alt="10+ Years Experience">
                 <strong>10+ Years Experience</strong>
                 <span>Manufacturing and export support for medical product buyers.</span>
               </div>
               <div class="feature-card">
-                <div class="feature-icon">CE</div>
+                <img class="feature-icon-img" src="{ce_icon}" alt="CE Approved">
                 <strong>CE Approved</strong>
                 <span>Product supply prepared for international medical markets.</span>
               </div>
               <div class="feature-card">
-                <div class="feature-icon">ISO</div>
-                <strong>ISO13485 Certified</strong>
+                <img class="feature-icon-img" src="{iso_icon}" alt="ISO13485:2016 Certified">
+                <strong>ISO13485:2016 Certified</strong>
                 <span>Certified facilities and quality management support.</span>
               </div>
               <div class="feature-card">
-                <div class="feature-icon">OEM</div>
-                <strong>Customization Available</strong>
-                <span>Private label, sourcing, and product requirement support.</span>
+                <img class="feature-icon-img" src="{service_icon}" alt="One-stop Medical Sourcing">
+                <strong>One-stop Medical Sourcing</strong>
+                <span>Product sourcing and quotation support for procurement teams.</span>
               </div>
             </div>
           </div>
