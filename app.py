@@ -1520,9 +1520,7 @@ st.markdown(
         align-items: center;
         justify-content: space-between;
         gap: .8rem;
-        margin: .65rem 0 .7rem;
-        padding-top: .45rem;
-        border-top: 1px solid #e4f2ea;
+        margin: .45rem 0 .7rem;
     }}
     .catalog-count-line strong {{
         color: {DARK};
@@ -1537,12 +1535,14 @@ st.markdown(
         display: none;
     }}
     div[data-testid="element-container"]:has(.compare-panel-marker) + div[data-testid="stVerticalBlock"] {{
-        margin: .9rem 0 1.35rem;
-        padding: 1rem;
-        border-radius: 18px;
-        border: 1px solid #cfead9;
-        background: linear-gradient(135deg, #edf9f3 0%, #ffffff 72%);
-        box-shadow: 0 14px 32px rgba(17, 132, 87, .08);
+        margin: 1.05rem 0 0;
+        padding: 1.45rem 1.55rem;
+        border-radius: 20px;
+        border: 1px solid #c8ead7;
+        background:
+            radial-gradient(circle at 96% 8%, rgba(188, 235, 208, .32), rgba(188, 235, 208, 0) 32%),
+            linear-gradient(135deg, #edf9f3 0%, #fbfffd 72%);
+        box-shadow: 0 16px 38px rgba(17, 132, 87, .10);
     }}
     .compare-panel-header {{
         display: flex;
@@ -1613,6 +1613,24 @@ st.markdown(
         color: {DARK};
         font-weight: 950;
         font-size: 1rem;
+    }}
+    .product-grid-divider {{
+        display: flex;
+        align-items: center;
+        gap: .85rem;
+        margin: 36px 0 28px;
+        color: {GREEN};
+        font-size: .78rem;
+        font-weight: 950;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+    }}
+    .product-grid-divider::before,
+    .product-grid-divider::after {{
+        content: "";
+        height: 1px;
+        background: #dcefe5;
+        flex: 1 1 auto;
     }}
     .sidebar-category-list {{
         border-top: 1px solid #dcefe5;
@@ -2270,6 +2288,7 @@ elif page == "products":
         and matches_search(product, search_query)
     ]
 
+    st.markdown('<div class="product-grid-divider">Browse Products</div>', unsafe_allow_html=True)
     st.markdown(
         f"""
         <div class="catalog-count-line">
