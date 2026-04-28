@@ -291,19 +291,57 @@ def variant_summary(product):
     return "REF/spec: " + "; ".join(summaries)
 
 
+def sample_ref_summary(product):
+    variants = product.get("variants", [])
+    if not variants:
+        return "Sample REF: needs review"
+
+    variant = variants[0]
+    ref = str(variant.get("ref", "needs_review"))
+    spec = str(variant.get("spec", "needs_review"))
+    return f"Sample REF: {ref} ({spec})"
+
+
+def chatbot_search_text(product):
+    variants = product.get("variants", [])
+    variant_text = " ".join(
+        " ".join(
+            [
+                str(variant.get("spec", "")),
+                str(variant.get("ref", "")),
+            ]
+        )
+        for variant in variants
+        if isinstance(variant, dict)
+    )
+    return " ".join(
+        [
+            str(product.get("name", "")),
+            str(product.get("category", "")),
+            str(product.get("raw_category", "")),
+            str(product.get("id", "")),
+            variant_text,
+        ]
+    ).lower()
+
+
 def search_products_for_chat(query, products):
     cleaned_query = str(query).lower().strip()
     if not cleaned_query:
         return []
 
-    matches = []
+    keywords = [word for word in cleaned_query.split() if word]
+    scored_matches = []
     for product in products:
-        if matches_search(product, cleaned_query):
-            matches.append(product)
-        if len(matches) == 5:
-            break
+        searchable = chatbot_search_text(product)
+        keyword_hits = sum(1 for keyword in keywords if keyword in searchable)
+        phrase_hit = cleaned_query in searchable
+        if phrase_hit or keyword_hits:
+            score = keyword_hits + (10 if phrase_hit else 0)
+            scored_matches.append((score, product))
 
-    return matches
+    scored_matches.sort(key=lambda item: item[0], reverse=True)
+    return [product for _, product in scored_matches[:5]]
 
 
 def build_chatbot_reply(query, products):
@@ -314,7 +352,8 @@ def build_chatbot_reply(query, products):
             "for sourcing support.\n\n"
             "Email: info@elitemedline.com\n"
             "Website: www.elitemedline.com\n\n"
-            "You can also submit a quote request through the Contact page."
+            "You can also submit a quote request through the Contact page.\n\n"
+            "Try searching: dressing, bandage, respiratory"
         )
 
     lines = ["Here are matching products from the Elite Medical catalog:"]
@@ -324,7 +363,7 @@ def build_chatbot_reply(query, products):
                 [
                     f"- {product['name']}",
                     f"  Category: {product['category']}",
-                    f"  {variant_summary(product)}",
+                    f"  {sample_ref_summary(product)}",
                 ]
             )
         )
