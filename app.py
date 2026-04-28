@@ -19,6 +19,7 @@ SERVICE_ICON_PATH = ICON_DIR / "service.png"
 COMPANY_DIR = ROOT / "public" / "company"
 COMPANY_IMAGE_PATH = COMPANY_DIR / "company.png"
 INNER_COMPANY_IMAGE_PATH = COMPANY_DIR / "innercompany.png"
+EXPORT_MAP_PATH = ROOT / "public" / "map.png"
 
 GREEN = "#118457"
 DARK = "#25302b"
@@ -313,9 +314,19 @@ def render_trust_section():
     )
 
 
-def render_export_markets_section():
-    st.markdown(
+def render_export_markets_section(show_map=False):
+    map_image = image_data_uri(EXPORT_MAP_PATH) if show_map else ""
+    map_html = (
+        f"""
+          <div class="export-map-wrap">
+            <img src="{map_image}" alt="Global export markets map">
+          </div>
         """
+        if map_image
+        else ""
+    )
+    st.markdown(
+        f"""
         <section class="export-section">
           <div>
             <span>Export Markets</span>
@@ -331,6 +342,7 @@ def render_export_markets_section():
             <div>Southeast Asia</div>
             <div>North America</div>
           </div>
+          {map_html}
         </section>
         """,
         unsafe_allow_html=True,
@@ -360,7 +372,7 @@ def render_faq_section():
     with st.expander("Can customers request customization?"):
         st.write("Yes. Customization services are available for suitable products, packaging, and sourcing requirements.")
     with st.expander("How can I request a quotation?"):
-        st.write("Use the Quick Request a Quote form, Contact page, or product Contact Now button with product name, quantity, and target market.")
+        st.write("Use the Contact page or a product Contact Now button with product name, quantity, and target market.")
 
 
 def render_quick_rfq(form_key, compact_title="Quick Request a Quote"):
@@ -918,27 +930,6 @@ st.markdown(
         border-bottom: 3px solid {GREEN};
         border-radius: 0;
     }}
-    div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div[data-testid="column"]:last-child div.stButton > button {{
-        min-height: 44px;
-        padding: 0 1.08rem;
-        border-radius: 999px;
-        background: #18a66a;
-        border: 1px solid #18a66a;
-        color: #ffffff !important;
-        text-decoration: none !important;
-        font-weight: 900;
-        white-space: nowrap;
-        box-shadow: 0 12px 24px rgba(17, 132, 87, .18);
-        transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
-    }}
-    div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div[data-testid="column"]:last-child div.stButton > button:hover {{
-        background: #128b59;
-        border-color: #128b59;
-        color: #ffffff !important;
-        text-decoration: none !important;
-        box-shadow: 0 14px 28px rgba(17, 132, 87, .24);
-        transform: translateY(-1px);
-    }}
     section[data-testid="stSidebar"] {{
         background: #f4fbf7;
         border-right: 1px solid #dcefe5;
@@ -1224,6 +1215,22 @@ st.markdown(
         font-weight: 900;
         text-align: center;
         box-shadow: 0 8px 20px rgba(17, 132, 87, .06);
+    }}
+    .export-map-wrap {{
+        grid-column: 1 / -1;
+        margin-top: .25rem;
+        border-radius: 16px;
+        border: 1px solid #dcefe5;
+        background: #ffffff;
+        padding: .55rem;
+        overflow: hidden;
+    }}
+    .export-map-wrap img {{
+        width: 100%;
+        max-height: 330px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
     }}
     .about-hero {{
         min-height: 370px;
@@ -1887,7 +1894,7 @@ if "last_quick_rfq" not in st.session_state:
 
 logo_tag = f'<img src="{logo_image}" alt="Elite Medical logo">' if logo_image else ""
 st.markdown('<span class="site-header-marker"></span>', unsafe_allow_html=True)
-header_columns = st.columns([2.45, .72, 1.02, .9, .88, 1.35])
+header_columns = st.columns([3.4, .82, 1.08, .98, .98])
 with header_columns[0]:
     st.markdown(
         f"""
@@ -1898,7 +1905,7 @@ with header_columns[0]:
         """,
         unsafe_allow_html=True,
     )
-for column, (page_slug, page_label) in zip(header_columns[1:5], PAGES):
+for column, (page_slug, page_label) in zip(header_columns[1:], PAGES):
     with column:
         st.button(
             page_label,
@@ -1908,14 +1915,6 @@ for column, (page_slug, page_label) in zip(header_columns[1:5], PAGES):
             on_click=navigate_to,
             args=(page_slug,),
         )
-with header_columns[5]:
-    st.button(
-        "Request a Quote",
-        key="nav_request_quote",
-        width="stretch",
-        on_click=navigate_to,
-        args=("contact",),
-    )
 
 if LOGO_PATH.exists():
     st.sidebar.image(str(LOGO_PATH), width=150)
@@ -2044,8 +2043,7 @@ if page == "home":
     )
 
     render_trust_section()
-    render_export_markets_section()
-    render_quick_rfq("home_quick_rfq")
+    render_export_markets_section(show_map=True)
 
 elif page == "about":
     st.markdown(
@@ -2219,8 +2217,6 @@ elif page == "products":
         ):
             with column:
                 render_product_card(product, start + offset)
-
-    render_quick_rfq("products_quick_rfq")
 
 else:
     st.markdown(
