@@ -279,37 +279,6 @@ def render_section_heading(kicker, title, body=""):
     )
 
 
-def render_trust_section():
-    first_image = about_background
-    second_image = inner_company_image
-    image_html = "".join(
-        f'<img src="{image}" alt="Elite Medical production and company environment">'
-        for image in [first_image, second_image]
-        if image
-    )
-    st.markdown(
-        f"""
-        <section class="why-elite-section">
-          <div class="why-elite-copy">
-            <span>Why Choose Elite Medical</span>
-            <h2>Reliable manufacturing and export support for medical buyers.</h2>
-            <p>
-              Elite Medical combines medical product manufacturing experience,
-              practical sourcing support, and export-focused service for B2B
-              distributors, hospitals, and procurement teams. Our team helps buyers
-              move from product selection to quotation and documentation with clear
-              communication and quality-minded supply coordination.
-            </p>
-          </div>
-          <div class="why-elite-images">
-            {image_html}
-          </div>
-        </section>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
 def render_export_markets_section(show_map=False):
     map_image = image_data_uri(EXPORT_MAP_PATH) if show_map else ""
     if map_image:
@@ -1171,45 +1140,18 @@ st.markdown(
         background: #ffffff;
         box-shadow: 0 12px 34px rgba(17, 132, 87, .08);
     }}
-    .why-elite-section {{
-        max-width: 1120px;
-        margin: 1.05rem auto;
-        display: grid;
-        grid-template-columns: minmax(0, .95fr) minmax(420px, 1.05fr);
-        gap: 1.1rem;
-        align-items: center;
-        padding: .3rem 0;
-    }}
-    .why-elite-copy span, .export-section span, .quick-rfq-copy span {{
+    .export-section span, .quick-rfq-copy span {{
         color: {GREEN};
         font-size: .76rem;
         font-weight: 950;
         text-transform: uppercase;
         letter-spacing: .06em;
     }}
-    .why-elite-copy h2, .export-section h2, .quick-rfq-copy h2 {{
+    .export-section h2, .quick-rfq-copy h2 {{
         color: {DARK};
         margin: .12rem 0 0;
         font-size: 1.38rem;
         line-height: 1.18;
-    }}
-    .why-elite-copy p {{
-        color: {MUTED};
-        line-height: 1.6;
-        margin: .55rem 0 0;
-    }}
-    .why-elite-images {{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: .75rem;
-    }}
-    .why-elite-images img {{
-        width: 100%;
-        height: 210px;
-        object-fit: cover;
-        border-radius: 16px;
-        border: 1px solid #dcefe5;
-        box-shadow: 0 12px 28px rgba(37, 48, 43, .12);
     }}
     .quick-rfq {{
         padding: .95rem;
@@ -1931,7 +1873,7 @@ st.markdown(
             min-height: 38px;
             font-size: .9rem;
         }}
-        .stat-grid, .company-layout, .about-grid, .about-card-grid, .certificate-grid, .why-elite-section, .why-elite-images, .export-section {{
+        .stat-grid, .company-layout, .about-grid, .about-card-grid, .certificate-grid, .export-section {{
             grid-template-columns: 1fr;
         }}
         .market-grid {{
@@ -2129,13 +2071,14 @@ if page == "home":
         <section class="company-section">
           <div class="company-layout">
             <div class="company-text">
-              <div class="company-eyebrow">Company Introduction</div>
-              <h2>Elite Medical (Nanjing) Co., Ltd.</h2>
+              <div class="company-eyebrow">COMPANY INTRODUCTION</div>
+              <h2>Reliable B2B Medical Product Supplier</h2>
               <p>
-                Based in Nanjing, China, Elite Medical supports international B2B
-                customers with dependable medical product sourcing and export service.
-                The company provides disposable medical products, medical consumables,
-                laboratory consumables, surgical supplies, and hospital equipment.
+                Elite Medical (Nanjing) Co., Ltd. supports international buyers
+                with medical consumables, surgical supplies, laboratory consumables,
+                and hospital equipment. With CE approved products, ISO13485:2016
+                certified facilities, and one-stop sourcing support, we help
+                procurement teams source products efficiently.
               </p>
               <div class="company-points">
                 <div class="company-point">More than 10 years experience</div>
@@ -2172,7 +2115,6 @@ if page == "home":
         unsafe_allow_html=True,
     )
 
-    render_trust_section()
     render_export_markets_section(show_map=True)
 
 elif page == "about":
