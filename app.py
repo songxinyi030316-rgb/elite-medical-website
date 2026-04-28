@@ -143,6 +143,10 @@ def reset_filters():
     st.session_state.product_search = ""
 
 
+def navigate_to(page):
+    st.session_state.current_page = page
+
+
 def render_section_heading(kicker, title, body=""):
     st.markdown(
         f"""
@@ -201,15 +205,27 @@ st.markdown(
     }}
     .block-container {{
         max-width: 1220px;
-        padding-top: 1.4rem;
+        padding-top: 1rem;
         padding-bottom: 2rem;
     }}
     h1, h2, h3, p {{
         color: {DARK};
     }}
-    div[data-testid="stTabs"] button {{
-        color: {DARK};
-        font-weight: 800;
+    div[role="radiogroup"] {{
+        gap: .45rem;
+        margin-bottom: .9rem;
+    }}
+    div[role="radiogroup"] label {{
+        border: 1px solid #dcefe5;
+        border-radius: 999px;
+        background: #ffffff;
+        padding: .25rem .8rem;
+        box-shadow: 0 6px 16px rgba(17, 132, 87, .06);
+    }}
+    div[role="radiogroup"] label[data-checked="true"] {{
+        background: {GREEN};
+        border-color: {GREEN};
+        color: #ffffff;
     }}
     section[data-testid="stSidebar"] {{
         background: #f4fbf7;
@@ -229,7 +245,7 @@ st.markdown(
         box-shadow: 0 10px 30px rgba(17, 132, 87, .08);
     }}
     .hero-copy {{
-        padding: 1.5rem;
+        padding: 1.35rem;
         background: linear-gradient(135deg, #effaf4 0%, #ffffff 76%);
         border-left: 7px solid {GREEN};
     }}
@@ -241,7 +257,7 @@ st.markdown(
         margin-bottom: .45rem;
     }}
     .hero-title {{
-        font-size: 2.7rem;
+        font-size: 2.45rem;
         line-height: 1.02;
         font-weight: 950;
         margin-bottom: .75rem;
@@ -252,32 +268,15 @@ st.markdown(
         line-height: 1.5;
         max-width: 720px;
     }}
-    .cta-row {{
-        display: flex;
-        gap: .7rem;
-        flex-wrap: wrap;
-        margin-top: 1rem;
-    }}
-    .primary-cta, .secondary-cta {{
-        display: inline-block;
-        border-radius: 999px;
-        padding: .68rem 1rem;
-        font-weight: 850;
-    }}
-    .primary-cta {{
-        background: {GREEN};
-        color: #ffffff;
-    }}
-    .secondary-cta {{
-        border: 1px solid #b9dfc9;
-        color: {GREEN};
-        background: #ffffff;
-    }}
     .hero-visual {{
-        padding: 1rem;
+        padding: .8rem;
         background:
             radial-gradient(circle at 15% 15%, #c7ecd6 0, transparent 26%),
             linear-gradient(145deg, #f5fcf7 0%, #ffffff 66%);
+    }}
+    .hero-visual img {{
+        border-radius: 12px;
+        box-shadow: 0 16px 34px rgba(17, 132, 87, .18);
     }}
     .visual-grid {{
         display: grid;
@@ -312,6 +311,84 @@ st.markdown(
     .section-card {{
         padding: 1.15rem;
         background: {LIGHT_GREEN};
+    }}
+    .company-gradient {{
+        border-radius: 18px;
+        padding: 1.1rem;
+        margin: .7rem 0 .95rem;
+        background:
+            linear-gradient(135deg, rgba(17,132,87,.97), rgba(35,165,101,.88)),
+            radial-gradient(circle at 82% 18%, rgba(255,255,255,.24), transparent 34%);
+        box-shadow: 0 16px 38px rgba(17, 132, 87, .18);
+    }}
+    .company-grid {{
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+        gap: .9rem;
+        align-items: stretch;
+    }}
+    .company-copy, .company-panel {{
+        border-radius: 14px;
+        padding: 1rem;
+        background: rgba(255,255,255,.13);
+        border: 1px solid rgba(255,255,255,.25);
+    }}
+    .company-copy h2, .company-copy p, .company-copy strong,
+    .company-panel strong, .company-panel span {{
+        color: #ffffff;
+    }}
+    .company-copy h2 {{
+        margin: 0 0 .45rem;
+        font-size: 1.55rem;
+        line-height: 1.16;
+    }}
+    .company-copy p {{
+        margin: 0;
+        line-height: 1.55;
+    }}
+    .company-panel {{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .6rem;
+    }}
+    .mini-badge {{
+        border-radius: 12px;
+        background: rgba(255,255,255,.18);
+        padding: .7rem;
+        min-height: 88px;
+    }}
+    .mini-badge strong {{
+        display: block;
+        font-size: .95rem;
+        line-height: 1.16;
+        margin-bottom: .25rem;
+    }}
+    .mini-badge span {{
+        font-size: .78rem;
+        line-height: 1.25;
+    }}
+    .intro-strip {{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: .75rem;
+        margin-bottom: .95rem;
+    }}
+    .intro-item {{
+        border-radius: 14px;
+        border: 1px solid #dcefe5;
+        background: #ffffff;
+        padding: .85rem;
+        box-shadow: 0 10px 24px rgba(17, 132, 87, .07);
+    }}
+    .intro-item strong {{
+        display: block;
+        color: {DARK};
+        margin-bottom: .25rem;
+    }}
+    .intro-item span {{
+        color: {MUTED};
+        font-size: .88rem;
+        line-height: 1.35;
     }}
     .stat-grid {{
         display: grid;
@@ -411,6 +488,21 @@ st.markdown(
         padding: 1.15rem;
         background: #f8fdf9;
     }}
+    .contact-hero {{
+        border-radius: 18px;
+        padding: 1.1rem;
+        margin-bottom: .85rem;
+        background: linear-gradient(135deg, #eefaf3 0%, #ffffff 74%);
+        border: 1px solid #dcefe5;
+        border-left: 7px solid {GREEN};
+    }}
+    .contact-hero h2 {{
+        margin: 0 0 .25rem;
+    }}
+    .contact-hero p {{
+        color: {MUTED};
+        margin: 0;
+    }}
     .footer {{
         margin-top: 1.1rem;
         padding: 1rem 1.15rem;
@@ -433,12 +525,25 @@ st.markdown(
         border-color: {GREEN};
         color: {GREEN};
     }}
+    div.stButton > button[kind="primary"] {{
+        background: {GREEN};
+        border-color: {GREEN};
+        color: #ffffff;
+    }}
+    div.stButton > button[kind="primary"]:hover {{
+        background: #0c6f49;
+        border-color: #0c6f49;
+        color: #ffffff;
+    }}
     @media (max-width: 900px) {{
-        .site-hero, .stat-grid {{
+        .site-hero, .stat-grid, .company-grid, .intro-strip {{
             grid-template-columns: 1fr;
         }}
         .hero-title {{
             font-size: 2rem;
+        }}
+        .company-panel {{
+            grid-template-columns: 1fr;
         }}
     }}
     </style>
@@ -449,40 +554,62 @@ st.markdown(
 products = load_products()
 counts = category_counts(products)
 
+if "current_page" not in st.session_state:
+    st.session_state.current_page = "Home"
 if "product_category" not in st.session_state:
     st.session_state.product_category = "All Categories"
 if "product_search" not in st.session_state:
     st.session_state.product_search = ""
 
-st.sidebar.header("Product Navigation")
-st.sidebar.selectbox(
-    "Category filter",
-    ["All Categories", *CORE_CATEGORIES],
-    key="product_category",
+st.radio(
+    "Navigation",
+    ["Home", "Products", "Contact"],
+    key="current_page",
+    horizontal=True,
+    label_visibility="collapsed",
 )
-st.sidebar.text_input(
-    "Search by product name or REF code",
-    key="product_search",
-)
-st.sidebar.button("Reset filter", on_click=reset_filters)
-st.sidebar.markdown("**Categories**")
-st.sidebar.markdown('<div class="sidebar-category-list">', unsafe_allow_html=True)
-for category in CORE_CATEGORIES:
+
+if st.session_state.current_page == "Products":
+    st.sidebar.header("Product Navigation")
+    st.sidebar.selectbox(
+        "Category filter",
+        ["All Categories", *CORE_CATEGORIES],
+        key="product_category",
+    )
+    st.sidebar.text_input(
+        "Search by product name or REF code",
+        key="product_search",
+    )
+    st.sidebar.button("Reset filter", on_click=reset_filters)
+    st.sidebar.markdown("**Categories**")
+    st.sidebar.markdown('<div class="sidebar-category-list">', unsafe_allow_html=True)
+    for category in CORE_CATEGORIES:
+        st.sidebar.markdown(
+            f"""
+            <div class="sidebar-category-row">
+              <span>{category}</span>
+              <span>{counts.get(category, 0)}</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    st.sidebar.markdown("</div>", unsafe_allow_html=True)
+else:
+    st.sidebar.markdown("### ELITE MEDICAL")
+    st.sidebar.write("Professional B2B medical product supplier in China.")
     st.sidebar.markdown(
-        f"""
-        <div class="sidebar-category-row">
-          <span>{category}</span>
-          <span>{counts.get(category, 0)}</span>
+        """
+        <div class="sidebar-category-list">
+          <div class="sidebar-category-row"><span>CE Approved</span><span>Yes</span></div>
+          <div class="sidebar-category-row"><span>ISO13485:2016</span><span>Certified</span></div>
+          <div class="sidebar-category-row"><span>Catalog Products</span><span>{}</span></div>
         </div>
-        """,
+        """.format(len(products)),
         unsafe_allow_html=True,
     )
-st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
-home_tab, products_tab, contact_tab = st.tabs(["Home", "Products", "Contact"])
-
-with home_tab:
-    hero_left, hero_right = st.columns([1.35, .85])
+if st.session_state.current_page == "Home":
+    hero_left, hero_right = st.columns([1.08, .92])
     with hero_left:
         st.markdown(
             """
@@ -490,37 +617,62 @@ with home_tab:
               <div class="text-logo">ELITE MEDICAL</div>
               <div class="hero-title">Medical Product Catalog 2025</div>
               <div class="hero-body">
-                B2B medical consumables and healthcare supplies manufacturer based in
-                Nanjing, China, serving distributors, hospitals, and procurement teams
-                with export-ready product sourcing.
-              </div>
-              <div class="cta-row">
-                <span class="primary-cta">View Products</span>
-                <span class="secondary-cta">Request a Quote</span>
+                B2B medical consumables, disposable medical products, laboratory
+                consumables, and healthcare supplies from a reliable medical product
+                partner in China.
               </div>
             </div>
             """,
             unsafe_allow_html=True,
         )
+        button_col_1, button_col_2, _ = st.columns([.9, .95, 1.25])
+        with button_col_1:
+            st.button(
+                "View Products",
+                type="primary",
+                use_container_width=True,
+                on_click=navigate_to,
+                args=("Products",),
+            )
+        with button_col_2:
+            st.button(
+                "Request a Quote",
+                use_container_width=True,
+                on_click=navigate_to,
+                args=("Contact",),
+            )
     with hero_right:
         st.markdown('<div class="hero-visual">', unsafe_allow_html=True)
-        st.markdown('<div class="visual-note">Elite Medical product showcase</div>', unsafe_allow_html=True)
+        st.markdown('<div class="visual-note">Brochure cover and product identity</div>', unsafe_allow_html=True)
         if HERO_IMAGE_PATH.exists():
-            st.image(str(HERO_IMAGE_PATH), use_container_width=True)
+            st.image(str(HERO_IMAGE_PATH), width="stretch")
         else:
             st.markdown(f"<strong>{HERO_IMAGE}</strong>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
-    render_section_heading("Company Introduction", "Elite Medical (Nanjing) Co., Ltd.")
     st.markdown(
         """
-        <div class="section-card">
-          <strong>Based in Nanjing, Jiangsu, China</strong><br>
-          More than 20 years of experience in medical product design, manufacturing,
-          and export. Product coverage includes sports care, medical consumables,
-          laboratory consumables/instruments, and medical dressings. Elite Medical
-          supports distributors, hospitals, and procurement teams with CE approved
-          products, ISO13485:2016 certified facilities, and one-stop sourcing service.
+        <div class="company-gradient">
+          <div class="company-grid">
+            <div class="company-copy">
+              <h2>Elite Medical (Nanjing) Co., Ltd.</h2>
+              <p>
+                Based in Nanjing, Jiangsu, China, Elite Medical designs and manufactures
+                disposable medical products, surgical and laboratory instruments, and
+                hospital equipment. With more than 10 years of experience, CE approved
+                products, ISO13485:2016 certified facilities, one-stop sourcing service,
+                and customization support, Elite Medical is positioned as a reliable
+                medical product partner for distributors, hospitals, and procurement
+                teams worldwide.
+              </p>
+            </div>
+            <div class="company-panel">
+              <div class="mini-badge"><strong>10+ Years</strong><span>Medical product manufacturing and export experience.</span></div>
+              <div class="mini-badge"><strong>CE Approved</strong><span>Product support for international purchasing teams.</span></div>
+              <div class="mini-badge"><strong>ISO13485:2016</strong><span>Certified facilities and quality management.</span></div>
+              <div class="mini-badge"><strong>Customization</strong><span>Private label and product sourcing services available.</span></div>
+            </div>
+          </div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -528,8 +680,20 @@ with home_tab:
 
     st.markdown(
         """
+        <div class="intro-strip">
+          <div class="intro-item"><strong>Disposable Medical Products</strong><span>Catalog coverage for medical consumables, dressings, care products, and supply needs.</span></div>
+          <div class="intro-item"><strong>Surgical & Laboratory Supply</strong><span>Support for surgical instruments, laboratory consumables, and hospital equipment.</span></div>
+          <div class="intro-item"><strong>One-stop B2B Sourcing</strong><span>Specification, sourcing, and quotation support for export customers.</span></div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    render_section_heading("Trust", "Why Choose Elite Medical")
+    st.markdown(
+        """
         <div class="stat-grid">
-          <div class="trust-card"><strong>20+ Years Experience</strong><span>Medical product design, manufacturing, and export.</span></div>
+          <div class="trust-card"><strong>10+ Years Experience</strong><span>Medical product design, manufacturing, and export.</span></div>
           <div class="trust-card"><strong>CE Approved</strong><span>Products prepared for international B2B markets.</span></div>
           <div class="trust-card"><strong>ISO13485:2016 Certified</strong><span>Certified facilities and quality management.</span></div>
           <div class="trust-card"><strong>One-stop Medical Sourcing</strong><span>Catalog support for distributors and procurement teams.</span></div>
@@ -538,7 +702,7 @@ with home_tab:
         unsafe_allow_html=True,
     )
 
-with products_tab:
+elif st.session_state.current_page == "Products":
     render_section_heading(
         "Product Catalog",
         "Medical Product Catalog",
@@ -568,11 +732,15 @@ with products_tab:
             with column:
                 render_product_card(product)
 
-with contact_tab:
-    render_section_heading(
-        "Quote request",
-        "Send Us Your Product Requirements",
-        "Our team will respond with specifications and quotation support.",
+else:
+    st.markdown(
+        """
+        <div class="contact-hero">
+          <h2>Request a Quote</h2>
+          <p>Send us your product requirements and our team will respond with specifications and quotation support.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
     form_col, info_col = st.columns([1.25, .75])
