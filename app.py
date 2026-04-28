@@ -499,19 +499,26 @@ def render_compare_panel(products):
 
 
 def render_product_card(product, card_index=0):
-    with st.container():
-        st.markdown('<div class="product-shell">', unsafe_allow_html=True)
-        image_path = product_image_path(product)
-        if image_path:
-            st.image(str(image_path), width=150)
-        else:
-            st.markdown('<span class="no-image">No image</span>', unsafe_allow_html=True)
+    image_path = product_image_path(product)
+    if image_path:
+        image_markup = (
+            f'<div class="product-image-slot has-image">'
+            f'<img src="{image_data_uri(image_path)}" alt="{html.escape(product["name"])}">'
+            f"</div>"
+        )
+    else:
+        image_markup = '<div class="product-image-slot missing"><span>No image</span></div>'
 
+    st.markdown('<span class="product-card-marker"></span>', unsafe_allow_html=True)
+    with st.container():
         st.markdown(
             f"""
-            <div class="product-name">{product["name"]}</div>
-            <div class="product-category">{product["category"]}</div>
-            <div class="variant-pill">{len(product["variants"])} variants</div>
+            <div class="product-card-content">
+              {image_markup}
+              <div class="product-name">{html.escape(product["name"])}</div>
+              <div class="product-category">{html.escape(product["category"])}</div>
+              <div class="variant-pill">{len(product["variants"])} variants</div>
+            </div>
             """,
             unsafe_allow_html=True,
         )
@@ -520,6 +527,7 @@ def render_product_card(product, card_index=0):
                 st.table(product["variants"])
             else:
                 st.write("Variant details need review.")
+        st.markdown('<span class="product-contact-button-marker"></span>', unsafe_allow_html=True)
         st.button(
             "Contact Now",
             key=f"contact_now_{card_index}_{product['id']}",
@@ -539,7 +547,6 @@ def render_product_card(product, card_index=0):
             on_click=toggle_compare_product,
             args=(product["id"],),
         )
-        st.markdown("</div>", unsafe_allow_html=True)
 
 
 def render_category_quick_cards(categories, counts):
@@ -973,7 +980,7 @@ st.markdown(
         max-width: 160px;
         margin-bottom: .5rem;
     }}
-    .section-card, .trust-card, .category-card, .product-shell, .quote-card, .contact-card {{
+    .section-card, .trust-card, .category-card, .quote-card, .contact-card {{
         border: 1px solid #dcefe5;
         border-radius: 16px;
         background: #ffffff;
@@ -1758,23 +1765,112 @@ st.markdown(
         color: {GREEN};
         font-weight: 850;
     }}
-    .product-shell {{
-        padding: .78rem;
-        margin-bottom: .7rem;
+    .product-card-marker {{
+        display: none;
+    }}
+    div[data-testid="element-container"]:has(.product-card-marker) + div[data-testid="stVerticalBlock"] {{
+        min-height: 430px;
+        height: 100%;
+        padding: .8rem;
+        margin-bottom: .85rem;
+        border: 1px solid #dcefe5;
+        border-radius: 16px;
         background: #ffffff;
+        box-shadow: 0 10px 28px rgba(17, 132, 87, .08);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }}
-    .product-shell div.stButton > button {{
-        margin-top: .6rem;
+    .product-card-content {{
+        display: flex;
+        flex-direction: column;
+        min-height: 266px;
+    }}
+    .product-image-slot {{
+        height: 150px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: .65rem;
+        overflow: hidden;
+    }}
+    .product-image-slot.has-image img {{
+        width: 100%;
+        max-width: 172px;
+        height: 150px;
+        object-fit: contain;
+        display: block;
+    }}
+    .product-image-slot.missing {{
+        height: 52px;
+        justify-content: flex-start;
+        margin: .2rem 0 .55rem;
+    }}
+    .product-image-slot.missing span {{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #f2f8f4;
+        color: {MUTED};
+        border-radius: 999px;
+        border: 1px dashed #bddfc9;
+        font-size: .78rem;
+        font-weight: 850;
+        padding: .22rem .58rem;
+    }}
+    .product-name {{
+        color: {DARK};
+        font-size: 1rem;
+        line-height: 1.22;
+        font-weight: 950;
+        min-height: 48px;
+        margin-bottom: .32rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }}
+    .product-category {{
+        color: {MUTED};
+        font-size: .86rem;
+        line-height: 1.3;
+        min-height: 22px;
+        margin-bottom: .45rem;
+    }}
+    .variant-pill {{
+        display: inline-flex;
+        align-items: center;
+        align-self: flex-start;
+        min-height: 28px;
+        border-radius: 999px;
+        background: #eefaf3;
+        color: {GREEN};
+        border: 1px solid #cfead9;
+        font-size: .8rem;
+        font-weight: 900;
+        padding: .18rem .58rem;
+    }}
+    .product-contact-button-marker {{
+        display: none;
+    }}
+    div[data-testid="element-container"]:has(.product-contact-button-marker) + div[data-testid="element-container"] div.stButton > button {{
+        margin-top: .5rem;
         min-height: 36px;
-        background: #18a66a;
-        border-color: #18a66a;
+        border-radius: 999px;
+        background: #21a86f;
+        border: 1px solid #21a86f;
         color: #ffffff;
-        box-shadow: 0 8px 18px rgba(17, 132, 87, .12);
+        box-shadow: 0 8px 18px rgba(33, 168, 111, .16);
+        font-size: .88rem;
+        font-weight: 900;
     }}
-    .product-shell div.stButton > button:hover {{
-        background: #128b59;
-        border-color: #128b59;
+    div[data-testid="element-container"]:has(.product-contact-button-marker) + div[data-testid="element-container"] div.stButton > button:hover {{
+        background: #1c985f;
+        border-color: #1c985f;
         color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 10px 22px rgba(33, 168, 111, .2);
     }}
     .product-compare-button-marker {{
         display: none;
@@ -1798,51 +1894,6 @@ st.markdown(
         background: #eaf8f0;
         border-color: {GREEN};
         color: {GREEN};
-    }}
-    .product-shell div[data-testid="stImage"] {{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: .45rem;
-    }}
-    .product-shell img {{
-        max-width: 160px;
-        max-height: 140px;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto;
-    }}
-    .no-image {{
-        display: inline-block;
-        background: #f2f8f4;
-        color: {MUTED};
-        border-radius: 999px;
-        border: 1px dashed #bddfc9;
-        font-size: .78rem;
-        font-weight: 800;
-        padding: .18rem .55rem;
-        margin-bottom: .35rem;
-    }}
-    .product-name {{
-        color: {DARK};
-        font-weight: 900;
-        line-height: 1.2;
-        min-height: 42px;
-        margin-top: .28rem;
-    }}
-    .product-category {{
-        color: {MUTED};
-        font-size: .88rem;
-        margin: .35rem 0;
-    }}
-    .variant-pill {{
-        display: inline-block;
-        color: {GREEN};
-        background: #eaf8f0;
-        border-radius: 999px;
-        padding: .22rem .55rem;
-        font-size: .82rem;
-        font-weight: 850;
     }}
     .quote-card, .contact-card {{
         padding: 1.15rem;
