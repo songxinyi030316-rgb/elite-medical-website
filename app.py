@@ -6,128 +6,174 @@ import streamlit as st
 
 DATA_PATH = Path(__file__).parent / "data" / "products.json"
 
+FALLBACK_PRODUCTS = [
+    {
+        "id": "EL010101",
+        "category": "MEDICAL DRESSING PAD",
+        "name": "TRANSPARENT FILM DRESSING",
+        "variants": [
+            {"spec": "paper frame", "ref": "EL010101"},
+            {"spec": "paper frame type, with slot", "ref": "EL010102"},
+        ],
+    },
+    {
+        "id": "EL010201",
+        "category": "MEDICAL DRESSING PAD",
+        "name": "WOUND CARE DRESSING",
+        "variants": [
+            {"spec": "non-woven + absorbent pad", "ref": "EL010201"},
+            {"spec": "PU + absorbent pad", "ref": "EL010202"},
+        ],
+    },
+    {
+        "id": "EL030101",
+        "category": "BANDAGE",
+        "name": "HIGH ELASTIC BANDAGE",
+        "variants": [
+            {"spec": "5", "ref": "EL-030101"},
+            {"spec": "7.5", "ref": "EL-030102"},
+        ],
+    },
+]
 
-st.set_page_config(page_title="Elite Medical Product Catalog", layout="wide")
 
-st.title("Test page working")
-st.title("Elite Medical Product Catalog")
-st.write(
-    "Elite Medical provides a B2B catalog of disposable medical products, "
-    "medical consumables, laboratory consumables, and healthcare supplies for "
-    "procurement teams and distributors."
-)
+def normalize_products(raw_products):
+    if not isinstance(raw_products, list):
+        return []
+
+    products = []
+    for product in raw_products:
+        if not isinstance(product, dict):
+            continue
+
+        variants = product.get("variants", [])
+        if not isinstance(variants, list):
+            variants = []
+
+        products.append(
+            {
+                "id": str(product.get("id", "needs_review")),
+                "category": str(product.get("category", "needs_review")),
+                "name": str(product.get("name", "needs_review")),
+                "variants": [
+                    {
+                        "spec": str(variant.get("spec", "needs_review")),
+                        "ref": str(variant.get("ref", "needs_review")),
+                    }
+                    for variant in variants
+                    if isinstance(variant, dict)
+                ],
+            }
+        )
+
+    return products
 
 
 def load_products():
     try:
         with DATA_PATH.open("r", encoding="utf-8") as products_file:
-            products = json.load(products_file)
-        if not isinstance(products, list):
-            st.warning("No products loaded")
-            return []
-        return products
+            products = normalize_products(json.load(products_file))
     except Exception as error:
         st.warning("No products loaded")
-        st.caption(f"Data load error: {error}")
-        return []
+        st.caption(f"Using fallback brochure sample content. Data error: {error}")
+        return FALLBACK_PRODUCTS
+
+    if not products:
+        st.warning("No products loaded")
+        st.caption("Using fallback brochure sample content.")
+        return FALLBACK_PRODUCTS
+
+    return products
 
 
-products = load_products()
+def product_matches(product, selected_category, search_query):
+    if selected_category != "All categories" and product["category"] != selected_category:
+        return False
 
-categories = sorted(
-    {
-        product.get("category", "needs_review")
-        for product in products
-        if isinstance(product, dict)
-    }
-)
-
-category_options = ["All categories", *categories] if categories else ["All categories"]
-selected_category = st.sidebar.selectbox("Category filter", category_options)
-search_query = st.sidebar.text_input("Search products")
-
-filtered_products = []
-for product in products:
-    if not isinstance(product, dict):
-        continue
-
-    name = product.get("name", "needs_review")
-    category = product.get("category", "needs_review")
-    variants = product.get("variants", [])
-
-    matches_category = (
-        selected_category == "All categories" or category == selected_category
-    )
     searchable_text = " ".join(
         [
-            str(name),
-            str(category),
-            " ".join(str(variant.get("ref", "")) for variant in variants),
-            " ".join(str(variant.get("spec", "")) for variant in variants),
+            product["name"],
+            product["category"],
+            product["id"],
+            " ".join(variant["spec"] for variant in product["variants"]),
+            " ".join(variant["ref"] for variant in product["variants"]),
         ]
     ).lower()
-    matches_search = search_query.lower() in searchable_text
 
-    if matches_category and matches_search:
-        filtered_products.append(product)
+    return search_query.lower().strip() in searchable_text
+
+
+st.set_page_config(page_title="Elite Medical Product Catalog", layout="wide")
+
+st.title("Elite Medical Product Catalog")
+st.write(
+    "Elite Medical is a B2B medical product supplier offering disposable "
+    "medical products, wound care items, bandages, protective products, "
+    "respiratory supplies, urology products, injection products, and laboratory "
+    "consumables for healthcare procurement teams and distributors."
+)
+
+products = load_products()
+categories = sorted({product["category"] for product in products})
+
+st.sidebar.header("Catalog Filters")
+selected_category = st.sidebar.selectbox(
+    "Category filter", ["All categories", *categories]
+)
+search_query = st.sidebar.text_input("Search products")
+
+filtered_products = [
+    product
+    for product in products
+    if product_matches(product, selected_category, search_query)
+]
 
 st.subheader("Products")
+st.write(f"Loaded products: {len(products)}")
 
-if not products:
-    st.info("No products loaded")
-elif not filtered_products:
+if not filtered_products:
     st.info("No products loaded")
 else:
-    st.caption(f"Showing {len(filtered_products)} of {len(products)} products")
+    st.caption(f"Showing {len(filtered_products)} product(s)")
 
     for product in filtered_products:
-        name = product.get("name", "needs_review")
-        category = product.get("category", "needs_review")
-        variants = product.get("variants", [])
+        with st.container():
+            st.markdown(f"### {product['name']}")
+            st.write(f"**Category:** {product['category']}")
+            st.write(f"**Product ID:** {product['id']}")
 
-        with st.expander(f"{name} — {category}", expanded=False):
-            st.write(f"**Product name:** {name}")
-            st.write(f"**Category:** {category}")
+            with st.expander("Product details", expanded=False):
+                if product["variants"]:
+                    st.table(
+                        [
+                            {"Spec": variant["spec"], "Ref": variant["ref"]}
+                            for variant in product["variants"]
+                        ]
+                    )
+                else:
+                    st.write("Variants: needs_review")
+            st.markdown("---")
 
-            if variants:
-                st.write("**Variants:**")
-                st.table(
-                    [
-                        {
-                            "Spec": variant.get("spec", "needs_review"),
-                            "Ref": variant.get("ref", "needs_review"),
-                        }
-                        for variant in variants
-                    ]
-                )
-            else:
-                st.write("Variants: needs_review")
+st.subheader("Inquiry Form")
 
-st.subheader("Product Inquiry")
-
-product_names = [
-    product.get("name", "needs_review")
-    for product in products
-    if isinstance(product, dict)
-]
-product_options = product_names if product_names else ["No products loaded"]
+product_options = [product["name"] for product in products] or ["No products loaded"]
 
 with st.form("inquiry_form"):
-    name = st.text_input("Name")
-    email = st.text_input("Email")
-    company = st.text_input("Company")
-    product = st.selectbox("Product", product_options)
-    message = st.text_area("Message")
+    inquiry_name = st.text_input("Name")
+    inquiry_email = st.text_input("Email")
+    inquiry_company = st.text_input("Company")
+    inquiry_product = st.selectbox("Product", product_options)
+    inquiry_message = st.text_area("Message")
     submitted = st.form_submit_button("Send inquiry")
 
 if submitted:
-    st.success("Inquiry submitted")
+    st.success("Inquiry received")
     st.write(
         {
-            "name": name,
-            "email": email,
-            "company": company,
-            "product": product,
-            "message": message,
+            "name": inquiry_name,
+            "email": inquiry_email,
+            "company": inquiry_company,
+            "product": inquiry_product,
+            "message": inquiry_message,
         }
     )
