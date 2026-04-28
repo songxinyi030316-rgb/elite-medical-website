@@ -35,6 +35,14 @@ CORE_CATEGORIES = [
     "Laboratory",
 ]
 
+PAGE_SLUGS = {
+    "Home": "home",
+    "About Us": "about",
+    "Products": "products",
+    "Contact": "contact",
+}
+SLUG_PAGES = {slug: page for page, slug in PAGE_SLUGS.items()}
+
 FALLBACK_PRODUCTS = [
     {
         "id": "EL010101",
@@ -156,6 +164,7 @@ def reset_filters():
 
 def navigate_to(page):
     st.session_state.current_page = page
+    st.query_params["page"] = PAGE_SLUGS.get(page, PAGE_SLUGS["Home"])
 
 
 def open_chatbot():
@@ -397,6 +406,7 @@ ce_icon = image_data_uri(CE_ICON_PATH)
 iso_icon = image_data_uri(ISO_ICON_PATH)
 service_icon = image_data_uri(SERVICE_ICON_PATH)
 inner_company_image = image_data_uri(INNER_COMPANY_IMAGE_PATH)
+logo_image = image_data_uri(LOGO_PATH)
 
 st.set_page_config(page_title="Elite Medical Product Catalog", layout="wide")
 
@@ -409,26 +419,94 @@ st.markdown(
     }}
     .block-container {{
         max-width: 1220px;
-        padding-top: 1rem;
+        padding-top: 2.75rem;
         padding-bottom: 2rem;
     }}
     h1, h2, h3, p {{
         color: {DARK};
     }}
-    div[role="radiogroup"] {{
-        gap: .45rem;
-        margin-bottom: .9rem;
-    }}
-    div[role="radiogroup"] label {{
-        border: 1px solid #dcefe5;
-        border-radius: 999px;
+    .site-header {{
+        margin: 1.8rem calc(50% - 50vw) 1rem;
+        padding: 0 max(1.5rem, calc((100vw - 1120px) / 2));
         background: #ffffff;
-        padding: .25rem .8rem;
-        box-shadow: 0 6px 16px rgba(17, 132, 87, .06);
+        border-bottom: 1px solid #e2eee8;
+        box-shadow: 0 12px 32px rgba(37, 48, 43, .08);
+        position: relative;
+        z-index: 20;
     }}
-    div[role="radiogroup"] label[data-checked="true"] {{
+    .site-header-inner {{
+        min-height: 86px;
+        display: flex;
+        align-items: center;
+        gap: 1.15rem;
+    }}
+    .brand-link {{
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        text-decoration: none;
+        min-width: 250px;
+    }}
+    .brand-link img {{
+        width: 62px;
+        height: 62px;
+        object-fit: contain;
+    }}
+    .brand-link span {{
+        color: {DARK};
+        font-size: 1.12rem;
+        font-weight: 950;
+        letter-spacing: .04em;
+        white-space: nowrap;
+    }}
+    .nav-links {{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+        flex: 1;
+    }}
+    .nav-link {{
+        position: relative;
+        color: {DARK};
+        text-decoration: none;
+        font-size: .98rem;
+        font-weight: 900;
+        padding: .55rem .05rem;
+        white-space: nowrap;
+    }}
+    .nav-link:hover {{
+        color: {GREEN};
+    }}
+    .nav-link.active {{
+        color: {GREEN};
+    }}
+    .nav-link.active::after {{
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: .18rem;
+        height: 3px;
+        border-radius: 999px;
         background: {GREEN};
-        border-color: {GREEN};
+    }}
+    .quote-link {{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 1rem;
+        border-radius: 999px;
+        background: {GREEN};
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 900;
+        white-space: nowrap;
+        box-shadow: 0 12px 24px rgba(17, 132, 87, .18);
+    }}
+    .quote-link:hover {{
+        background: #0c6f49;
         color: #ffffff;
     }}
     section[data-testid="stSidebar"] {{
@@ -969,6 +1047,39 @@ st.markdown(
         font-size: .78rem;
     }}
     @media (max-width: 900px) {{
+        .block-container {{
+            padding-top: 2.25rem;
+        }}
+        .site-header {{
+            margin-top: 1.45rem;
+            padding: 0 1rem;
+        }}
+        .site-header-inner {{
+            min-height: auto;
+            padding: .85rem 0;
+            flex-wrap: wrap;
+        }}
+        .brand-link {{
+            min-width: 0;
+            flex: 1 1 100%;
+        }}
+        .brand-link img {{
+            width: 54px;
+            height: 54px;
+        }}
+        .nav-links {{
+            order: 2;
+            flex: 1 1 100%;
+            justify-content: flex-start;
+            gap: .9rem;
+            overflow-x: auto;
+            padding-bottom: .15rem;
+        }}
+        .quote-link {{
+            order: 1;
+            min-height: 38px;
+            padding: 0 .85rem;
+        }}
         .stat-grid, .company-layout, .about-grid, .about-card-grid, .certificate-grid {{
             grid-template-columns: 1fr;
         }}
@@ -1013,19 +1124,38 @@ st.markdown(
 products = load_products()
 counts = category_counts(products)
 
-if "current_page" not in st.session_state:
-    st.session_state.current_page = "Home"
+page_slug = st.query_params.get("page", PAGE_SLUGS["Home"])
+if isinstance(page_slug, list):
+    page_slug = page_slug[0] if page_slug else PAGE_SLUGS["Home"]
+requested_page = SLUG_PAGES.get(str(page_slug).lower(), "Home")
+st.session_state.current_page = requested_page
 if "product_category" not in st.session_state:
     st.session_state.product_category = "All Categories"
 if "product_search" not in st.session_state:
     st.session_state.product_search = ""
 
-st.radio(
-    "Navigation",
-    ["Home", "About Us", "Products", "Contact"],
-    key="current_page",
-    horizontal=True,
-    label_visibility="collapsed",
+logo_tag = f'<img src="{logo_image}" alt="Elite Medical logo">' if logo_image else ""
+nav_links = "\n".join(
+    f'<a class="nav-link {"active" if st.session_state.current_page == page else ""}" '
+    f'href="?page={slug}">{page}</a>'
+    for page, slug in PAGE_SLUGS.items()
+)
+st.markdown(
+    f"""
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand-link" href="?page=home">
+          {logo_tag}
+          <span>ELITE MEDICAL</span>
+        </a>
+        <nav class="nav-links">
+          {nav_links}
+        </nav>
+        <a class="quote-link" href="?page=contact">Request a Quote</a>
+      </div>
+    </header>
+    """,
+    unsafe_allow_html=True,
 )
 
 if LOGO_PATH.exists():
