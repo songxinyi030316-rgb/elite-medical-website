@@ -167,6 +167,12 @@ def navigate_to(page):
     st.query_params["page"] = PAGE_SLUGS.get(page, PAGE_SLUGS["Home"])
 
 
+def start_product_inquiry(product_name):
+    st.session_state.selected_product = product_name
+    st.session_state.inquiry_product = product_name
+    navigate_to("Contact")
+
+
 def open_chatbot():
     st.session_state.chatbot_open = True
 
@@ -213,7 +219,7 @@ def render_section_heading(kicker, title, body=""):
     )
 
 
-def render_product_card(product):
+def render_product_card(product, card_index=0):
     with st.container():
         st.markdown('<div class="product-shell">', unsafe_allow_html=True)
         if product.get("image"):
@@ -237,6 +243,14 @@ def render_product_card(product):
                 st.table(product["variants"])
             else:
                 st.write("Variant details need review.")
+        st.button(
+            "Contact Now",
+            key=f"contact_now_{card_index}_{product['id']}",
+            type="primary",
+            width="stretch",
+            on_click=start_product_inquiry,
+            args=(product["name"],),
+        )
         st.markdown("</div>", unsafe_allow_html=True)
 
 
@@ -434,6 +448,13 @@ st.markdown(
         position: relative;
         z-index: 20;
     }}
+    .site-header a,
+    .site-header a:link,
+    .site-header a:visited,
+    .site-header a:hover,
+    .site-header a:active {{
+        text-decoration: none !important;
+    }}
     .site-header-inner {{
         min-height: 86px;
         display: flex;
@@ -468,18 +489,22 @@ st.markdown(
     }}
     .nav-link {{
         position: relative;
-        color: {DARK};
-        text-decoration: none;
+        color: {DARK} !important;
+        text-decoration: none !important;
         font-size: .98rem;
         font-weight: 900;
         padding: .55rem .05rem;
         white-space: nowrap;
     }}
+    .nav-link:link,
+    .nav-link:visited {{
+        color: {DARK} !important;
+    }}
     .nav-link:hover {{
-        color: {GREEN};
+        color: {GREEN} !important;
     }}
     .nav-link.active {{
-        color: {GREEN};
+        color: {GREEN} !important;
     }}
     .nav-link.active::after {{
         content: "";
@@ -496,18 +521,27 @@ st.markdown(
         align-items: center;
         justify-content: center;
         min-height: 44px;
-        padding: 0 1rem;
+        padding: 0 1.08rem;
         border-radius: 999px;
-        background: {GREEN};
-        color: #ffffff;
-        text-decoration: none;
+        background: #18a66a;
+        color: #ffffff !important;
+        text-decoration: none !important;
         font-weight: 900;
         white-space: nowrap;
         box-shadow: 0 12px 24px rgba(17, 132, 87, .18);
+        transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
+    }}
+    .quote-link:link,
+    .quote-link:visited {{
+        color: #ffffff !important;
+        text-decoration: none !important;
     }}
     .quote-link:hover {{
-        background: #0c6f49;
-        color: #ffffff;
+        background: #128b59;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        box-shadow: 0 14px 28px rgba(17, 132, 87, .24);
+        transform: translateY(-1px);
     }}
     section[data-testid="stSidebar"] {{
         background: #f4fbf7;
@@ -878,6 +912,19 @@ st.markdown(
         margin-bottom: .7rem;
         background: #ffffff;
     }}
+    .product-shell div.stButton > button {{
+        margin-top: .6rem;
+        min-height: 36px;
+        background: #18a66a;
+        border-color: #18a66a;
+        color: #ffffff;
+        box-shadow: 0 8px 18px rgba(17, 132, 87, .12);
+    }}
+    .product-shell div.stButton > button:hover {{
+        background: #128b59;
+        border-color: #128b59;
+        color: #ffffff;
+    }}
     .product-shell img {{
         max-height: 118px;
         object-fit: contain;
@@ -1133,6 +1180,10 @@ if "product_category" not in st.session_state:
     st.session_state.product_category = "All Categories"
 if "product_search" not in st.session_state:
     st.session_state.product_search = ""
+if "selected_product" not in st.session_state:
+    st.session_state.selected_product = ""
+if "inquiry_product" not in st.session_state:
+    st.session_state.inquiry_product = st.session_state.selected_product
 
 logo_tag = f'<img src="{logo_image}" alt="Elite Medical logo">' if logo_image else ""
 nav_links = "\n".join(
@@ -1401,9 +1452,11 @@ elif st.session_state.current_page == "Products":
 
     for start in range(0, len(filtered_products), 3):
         columns = st.columns(3)
-        for column, product in zip(columns, filtered_products[start : start + 3]):
+        for offset, (column, product) in enumerate(
+            zip(columns, filtered_products[start : start + 3])
+        ):
             with column:
-                render_product_card(product)
+                render_product_card(product, start + offset)
 
 else:
     st.markdown(
@@ -1419,21 +1472,38 @@ else:
     form_col, info_col = st.columns([1.25, .75])
     with form_col:
         st.markdown('<div class="quote-card">', unsafe_allow_html=True)
+        if st.session_state.selected_product and not st.session_state.inquiry_product:
+            st.session_state.inquiry_product = st.session_state.selected_product
         with st.form("inquiry_form"):
             col1, col2 = st.columns(2)
             with col1:
                 name = st.text_input("Name")
                 company = st.text_input("Company")
+                interested_product = st.text_input(
+                    "Product of Interest",
+                    key="inquiry_product",
+                    placeholder="Enter product name or REF code",
+                )
             with col2:
                 email = st.text_input("Email")
-                interested_product = st.selectbox(
-                    "Interested product",
-                    [product["name"] for product in products],
+                quantity = st.text_input(
+                    "Quantity",
+                    placeholder="e.g., 500 boxes / 10,000 pcs",
                 )
             message = st.text_area("Message")
             submitted = st.form_submit_button("Submit Inquiry")
         if submitted:
             st.success("Thank you. Your inquiry has been received.")
+            st.markdown(
+                f"""
+                <div class="section-card" style="margin-top:.75rem;">
+                  <strong>Inquiry summary</strong><br>
+                  Product: {html.escape(interested_product or "Not specified")}<br>
+                  Quantity: {html.escape(quantity or "Not specified")}
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
         st.markdown("</div>", unsafe_allow_html=True)
 
     with info_col:
