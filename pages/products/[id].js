@@ -2,6 +2,8 @@ import Link from "next/link";
 import InquiryForm from "../../components/InquiryForm";
 import products from "../../data/products.json";
 
+const DEFAULT_PRODUCT_IMAGE = "/products/default.png";
+
 export default function ProductDetailPage({ product }) {
   if (!product) {
     return null;
@@ -15,26 +17,33 @@ export default function ProductDetailPage({ product }) {
 
       <section className="product-detail">
         <div className="detail-image">
-          <img src={product.image} alt="" />
+          <img src={product.image || DEFAULT_PRODUCT_IMAGE} alt="" />
         </div>
 
         <div className="detail-copy">
           <p className="product-category">{product.category}</p>
           <h1>{product.name}</h1>
-          <p className="intro">{product.description}</p>
+          <p className="intro">
+            Product data extracted from the Elite Medical brochure. Use the
+            variant references below for inquiry.
+          </p>
 
           <div className="variant-table" aria-label="Product variants">
             <div className="variant-row variant-head">
               <span>Spec</span>
               <span>Ref</span>
             </div>
-            {product.variants.map((variant) => (
-              <div className="variant-row" key={`${variant.spec}-${variant.ref}`}>
+            {product.variants.map((variant, index) => (
+              <div className="variant-row" key={`${variant.ref}-${index}`}>
                 <span>{variant.spec}</span>
                 <span>{variant.ref}</span>
               </div>
             ))}
           </div>
+
+          {product.variants.length === 0 ? (
+            <p className="empty-state">Variant extraction needs review.</p>
+          ) : null}
 
           <a className="button primary" href="#inquiry">
             Request a quote
@@ -60,9 +69,7 @@ export default function ProductDetailPage({ product }) {
 
 export function getStaticPaths() {
   return {
-    paths: products.map((product) => ({
-      params: { id: product.id },
-    })),
+    paths: products.map((product) => ({ params: { id: product.id } })),
     fallback: false,
   };
 }

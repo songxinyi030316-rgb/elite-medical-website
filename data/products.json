@@ -1,15 +1,6844 @@
 [
   {
     "id": "EL010101",
-    "category": "Medical Dressing",
-    "name": "Transparent Film Dressing",
+    "category": "MEDICAL DRESSING PAD",
+    "name": "TRANSPARENT FILM DRESSING",
     "variants": [
       {
-        "spec": "paper frame type",
+        "spec": "paper frame",
         "ref": "EL010101"
+      },
+      {
+        "spec": "paper frame type, with slot",
+        "ref": "EL010102"
+      },
+      {
+        "spec": "without frame and absorbent pad",
+        "ref": "EL010103"
+      },
+      {
+        "spec": "without frame, but with absorbent pad",
+        "ref": "EL010104"
       }
-    ],
-    "description": "Disposable wound dressing",
-    "image": "/products/default.png"
+    ]
+  },
+  {
+    "id": "EL010201",
+    "category": "MEDICAL DRESSING PAD",
+    "name": "WOUND CARE DRESSING",
+    "variants": [
+      {
+        "spec": "non-woven + absorbent pad",
+        "ref": "EL010201"
+      },
+      {
+        "spec": "PU + absorbent pad /cm x cm",
+        "ref": "EL010202"
+      }
+    ]
+  },
+  {
+    "id": "EL010301",
+    "category": "MEDICAL DRESSING PAD",
+    "name": "HYDROCOLLOID DRESSING",
+    "variants": [
+      {
+        "spec": "5 x 5",
+        "ref": "EL010301"
+      },
+      {
+        "spec": "10 x 10",
+        "ref": "EL010302"
+      },
+      {
+        "spec": "8 x 12",
+        "ref": "EL010303"
+      },
+      {
+        "spec": "15 x 18 /non-adhesive",
+        "ref": "EL010304"
+      }
+    ]
+  },
+  {
+    "id": "EL010401",
+    "category": "MEDICAL DRESSING PAD",
+    "name": "FOAM DRESSING",
+    "variants": [
+      {
+        "spec": "5 x 5cm",
+        "ref": "EL010401"
+      },
+      {
+        "spec": "10 x 10cm",
+        "ref": "EL010402"
+      },
+      {
+        "spec": "15 x 15cm",
+        "ref": "EL010403"
+      },
+      {
+        "spec": "/adhesive 5 x 5cm",
+        "ref": "EL010404"
+      },
+      {
+        "spec": "10 x 10cm",
+        "ref": "EL010405"
+      },
+      {
+        "spec": "15 x 15cm",
+        "ref": "EL010406"
+      }
+    ]
+  },
+  {
+    "id": "EL010501",
+    "category": "MEDICAL DRESSING PAD",
+    "name": "ALGINATE DRESSING",
+    "variants": [
+      {
+        "spec": "2\" x 2\"",
+        "ref": "EL010501"
+      },
+      {
+        "spec": "4\" x 4\"",
+        "ref": "EL010502"
+      },
+      {
+        "spec": "4\" x 6\"",
+        "ref": "EL010503"
+      },
+      {
+        "spec": "4\" x 8\"",
+        "ref": "EL010504"
+      },
+      {
+        "spec": "6\" x 6\"",
+        "ref": "EL010505"
+      },
+      {
+        "spec": "8\" x 8\"",
+        "ref": "EL010506"
+      },
+      {
+        "spec": "12\" rope",
+        "ref": "EL010507"
+      },
+      {
+        "spec": "12\" strip /mm x mm",
+        "ref": "EL010508"
+      }
+    ]
+  },
+  {
+    "id": "EL010601",
+    "category": "MEDICAL DRESSING PAD",
+    "name": "STRIPS WOUND SKIN CLOSURES (REINFORCED)",
+    "variants": [
+      {
+        "spec": "3 x 75",
+        "ref": "EL010601"
+      },
+      {
+        "spec": "6 x 38",
+        "ref": "EL010602"
+      },
+      {
+        "spec": "6 x 75",
+        "ref": "EL010603"
+      },
+      {
+        "spec": "6 x 100",
+        "ref": "EL010604"
+      },
+      {
+        "spec": "12 x 100 /without iodine",
+        "ref": "EL010605"
+      }
+    ]
+  },
+  {
+    "id": "EL010701",
+    "category": "MEDICAL DRESSING PAD",
+    "name": "SURGICAL INCISION DRAPE",
+    "variants": [
+      {
+        "spec": "15 x 20cm",
+        "ref": "EL010701"
+      },
+      {
+        "spec": "30 x 40cm",
+        "ref": "EL010702"
+      },
+      {
+        "spec": "40 x 60cm",
+        "ref": "EL010703"
+      },
+      {
+        "spec": "/with iodine 15 x 20cm",
+        "ref": "EL010704"
+      },
+      {
+        "spec": "30 x 40cm",
+        "ref": "EL010705"
+      },
+      {
+        "spec": "40 x 60cm",
+        "ref": "EL010706"
+      }
+    ]
+  },
+  {
+    "id": "EL020101",
+    "category": "MEDICAL TAPES AND PLASTER",
+    "name": "ZINC OXIDE ADHESIVE TAPE",
+    "variants": [
+      {
+        "spec": "1.25",
+        "ref": "EL020101"
+      },
+      {
+        "spec": "2.5",
+        "ref": "EL020102"
+      },
+      {
+        "spec": "5",
+        "ref": "EL020103"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL020104"
+      },
+      {
+        "spec": "10 /cm",
+        "ref": "EL020105"
+      }
+    ]
+  },
+  {
+    "id": "EL020301",
+    "category": "MEDICAL TAPES AND PLASTER",
+    "name": "PE TAPE",
+    "variants": [
+      {
+        "spec": "1.25",
+        "ref": "EL020301"
+      },
+      {
+        "spec": "2.5",
+        "ref": "EL020302"
+      },
+      {
+        "spec": "5",
+        "ref": "EL020303"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL020304"
+      },
+      {
+        "spec": "10 /cm",
+        "ref": "EL020305"
+      }
+    ]
+  },
+  {
+    "id": "EL020401",
+    "category": "MEDICAL TAPES AND PLASTER",
+    "name": "NON-WOVEN TAPE",
+    "variants": [
+      {
+        "spec": "1.25",
+        "ref": "EL020401"
+      },
+      {
+        "spec": "2.5",
+        "ref": "EL020402"
+      },
+      {
+        "spec": "5",
+        "ref": "EL020403"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL020404"
+      },
+      {
+        "spec": "10 /cm",
+        "ref": "EL020405"
+      }
+    ]
+  },
+  {
+    "id": "EL020501",
+    "category": "MEDICAL TAPES AND PLASTER",
+    "name": "SILK TAPE",
+    "variants": [
+      {
+        "spec": "1.25",
+        "ref": "EL020501"
+      },
+      {
+        "spec": "2.5",
+        "ref": "EL020502"
+      },
+      {
+        "spec": "5",
+        "ref": "EL020503"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL020504"
+      },
+      {
+        "spec": "10 /mm",
+        "ref": "EL020505"
+      }
+    ]
+  },
+  {
+    "id": "EL020601",
+    "category": "MEDICAL TAPES AND PLASTER",
+    "name": "PLASTER /BANDAGE",
+    "variants": [
+      {
+        "spec": "72 x 19",
+        "ref": "EL020601"
+      },
+      {
+        "spec": "56 x 19",
+        "ref": "EL020602"
+      },
+      {
+        "spec": "40 x 10",
+        "ref": "EL020603"
+      },
+      {
+        "spec": "Dia 22mm",
+        "ref": "EL020604"
+      },
+      {
+        "spec": "Dia 25mm",
+        "ref": "EL020605"
+      }
+    ]
+  },
+  {
+    "id": "EL-030101",
+    "category": "BANDAGE",
+    "name": "HIGH ELASTIC BANDAGE",
+    "variants": [
+      {
+        "spec": "5",
+        "ref": "EL-030101"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL-030102"
+      },
+      {
+        "spec": "10",
+        "ref": "EL-030103"
+      },
+      {
+        "spec": "15 /cm",
+        "ref": "EL-030104"
+      }
+    ]
+  },
+  {
+    "id": "EL030201",
+    "category": "BANDAGE",
+    "name": "CREPE BANDAGE",
+    "variants": [
+      {
+        "spec": "5",
+        "ref": "EL030201"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL030202"
+      },
+      {
+        "spec": "10",
+        "ref": "EL030203"
+      },
+      {
+        "spec": "15",
+        "ref": "EL030204"
+      },
+      {
+        "spec": "20 /cm",
+        "ref": "EL030205"
+      }
+    ]
+  },
+  {
+    "id": "EL-030401",
+    "category": "BANDAGE",
+    "name": "PBT BANDAGE/CONFORMING BANDAGE (PLAIN)",
+    "variants": [
+      {
+        "spec": "5",
+        "ref": "EL-030401"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL-030402"
+      },
+      {
+        "spec": "10",
+        "ref": "EL-030403"
+      },
+      {
+        "spec": "15 /M",
+        "ref": "EL-030404"
+      }
+    ]
+  },
+  {
+    "id": "EL030501",
+    "category": "BANDAGE",
+    "name": "needs_review",
+    "variants": [
+      {
+        "spec": "4.5cm",
+        "ref": "EL030501"
+      },
+      {
+        "spec": "6.25cm",
+        "ref": "EL030502"
+      },
+      {
+        "spec": "6.75cm",
+        "ref": "EL030503"
+      },
+      {
+        "spec": "7.5cm",
+        "ref": "EL030504"
+      },
+      {
+        "spec": "8.75cm",
+        "ref": "EL030505"
+      },
+      {
+        "spec": "10cm",
+        "ref": "EL030506"
+      },
+      {
+        "spec": "12cm",
+        "ref": "EL030507"
+      },
+      {
+        "spec": "17.5cm",
+        "ref": "EL030508"
+      },
+      {
+        "spec": "21.5cm",
+        "ref": "EL030509"
+      },
+      {
+        "spec": "32.5cm /cm",
+        "ref": "EL030510"
+      }
+    ]
+  },
+  {
+    "id": "EL-030601",
+    "category": "BANDAGE",
+    "name": "STOCKINETTE BANDAGE",
+    "variants": [
+      {
+        "spec": "5",
+        "ref": "EL-030601"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL-030602"
+      },
+      {
+        "spec": "10",
+        "ref": "EL-030603"
+      },
+      {
+        "spec": "15",
+        "ref": "EL-030604"
+      },
+      {
+        "spec": "20",
+        "ref": "EL-030605"
+      }
+    ]
+  },
+  {
+    "id": "EL-030701",
+    "category": "BANDAGE",
+    "name": "TUBULAR NET BANDAGE",
+    "variants": [
+      {
+        "spec": "0.5#",
+        "ref": "EL-030701"
+      },
+      {
+        "spec": "1#",
+        "ref": "EL-030702"
+      },
+      {
+        "spec": "2#",
+        "ref": "EL-030703"
+      },
+      {
+        "spec": "3#",
+        "ref": "EL-030704"
+      },
+      {
+        "spec": "4#",
+        "ref": "EL-030705"
+      },
+      {
+        "spec": "5#",
+        "ref": "EL-030706"
+      },
+      {
+        "spec": "5.5#",
+        "ref": "EL-030707"
+      },
+      {
+        "spec": "5.8#",
+        "ref": "EL-030708"
+      },
+      {
+        "spec": "6#",
+        "ref": "EL-030709"
+      },
+      {
+        "spec": "7#",
+        "ref": "EL-030710"
+      },
+      {
+        "spec": "8# /4M",
+        "ref": "EL-030711"
+      }
+    ]
+  },
+  {
+    "id": "EL030801",
+    "category": "BANDAGE",
+    "name": "FIRST AID BANDAGE",
+    "variants": [
+      {
+        "spec": "6cm",
+        "ref": "EL030801"
+      },
+      {
+        "spec": "8cm",
+        "ref": "EL030802"
+      },
+      {
+        "spec": "10cm",
+        "ref": "EL030803"
+      },
+      {
+        "spec": "15cm",
+        "ref": "EL030804"
+      }
+    ]
+  },
+  {
+    "id": "EL031001",
+    "category": "BANDAGE",
+    "name": "DISPOSABLE MEDICAL TOURNIQUET",
+    "variants": [
+      {
+        "spec": "buckle",
+        "ref": "EL031001"
+      },
+      {
+        "spec": "TPE common shape",
+        "ref": "EL031002"
+      },
+      {
+        "spec": "fish-bone shape",
+        "ref": "EL031003"
+      },
+      {
+        "spec": "punching",
+        "ref": "EL031004"
+      }
+    ]
+  },
+  {
+    "id": "EL031101",
+    "category": "BANDAGE",
+    "name": "SKIN TRACTION KIT",
+    "variants": [
+      {
+        "spec": "adult",
+        "ref": "EL031101"
+      },
+      {
+        "spec": "pediatric /6M",
+        "ref": "EL031102"
+      }
+    ]
+  },
+  {
+    "id": "EL031201",
+    "category": "BANDAGE",
+    "name": "SLING",
+    "variants": [
+      {
+        "spec": "5.5cm",
+        "ref": "EL031201"
+      },
+      {
+        "spec": "7.5cm",
+        "ref": "EL031202"
+      }
+    ]
+  },
+  {
+    "id": "EL031301",
+    "category": "BANDAGE",
+    "name": "PLASTER OF PARIS BANDAGE/ POP BANDAGE",
+    "variants": [
+      {
+        "spec": "5cm",
+        "ref": "EL031301"
+      },
+      {
+        "spec": "7.5cm",
+        "ref": "EL031302"
+      },
+      {
+        "spec": "10cm",
+        "ref": "EL031303"
+      },
+      {
+        "spec": "15cm",
+        "ref": "EL031304"
+      },
+      {
+        "spec": "20cm",
+        "ref": "EL031305"
+      },
+      {
+        "spec": "/3.6M 5cm",
+        "ref": "EL031306"
+      },
+      {
+        "spec": "7.5cm",
+        "ref": "EL031307"
+      },
+      {
+        "spec": "10cm",
+        "ref": "EL031308"
+      },
+      {
+        "spec": "15cm",
+        "ref": "EL031309"
+      },
+      {
+        "spec": "20cm /2.7M",
+        "ref": "EL031310"
+      }
+    ]
+  },
+  {
+    "id": "EL031401",
+    "category": "BANDAGE",
+    "name": "ORTHOPEDIC CAST PADDING",
+    "variants": [
+      {
+        "spec": "5cm",
+        "ref": "EL031401"
+      },
+      {
+        "spec": "7.5cm",
+        "ref": "EL031402"
+      },
+      {
+        "spec": "10cm",
+        "ref": "EL031403"
+      },
+      {
+        "spec": "15cm",
+        "ref": "EL031404"
+      },
+      {
+        "spec": "20cm",
+        "ref": "EL031405"
+      },
+      {
+        "spec": "/3.6M 5cm",
+        "ref": "EL031406"
+      },
+      {
+        "spec": "7.5cm",
+        "ref": "EL031407"
+      },
+      {
+        "spec": "10cm",
+        "ref": "EL031408"
+      },
+      {
+        "spec": "15cm",
+        "ref": "EL031409"
+      },
+      {
+        "spec": "20cm /cm",
+        "ref": "EL031410"
+      }
+    ]
+  },
+  {
+    "id": "EL-031501",
+    "category": "BANDAGE",
+    "name": "ORTHOPEDIC CASTING TAPE",
+    "variants": [
+      {
+        "spec": "5",
+        "ref": "EL-031501"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL-031502"
+      },
+      {
+        "spec": "10",
+        "ref": "EL-031503"
+      },
+      {
+        "spec": "12.5",
+        "ref": "EL-031504"
+      }
+    ]
+  },
+  {
+    "id": "EL-031601",
+    "category": "BANDAGE",
+    "name": "SELF-ADHESIVE ELASTIC BANDAGE",
+    "variants": [
+      {
+        "spec": "2.5cm",
+        "ref": "EL-031601"
+      },
+      {
+        "spec": "5cm",
+        "ref": "EL-031602"
+      },
+      {
+        "spec": "7.5cm",
+        "ref": "EL-031603"
+      },
+      {
+        "spec": "10cm",
+        "ref": "EL-031604"
+      },
+      {
+        "spec": "15cm /4.5M",
+        "ref": "EL-031605"
+      }
+    ]
+  },
+  {
+    "id": "EL031801",
+    "category": "BANDAGE",
+    "name": "needs_review",
+    "variants": [
+      {
+        "spec": "5cm",
+        "ref": "EL031801"
+      },
+      {
+        "spec": "7.5cm",
+        "ref": "EL031802"
+      },
+      {
+        "spec": "10cm /5M",
+        "ref": "EL031803"
+      }
+    ]
+  },
+  {
+    "id": "EL-031901",
+    "category": "BANDAGE",
+    "name": "KINESIOLOGY TAPE",
+    "variants": [
+      {
+        "spec": "5cm",
+        "ref": "EL-031901"
+      },
+      {
+        "spec": "7.5cm",
+        "ref": "EL-031902"
+      },
+      {
+        "spec": "10cm",
+        "ref": "EL-031903"
+      }
+    ]
+  },
+  {
+    "id": "EL040101",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "GAUZE SWAB",
+    "variants": [
+      {
+        "spec": "5 x 5",
+        "ref": "EL040101"
+      },
+      {
+        "spec": "7.5 x 7.5",
+        "ref": "EL040102"
+      },
+      {
+        "spec": "10 x 10",
+        "ref": "EL040103"
+      },
+      {
+        "spec": "10 x 20 /4M",
+        "ref": "EL040104"
+      }
+    ]
+  },
+  {
+    "id": "EL-040201",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "GAUZE BANDAGE",
+    "variants": [
+      {
+        "spec": "1\"",
+        "ref": "EL-040201"
+      },
+      {
+        "spec": "2\"",
+        "ref": "EL-040202"
+      },
+      {
+        "spec": "3\"",
+        "ref": "EL-040203"
+      },
+      {
+        "spec": "4\"",
+        "ref": "EL-040204"
+      },
+      {
+        "spec": "6\"",
+        "ref": "EL-040205"
+      },
+      {
+        "spec": "/10M 1\"",
+        "ref": "EL-040206"
+      },
+      {
+        "spec": "2\"",
+        "ref": "EL-040207"
+      },
+      {
+        "spec": "3\"",
+        "ref": "EL-040208"
+      },
+      {
+        "spec": "4\"",
+        "ref": "EL-040209"
+      },
+      {
+        "spec": "6\"",
+        "ref": "EL-040210"
+      }
+    ]
+  },
+  {
+    "id": "EL-040301",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "GUAZE ROLL",
+    "variants": [
+      {
+        "spec": "cylinder-shaped",
+        "ref": "EL-040301"
+      },
+      {
+        "spec": "pillow-shaped",
+        "ref": "EL-040302"
+      }
+    ]
+  },
+  {
+    "id": "EL-040401",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "LAP SPONGE",
+    "variants": [
+      {
+        "spec": "12\" x 12\"",
+        "ref": "EL-040401"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-040402"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-040202-4P"
+      },
+      {
+        "spec": "18\" x 18\"",
+        "ref": "EL-040202-8P"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-040202-10P"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-040202-12P"
+      }
+    ]
+  },
+  {
+    "id": "EL-040701",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "NON-WOVEN SWAB",
+    "variants": [
+      {
+        "spec": "15 x 15",
+        "ref": "EL-040701"
+      },
+      {
+        "spec": "25 x 30",
+        "ref": "EL-040702"
+      },
+      {
+        "spec": "40 x 40 /roll",
+        "ref": "EL-040703"
+      }
+    ]
+  },
+  {
+    "id": "EL040801",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "COTTON ROLL",
+    "variants": [
+      {
+        "spec": "50g",
+        "ref": "EL040801"
+      },
+      {
+        "spec": "100g",
+        "ref": "EL040802"
+      },
+      {
+        "spec": "250g",
+        "ref": "EL040803"
+      },
+      {
+        "spec": "400g",
+        "ref": "EL040804"
+      },
+      {
+        "spec": "450g",
+        "ref": "EL040805"
+      },
+      {
+        "spec": "500g",
+        "ref": "EL040806"
+      },
+      {
+        "spec": "1000g /mm x mm",
+        "ref": "EL040807"
+      }
+    ]
+  },
+  {
+    "id": "EL040901",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "DENTAL COTTON ROLL",
+    "variants": [
+      {
+        "spec": "8 x 38",
+        "ref": "EL040901"
+      },
+      {
+        "spec": "10 x 38",
+        "ref": "EL040902"
+      },
+      {
+        "spec": "12 x 38",
+        "ref": "EL040903"
+      },
+      {
+        "spec": "15 x 30",
+        "ref": "EL040904"
+      }
+    ]
+  },
+  {
+    "id": "EL041301",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "INCONTINENCE UNDERPAD",
+    "variants": [
+      {
+        "spec": "S",
+        "ref": "EL041301"
+      },
+      {
+        "spec": "M",
+        "ref": "EL041302"
+      },
+      {
+        "spec": "L",
+        "ref": "EL041303"
+      }
+    ]
+  },
+  {
+    "id": "EL041901",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "ADULT DIAPER",
+    "variants": [
+      {
+        "spec": "M",
+        "ref": "EL041901"
+      },
+      {
+        "spec": "L",
+        "ref": "EL041902"
+      },
+      {
+        "spec": "XL",
+        "ref": "EL041903"
+      }
+    ]
+  },
+  {
+    "id": "EL042001",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "STERILE PARAFFIN GAUZE DRESSING",
+    "variants": [
+      {
+        "spec": "5 x 5",
+        "ref": "EL042001"
+      },
+      {
+        "spec": "7.5 x 7.5",
+        "ref": "EL042002"
+      },
+      {
+        "spec": "10 x 10",
+        "ref": "EL042003"
+      },
+      {
+        "spec": "10 x 20",
+        "ref": "EL042004"
+      },
+      {
+        "spec": "10 x 30",
+        "ref": "EL042005"
+      },
+      {
+        "spec": "20 x 20 /cm x cm",
+        "ref": "EL042006"
+      }
+    ]
+  },
+  {
+    "id": "EL-042101",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "ALCOHOL PAD",
+    "variants": [
+      {
+        "spec": "6 x 3",
+        "ref": "EL-042101"
+      }
+    ]
+  },
+  {
+    "id": "EL0422",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "CRINKLE GAUZE ROLL",
+    "variants": [
+      {
+        "spec": "4.5inch x 4.1yard 6plys",
+        "ref": "EL0422"
+      }
+    ]
+  },
+  {
+    "id": "EL0423",
+    "category": "COTTON AND GAUZE PRODUCTS",
+    "name": "TRIANGLE BANDAGE",
+    "variants": []
+  },
+  {
+    "id": "EL-050101",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "REINFORCED SURGICAL GOWN /SURGICAL GOWN",
+    "variants": [
+      {
+        "spec": "S",
+        "ref": "EL-050101"
+      },
+      {
+        "spec": "M",
+        "ref": "EL-050102"
+      },
+      {
+        "spec": "L",
+        "ref": "EL-050103"
+      },
+      {
+        "spec": "XL",
+        "ref": "EL-050104"
+      },
+      {
+        "spec": "/ reinforced S",
+        "ref": "EL050105"
+      },
+      {
+        "spec": "M",
+        "ref": "EL050106"
+      },
+      {
+        "spec": "L",
+        "ref": "EL050107"
+      },
+      {
+        "spec": "XL",
+        "ref": "EL050108"
+      }
+    ]
+  },
+  {
+    "id": "EL050201",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "SOLATION GOWN",
+    "variants": [
+      {
+        "spec": "S",
+        "ref": "EL050201"
+      },
+      {
+        "spec": "M",
+        "ref": "EL050202"
+      },
+      {
+        "spec": "L",
+        "ref": "EL050203"
+      },
+      {
+        "spec": "XL /patient gown",
+        "ref": "EL050204"
+      }
+    ]
+  },
+  {
+    "id": "EL050301",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "SCRUB SUIT /PATIENT GOWN",
+    "variants": [
+      {
+        "spec": "S",
+        "ref": "EL050301"
+      },
+      {
+        "spec": "M",
+        "ref": "EL050302"
+      },
+      {
+        "spec": "/scrub suit S",
+        "ref": "EL050801"
+      },
+      {
+        "spec": "M",
+        "ref": "EL050802"
+      }
+    ]
+  },
+  {
+    "id": "EL050401",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "DISPOSABLE FACE MASK",
+    "variants": [
+      {
+        "spec": "with ties on",
+        "ref": "EL050401"
+      },
+      {
+        "spec": "with ear loop",
+        "ref": "EL050402"
+      }
+    ]
+  },
+  {
+    "id": "EL050501",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "N95 FACE MASK",
+    "variants": [
+      {
+        "spec": "with valve",
+        "ref": "EL050501"
+      },
+      {
+        "spec": "without valve",
+        "ref": "EL050502"
+      }
+    ]
+  },
+  {
+    "id": "EL-050601",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "BOUFFANT CAP",
+    "variants": [
+      {
+        "spec": "18\"",
+        "ref": "EL-050601"
+      },
+      {
+        "spec": "19\"",
+        "ref": "EL-050602"
+      },
+      {
+        "spec": "21\"",
+        "ref": "EL-050603"
+      },
+      {
+        "spec": "24\"",
+        "ref": "EL-050604"
+      }
+    ]
+  },
+  {
+    "id": "EL050701",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "MOP CAP",
+    "variants": [
+      {
+        "spec": "18\"",
+        "ref": "EL050701"
+      },
+      {
+        "spec": "19\"",
+        "ref": "EL050702"
+      },
+      {
+        "spec": "21\"",
+        "ref": "EL050703"
+      },
+      {
+        "spec": "24\"",
+        "ref": "EL050704"
+      }
+    ]
+  },
+  {
+    "id": "EL-050801",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "DOCTOR CAP",
+    "variants": [
+      {
+        "spec": "with elastic",
+        "ref": "EL-050801"
+      },
+      {
+        "spec": "with ties on /cm x cm",
+        "ref": "EL-050802"
+      }
+    ]
+  },
+  {
+    "id": "EL-050901",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "SHOE COVER",
+    "variants": [
+      {
+        "spec": "40 x 16",
+        "ref": "EL-050901"
+      },
+      {
+        "spec": "40 x 17",
+        "ref": "EL-050902"
+      },
+      {
+        "spec": "38 x 16",
+        "ref": "EL-050903"
+      }
+    ]
+  },
+  {
+    "id": "EL051101",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "NON-WOVEN SLEEVES",
+    "variants": [
+      {
+        "spec": "PP, 40 x 20",
+        "ref": "EL051101"
+      },
+      {
+        "spec": "PP, 45 x 22",
+        "ref": "EL051102"
+      },
+      {
+        "spec": "PE, 40 x 20",
+        "ref": "EL051103"
+      }
+    ]
+  },
+  {
+    "id": "EL051201",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "PE APRON",
+    "variants": [
+      {
+        "spec": "S",
+        "ref": "EL051201"
+      },
+      {
+        "spec": "M",
+        "ref": "EL051202"
+      },
+      {
+        "spec": "L",
+        "ref": "EL051203"
+      }
+    ]
+  },
+  {
+    "id": "EL051601",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "BED SHEET",
+    "variants": [
+      {
+        "spec": "without pillowcase",
+        "ref": "EL051601"
+      },
+      {
+        "spec": "with pillowcase",
+        "ref": "EL051602"
+      }
+    ]
+  },
+  {
+    "id": "EL051801",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "DRESSING PACK",
+    "variants": [
+      {
+        "spec": "Forceps Plastic Tray Gauze Ball Gauze Swap Bag Drape Sheet Custom-made is available",
+        "ref": "EL051801"
+      }
+    ]
+  },
+  {
+    "id": "EL052201",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "INDICATOR TAPE",
+    "variants": [
+      {
+        "spec": "eo sterilization",
+        "ref": "EL052201"
+      },
+      {
+        "spec": "autoclave steam",
+        "ref": "EL052202"
+      },
+      {
+        "spec": "plasma",
+        "ref": "EL052203"
+      },
+      {
+        "spec": "sterilization strip",
+        "ref": "EL052204"
+      }
+    ]
+  },
+  {
+    "id": "EL052301",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "STERILIZATION CREPE PAPER",
+    "variants": [
+      {
+        "spec": "S",
+        "ref": "EL052301"
+      },
+      {
+        "spec": "M",
+        "ref": "EL052302"
+      },
+      {
+        "spec": "L",
+        "ref": "EL052303"
+      }
+    ]
+  },
+  {
+    "id": "EL052401",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "HEAT SEALING STERILIZATION FLAT REEL",
+    "variants": [
+      {
+        "spec": "flat reel",
+        "ref": "EL052401"
+      },
+      {
+        "spec": "flat pouch",
+        "ref": "EL052402"
+      },
+      {
+        "spec": "gusseted reel",
+        "ref": "EL052403"
+      }
+    ]
+  },
+  {
+    "id": "EL052501",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "CESAREAN PACK",
+    "variants": [
+      {
+        "spec": "Caesarean Section Drape 200/260 x 320cm Mayo Stand Cover 80 x 145cm Hand Towels 30 x 40cm Reinforced Surgical Gown XL: 130 x 150cm Umbilical Clamp Baby Blanket 75 x 90cm Sucture Bag 16 x 28cm Back Table Cover 150 x 190cm SMS Wrap 100 x 100cm Custom-made is available",
+        "ref": "EL052501"
+      }
+    ]
+  },
+  {
+    "id": "EL052701",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "DELIVERY PACK",
+    "variants": [
+      {
+        "spec": "Under Buttocks Drape 100 x 112cm Leggings 75 x 120cm Reinforced Side Drape 100 x 150cm Hand Towels 30 x 40cm Reinforced Surgical Gown XL: 130 x 150cm Baby Blanke Custom-made is available",
+        "ref": "EL052701"
+      }
+    ]
+  },
+  {
+    "id": "EL053101",
+    "category": "NON-WOVEN PROTECTIVE PRODUCTS",
+    "name": "STERILE TREATMENT WIPE",
+    "variants": [
+      {
+        "spec": "20cm-400cm x 20cm-400cm",
+        "ref": "EL053101"
+      }
+    ]
+  },
+  {
+    "id": "EL-060028-L",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "ENDOTRACHEAL TUBE (LEFT- SIDED)",
+    "variants": [
+      {
+        "spec": "Fr28",
+        "ref": "EL-060028-L"
+      },
+      {
+        "spec": "Fr32",
+        "ref": "EL-060032-L"
+      },
+      {
+        "spec": "Fr35",
+        "ref": "EL-060035-L"
+      },
+      {
+        "spec": "Fr37",
+        "ref": "EL-060037-L"
+      },
+      {
+        "spec": "Fr39",
+        "ref": "EL-060039-L"
+      },
+      {
+        "spec": "Fr41",
+        "ref": "EL-060041-L"
+      }
+    ]
+  },
+  {
+    "id": "EL-060028-R",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "ENDOTRACHEAL TUBE (RIGHT- SIDED)",
+    "variants": [
+      {
+        "spec": "Fr28",
+        "ref": "EL-060028-R"
+      },
+      {
+        "spec": "Fr32",
+        "ref": "EL-060032-R"
+      },
+      {
+        "spec": "Fr35",
+        "ref": "EL-060035-R"
+      },
+      {
+        "spec": "Fr37",
+        "ref": "EL-060037-R"
+      },
+      {
+        "spec": "Fr39",
+        "ref": "EL-060039-R"
+      },
+      {
+        "spec": "Fr41",
+        "ref": "EL-060041-R"
+      }
+    ]
+  },
+  {
+    "id": "EL-060501",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "INTUBATION STYLET",
+    "variants": [
+      {
+        "spec": "Fr6",
+        "ref": "EL-060501"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-060502"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-060503"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-3143"
+      },
+      {
+        "spec": "/mm 3.0",
+        "ref": "EL-060601-3.0"
+      },
+      {
+        "spec": "3.5",
+        "ref": "EL-060601-3.5"
+      },
+      {
+        "spec": "4.0",
+        "ref": "EL-060601-4.0"
+      },
+      {
+        "spec": "4.5",
+        "ref": "EL-060601-4.5"
+      },
+      {
+        "spec": "5.0",
+        "ref": "EL-060601-5.0"
+      },
+      {
+        "spec": "5.5",
+        "ref": "EL-060601-5.5"
+      },
+      {
+        "spec": "6.0",
+        "ref": "EL-060601-6.0"
+      },
+      {
+        "spec": "6.5",
+        "ref": "EL-060601-6.5"
+      },
+      {
+        "spec": "7.0",
+        "ref": "EL-060601-7.0"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL-060601-7.5"
+      },
+      {
+        "spec": "8.0",
+        "ref": "EL-060601-8.0"
+      },
+      {
+        "spec": "8.5",
+        "ref": "EL-060601-8.5"
+      },
+      {
+        "spec": "9.0",
+        "ref": "EL-060601-9.0"
+      },
+      {
+        "spec": "9.5",
+        "ref": "EL-060601-9.5"
+      },
+      {
+        "spec": "10.0",
+        "ref": "EL-060601-10.0"
+      }
+    ]
+  },
+  {
+    "id": "EL-060701",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "PVC LARYNGEAL MASK (DISPOSABLE, STANDARD)",
+    "variants": [
+      {
+        "spec": "1.0",
+        "ref": "EL-060701"
+      },
+      {
+        "spec": "1.5",
+        "ref": "EL-060702"
+      },
+      {
+        "spec": "2.0",
+        "ref": "EL-060703"
+      },
+      {
+        "spec": "2.5",
+        "ref": "EL-060704"
+      },
+      {
+        "spec": "3.0",
+        "ref": "EL-060705"
+      },
+      {
+        "spec": "4.0",
+        "ref": "EL-060706"
+      },
+      {
+        "spec": "5.0",
+        "ref": "EL-060707"
+      }
+    ]
+  },
+  {
+    "id": "EL-3166",
+    "category": "needs_review",
+    "name": "PVC LARYNGEAL MASK (DISPOSABLE, REINFORCED)",
+    "variants": [
+      {
+        "spec": "1.0",
+        "ref": "EL-3166"
+      },
+      {
+        "spec": "1.5",
+        "ref": "EL-3167"
+      },
+      {
+        "spec": "2.0",
+        "ref": "EL-3168"
+      },
+      {
+        "spec": "2.5",
+        "ref": "EL-3169"
+      },
+      {
+        "spec": "3.0",
+        "ref": "EL-3170"
+      },
+      {
+        "spec": "4.0",
+        "ref": "EL-3171"
+      },
+      {
+        "spec": "5.0 /mm",
+        "ref": "EL-3172"
+      }
+    ]
+  },
+  {
+    "id": "EL-060801-1.0",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "SILICONE LARYNGEAL MASK (DISPOSABLE, REINFORCED)",
+    "variants": [
+      {
+        "spec": "1.0",
+        "ref": "EL-060801-1.0"
+      },
+      {
+        "spec": "1.5",
+        "ref": "EL-060801-1.5"
+      },
+      {
+        "spec": "2.0",
+        "ref": "EL-060801-2.0"
+      },
+      {
+        "spec": "2.5",
+        "ref": "EL-060801-2.5"
+      },
+      {
+        "spec": "3.0",
+        "ref": "EL-060801-3.0"
+      },
+      {
+        "spec": "4.0",
+        "ref": "EL-060801-4.0"
+      },
+      {
+        "spec": "5.0 /mm",
+        "ref": "EL-060801-5.0"
+      }
+    ]
+  },
+  {
+    "id": "EL-060802-1.0",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "SILICONE LARYNGEAL MASK (DISPOSABLE, REINFORCED)",
+    "variants": [
+      {
+        "spec": "1.0",
+        "ref": "EL-060802-1.0"
+      },
+      {
+        "spec": "1.5",
+        "ref": "EL-060802-1.5"
+      },
+      {
+        "spec": "2.0",
+        "ref": "EL-060802-2.0"
+      },
+      {
+        "spec": "2.5",
+        "ref": "EL-060802-2.5"
+      },
+      {
+        "spec": "3.0",
+        "ref": "EL-060802-3.0"
+      },
+      {
+        "spec": "4.0",
+        "ref": "EL-060802-4.0"
+      },
+      {
+        "spec": "5.0 /mm",
+        "ref": "EL-060802-5.0"
+      }
+    ]
+  },
+  {
+    "id": "EL-060901-1.0",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "SILICONE LARYNGEAL MASK (RESUABLE, STANDARD)",
+    "variants": [
+      {
+        "spec": "1.0",
+        "ref": "EL-060901-1.0"
+      },
+      {
+        "spec": "1.5",
+        "ref": "EL-060901-1.5"
+      },
+      {
+        "spec": "2.0",
+        "ref": "EL-060901-2.0"
+      },
+      {
+        "spec": "2.5",
+        "ref": "EL-060901-2.5"
+      },
+      {
+        "spec": "3.0",
+        "ref": "EL-060901-3.0"
+      },
+      {
+        "spec": "4.0",
+        "ref": "EL-060901-4.0"
+      },
+      {
+        "spec": "5.0",
+        "ref": "EL-060901-5.0"
+      }
+    ]
+  },
+  {
+    "id": "EL-3179",
+    "category": "needs_review",
+    "name": "OROPHARYNGEAL AIRWAY",
+    "variants": [
+      {
+        "spec": "30",
+        "ref": "EL-3179"
+      },
+      {
+        "spec": "40",
+        "ref": "EL-3180"
+      },
+      {
+        "spec": "50",
+        "ref": "EL-3181"
+      },
+      {
+        "spec": "60",
+        "ref": "EL-3182"
+      },
+      {
+        "spec": "70",
+        "ref": "EL-3183"
+      },
+      {
+        "spec": "80",
+        "ref": "EL-3184"
+      },
+      {
+        "spec": "90",
+        "ref": "EL-3185"
+      },
+      {
+        "spec": "100",
+        "ref": "EL-3186"
+      },
+      {
+        "spec": "110",
+        "ref": "EL-3187"
+      },
+      {
+        "spec": "120 /mm",
+        "ref": "EL-3188"
+      }
+    ]
+  },
+  {
+    "id": "EL-061001-",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "GUEDEL AIRWAY",
+    "variants": [
+      {
+        "spec": "#000, 40",
+        "ref": "EL-061001-"
+      },
+      {
+        "spec": "#00, 50",
+        "ref": "EL-061001-"
+      },
+      {
+        "spec": "#0, 60",
+        "ref": "EL-061001-"
+      },
+      {
+        "spec": "#1, 70",
+        "ref": "EL-061001-"
+      },
+      {
+        "spec": "#2, 80",
+        "ref": "EL-061001-"
+      },
+      {
+        "spec": "#3, 90",
+        "ref": "EL-061001-"
+      },
+      {
+        "spec": "#4, 100",
+        "ref": "EL-061001-"
+      },
+      {
+        "spec": "#5, 110",
+        "ref": "EL-061001-"
+      },
+      {
+        "spec": "#6, 120",
+        "ref": "EL-061001-"
+      }
+    ]
+  },
+  {
+    "id": "EL-0611",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "NASOPHARYNGEAL AIRWAY (WITHOUT CLIP)",
+    "variants": [
+      {
+        "spec": "Fr12",
+        "ref": "EL-0611"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-061100"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-061101"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-061102"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-061103"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL-061104"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL-061105"
+      },
+      {
+        "spec": "Fr26",
+        "ref": "EL-061106"
+      },
+      {
+        "spec": "Fr28",
+        "ref": "EL-061107"
+      },
+      {
+        "spec": "Fr30",
+        "ref": "EL-061108"
+      },
+      {
+        "spec": "Fr32",
+        "ref": "EL-061109"
+      },
+      {
+        "spec": "Fr34",
+        "ref": "EL-061110"
+      },
+      {
+        "spec": "Fr36",
+        "ref": "EL-061111"
+      }
+    ]
+  },
+  {
+    "id": "EL-3189",
+    "category": "needs_review",
+    "name": "NASOPHARYNGEAL AIRWAY (WITH CLIP)",
+    "variants": [
+      {
+        "spec": "Fr12",
+        "ref": "EL-3189"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-3190"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-3191"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-3192"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-3193"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL-3194"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL-3195"
+      },
+      {
+        "spec": "Fr26",
+        "ref": "EL-3196"
+      },
+      {
+        "spec": "Fr28",
+        "ref": "EL-3197"
+      },
+      {
+        "spec": "Fr30",
+        "ref": "EL-3198"
+      },
+      {
+        "spec": "Fr32",
+        "ref": "EL-3199"
+      },
+      {
+        "spec": "Fr34",
+        "ref": "EL-3200"
+      },
+      {
+        "spec": "Fr36",
+        "ref": "EL-3201"
+      }
+    ]
+  },
+  {
+    "id": "EL-3173",
+    "category": "needs_review",
+    "name": "ANAESTHETIC MASK (SOFT)",
+    "variants": [
+      {
+        "spec": "#0",
+        "ref": "EL-3173"
+      },
+      {
+        "spec": "#1",
+        "ref": "EL-3174"
+      },
+      {
+        "spec": "#2",
+        "ref": "EL-3175"
+      },
+      {
+        "spec": "#3",
+        "ref": "EL-3176"
+      },
+      {
+        "spec": "#4",
+        "ref": "EL-3177"
+      },
+      {
+        "spec": "#5",
+        "ref": "EL-3178"
+      },
+      {
+        "spec": "#6 /PVC",
+        "ref": "EL-3179"
+      }
+    ]
+  },
+  {
+    "id": "EL-061201-",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "ANAESTHETIC MASK (PVC)",
+    "variants": [
+      {
+        "spec": "#000",
+        "ref": "EL-061201-"
+      },
+      {
+        "spec": "#00",
+        "ref": "EL-061201-"
+      },
+      {
+        "spec": "#0",
+        "ref": "EL-061201-"
+      },
+      {
+        "spec": "#1",
+        "ref": "EL-061201-"
+      },
+      {
+        "spec": "#2",
+        "ref": "EL-061201-"
+      },
+      {
+        "spec": "#3",
+        "ref": "EL-061201-"
+      },
+      {
+        "spec": "#4",
+        "ref": "EL-061201-"
+      },
+      {
+        "spec": "#5",
+        "ref": "EL-061201-"
+      },
+      {
+        "spec": "#6",
+        "ref": "EL-061201-"
+      }
+    ]
+  },
+  {
+    "id": "EL-061202-",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "ANAESTHETIC MASK (SILICONE)",
+    "variants": [
+      {
+        "spec": "#000",
+        "ref": "EL-061202-"
+      },
+      {
+        "spec": "#00",
+        "ref": "EL-061202-"
+      },
+      {
+        "spec": "#0",
+        "ref": "EL-061202-"
+      },
+      {
+        "spec": "#1",
+        "ref": "EL-061202-"
+      },
+      {
+        "spec": "#2",
+        "ref": "EL-061202-"
+      },
+      {
+        "spec": "#3",
+        "ref": "EL-061202-"
+      },
+      {
+        "spec": "#4",
+        "ref": "EL-061202-"
+      },
+      {
+        "spec": "#5",
+        "ref": "EL-061202-"
+      },
+      {
+        "spec": "#6 /without tubing",
+        "ref": "EL-061202-"
+      }
+    ]
+  },
+  {
+    "id": "EL-061301",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "TRACHEOSTOMY MASK",
+    "variants": [
+      {
+        "spec": "adult",
+        "ref": "EL-061301"
+      },
+      {
+        "spec": "pediatric",
+        "ref": "EL-061302"
+      },
+      {
+        "spec": "/with tubing adult",
+        "ref": "EL-3202"
+      },
+      {
+        "spec": "pediatric",
+        "ref": "EL-3203"
+      }
+    ]
+  },
+  {
+    "id": "EL-061401",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "NASAL OXYGEN CANNULA",
+    "variants": [
+      {
+        "spec": "normal-tip, M /adult",
+        "ref": "EL-061401"
+      },
+      {
+        "spec": "normal-tip, S /pediatric",
+        "ref": "EL-061402"
+      },
+      {
+        "spec": "normal-tip, XS /infant",
+        "ref": "EL-061403"
+      },
+      {
+        "spec": "soft-tip, XS /infant",
+        "ref": "EL-061404"
+      },
+      {
+        "spec": "soft-tip, XXS /neonate",
+        "ref": "EL-061405"
+      },
+      {
+        "spec": "high flow, adult",
+        "ref": "EL-3220"
+      },
+      {
+        "spec": "high flow, pediatric",
+        "ref": "EL-3221"
+      },
+      {
+        "spec": "high flow, infant",
+        "ref": "EL-3222"
+      },
+      {
+        "spec": "/",
+        "ref": "EL-3223"
+      }
+    ]
+  },
+  {
+    "id": "EL061508S",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "SIMPLE NASAL OXYGEN CATHETER",
+    "variants": [
+      {
+        "spec": "Fr8",
+        "ref": "EL061508S"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL061510S"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL061512S"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL061514S"
+      }
+    ]
+  },
+  {
+    "id": "EL061508",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "SIMPLE NASAL OXYGEN CATHETER (WITHOUT SPONGE)",
+    "variants": [
+      {
+        "spec": "Fr8",
+        "ref": "EL061508"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL061510"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL061512"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL061514"
+      }
+    ]
+  },
+  {
+    "id": "EL-061601",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "SIMPLE OXYGEN MASK",
+    "variants": [
+      {
+        "spec": "XL /adult elongated",
+        "ref": "EL-061601"
+      },
+      {
+        "spec": "L /adult standard",
+        "ref": "EL-061602"
+      },
+      {
+        "spec": "M /pediatric elongated",
+        "ref": "EL-061603"
+      },
+      {
+        "spec": "S /pediatric standard",
+        "ref": "EL-061604"
+      },
+      {
+        "spec": "XS /infant /silicone",
+        "ref": "EL-061605"
+      }
+    ]
+  },
+  {
+    "id": "EL-061701",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "OXYGEN CONNECTING TUBE",
+    "variants": [
+      {
+        "spec": "7FT",
+        "ref": "EL-061701"
+      },
+      {
+        "spec": "10FT",
+        "ref": "EL-061702"
+      },
+      {
+        "spec": "14FT",
+        "ref": "EL-061703"
+      },
+      {
+        "spec": "25FT",
+        "ref": "EL-061704"
+      },
+      {
+        "spec": "50FT",
+        "ref": "EL-061705"
+      }
+    ]
+  },
+  {
+    "id": "EL-061801",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "NON-REBREATH MASK",
+    "variants": [
+      {
+        "spec": "XL /adult elongated",
+        "ref": "EL-061801"
+      },
+      {
+        "spec": "L /adult standard",
+        "ref": "EL-061802"
+      },
+      {
+        "spec": "M /pediatric elongated",
+        "ref": "EL-061803"
+      },
+      {
+        "spec": "S /pediatric standard",
+        "ref": "EL-061804"
+      },
+      {
+        "spec": "XS /infant",
+        "ref": "EL-061805"
+      },
+      {
+        "spec": "XL /adult elongated",
+        "ref": "EL-061901"
+      },
+      {
+        "spec": "L /adult standard",
+        "ref": "EL-061902"
+      },
+      {
+        "spec": "M /pediatric elongated",
+        "ref": "EL-061903"
+      },
+      {
+        "spec": "S /pediatric standard",
+        "ref": "EL-061904"
+      },
+      {
+        "spec": "XS /infant",
+        "ref": "EL-061910"
+      }
+    ]
+  },
+  {
+    "id": "EL-062001",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "JET NEBULIZER KIT",
+    "variants": [
+      {
+        "spec": "without mask",
+        "ref": "EL-062001"
+      },
+      {
+        "spec": "with mask",
+        "ref": "EL-062002"
+      }
+    ]
+  },
+  {
+    "id": "EL-062101",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "VENTURI MASK WITH 2 DILUTERS",
+    "variants": [
+      {
+        "spec": "XL /adult elongated",
+        "ref": "EL-062101"
+      },
+      {
+        "spec": "L /adult standard",
+        "ref": "EL-062102"
+      },
+      {
+        "spec": "M /pediatric elongated",
+        "ref": "EL-062103"
+      },
+      {
+        "spec": "S /pediatric standard",
+        "ref": "EL-062104"
+      },
+      {
+        "spec": "XS /infant /with 6 diluter",
+        "ref": "EL-062105"
+      }
+    ]
+  },
+  {
+    "id": "EL-062201",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "ADJUSTABLE VENTURI MASK (WITH 6 /7DILUTER)",
+    "variants": [
+      {
+        "spec": "XL /adult elongated",
+        "ref": "EL-062201"
+      },
+      {
+        "spec": "L /adult standard",
+        "ref": "EL-062202"
+      },
+      {
+        "spec": "M /pediatric elongated",
+        "ref": "EL-062203"
+      },
+      {
+        "spec": "S /pediatric standard",
+        "ref": "EL-062204"
+      },
+      {
+        "spec": "XS /infant",
+        "ref": "EL-062205"
+      },
+      {
+        "spec": "/with 7 diluter XL /adult elongated",
+        "ref": "EL-062206"
+      },
+      {
+        "spec": "L /adult standard",
+        "ref": "EL-062207"
+      },
+      {
+        "spec": "M /pediatric elongated",
+        "ref": "EL-062208"
+      },
+      {
+        "spec": "S /pediatric standard",
+        "ref": "EL-062209"
+      },
+      {
+        "spec": "XS /infant",
+        "ref": "EL-062210"
+      }
+    ]
+  },
+  {
+    "id": "EL-062301",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "GASTROSTOMY TUBE",
+    "variants": [
+      {
+        "spec": "Fr12",
+        "ref": "EL-062301"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-062302"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-062303"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-062304"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-062305"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL-062306"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL-062307"
+      }
+    ]
+  },
+  {
+    "id": "EL-062401",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "CPR MASK",
+    "variants": [
+      {
+        "spec": "standard",
+        "ref": "EL-062401"
+      }
+    ]
+  },
+  {
+    "id": "EL-062501",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "CPAP MASK",
+    "variants": [
+      {
+        "spec": "L",
+        "ref": "EL-062501"
+      },
+      {
+        "spec": "M",
+        "ref": "EL-062502"
+      },
+      {
+        "spec": "S",
+        "ref": "EL-062503"
+      },
+      {
+        "spec": "nasal",
+        "ref": "EL-062504"
+      }
+    ]
+  },
+  {
+    "id": "EL-3268-24",
+    "category": "needs_review",
+    "name": "CLOSED SUCTION CATHETER (24 HOURS)",
+    "variants": [
+      {
+        "spec": "Fr6",
+        "ref": "EL-3268-24"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL-3269-24"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-3270-24"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-3271-24"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-3272-24"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-3273-24"
+      }
+    ]
+  },
+  {
+    "id": "EL-3268-72",
+    "category": "needs_review",
+    "name": "CLOSED SUCTION CATHETER (72 HOURS)",
+    "variants": [
+      {
+        "spec": "Fr6",
+        "ref": "EL-3268-72"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL-3269-72"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-3270-72"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-3271-72"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-3272-72"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-3273-72"
+      }
+    ]
+  },
+  {
+    "id": "EL-062701",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "MUCUS EXTRACTOR",
+    "variants": [
+      {
+        "spec": "Fr6",
+        "ref": "EL-062701"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL-062702"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-062703"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-062704"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-062705"
+      }
+    ]
+  },
+  {
+    "id": "EL-062600",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "SUCTION CATHETER",
+    "variants": [
+      {
+        "spec": "Fr5",
+        "ref": "EL-062600"
+      },
+      {
+        "spec": "Fr6",
+        "ref": "EL-062601"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL-062602"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-062603"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-062604"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-062605"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-062606"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-062607"
+      },
+      {
+        "spec": "Fr20 /M",
+        "ref": "EL-062608"
+      }
+    ]
+  },
+  {
+    "id": "EL-062801",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "SUCTION CONNECTING TUBE",
+    "variants": [
+      {
+        "spec": "1 /4\" x 1.8",
+        "ref": "EL-062801"
+      },
+      {
+        "spec": "1 /4\" x 2.0",
+        "ref": "EL-062802"
+      },
+      {
+        "spec": "1 /4\" x 2.5",
+        "ref": "EL-062803"
+      },
+      {
+        "spec": "1 /4\" x 3.0",
+        "ref": "EL-062804"
+      },
+      {
+        "spec": "1 /4\" x 3.6",
+        "ref": "EL-062805"
+      },
+      {
+        "spec": "3 /16\" x 1.8",
+        "ref": "EL-062806"
+      },
+      {
+        "spec": "3 /16\" x 2.0",
+        "ref": "EL-062807"
+      },
+      {
+        "spec": "3 /16\" x 2.5",
+        "ref": "EL-062808"
+      },
+      {
+        "spec": "3 /16\" x 3.0",
+        "ref": "EL-062809"
+      },
+      {
+        "spec": "3 /16\" x 3.6",
+        "ref": "EL-062810"
+      },
+      {
+        "spec": "9 /32\" x 1.8",
+        "ref": "EL-062811"
+      },
+      {
+        "spec": "9 /32\" x 2.0",
+        "ref": "EL-062812"
+      },
+      {
+        "spec": "9 /32\" x 3.0",
+        "ref": "EL-062813"
+      },
+      {
+        "spec": "9 /32\" x 3.6",
+        "ref": "EL-062814"
+      }
+    ]
+  },
+  {
+    "id": "EL-3256",
+    "category": "needs_review",
+    "name": "SUCTION YANKAUER SET",
+    "variants": [
+      {
+        "spec": "1 /4\"",
+        "ref": "EL-3256"
+      },
+      {
+        "spec": "3 /16\"",
+        "ref": "EL-3257"
+      },
+      {
+        "spec": "9 /32\"",
+        "ref": "EL-3258"
+      }
+    ]
+  },
+  {
+    "id": "EL-062901",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "SUCTION YANKAUER HANDLE",
+    "variants": [
+      {
+        "spec": "crown tip with vent",
+        "ref": "EL-062901"
+      },
+      {
+        "spec": "crown tip without vent",
+        "ref": "EL-062902"
+      },
+      {
+        "spec": "plain tip with vent",
+        "ref": "EL-062903"
+      },
+      {
+        "spec": "crown tip without vent",
+        "ref": "EL-062904"
+      }
+    ]
+  },
+  {
+    "id": "EL-063001",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "ANESTHESIA CIRCUIT",
+    "variants": [
+      {
+        "spec": "22mm, 2 x 160cm corrugated tubes, adult",
+        "ref": "EL-063001"
+      },
+      {
+        "spec": "15mm, 2 x 150cm corrugated tubes, pediatric",
+        "ref": "EL-063002"
+      },
+      {
+        "spec": "22mm, 2 x 160cm smoothbore tubes, adult",
+        "ref": "EL-063003"
+      },
+      {
+        "spec": "15mm, 2 x 150cm smoothbore tubes, pediatric",
+        "ref": "EL-063004"
+      },
+      {
+        "spec": "22mm, 2 x 160cm expandable tubes, adult",
+        "ref": "EL-063005"
+      },
+      {
+        "spec": "15mm, 2 x 150cm expandable tubes, pediatric",
+        "ref": "EL-063006"
+      },
+      {
+        "spec": "for adult use",
+        "ref": "EL-3204"
+      },
+      {
+        "spec": "for pediatric use",
+        "ref": "EL-3205"
+      }
+    ]
+  },
+  {
+    "id": "EL-063101",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "VENTILATOR CIRCUIT",
+    "variants": [
+      {
+        "spec": "22mm, 2 x 160cm + 2 x 80cm corrugated tubes, adult",
+        "ref": "EL-063101"
+      },
+      {
+        "spec": "15mm, 2 x 150cm + 2 x 75cm corrugated tubes, pediatric",
+        "ref": "EL-063102"
+      },
+      {
+        "spec": "22mm, 4 x 80cm corrugated tubes, adult",
+        "ref": "EL-063103"
+      },
+      {
+        "spec": "22mm, 4 x 75cm corrugated tubes, pediatric",
+        "ref": "EL-063104"
+      },
+      {
+        "spec": "22mm, 1 x 160cm + 2 x 80cm smoothbore tubes, adult",
+        "ref": "EL-063105"
+      },
+      {
+        "spec": "15mm, 1 x 150cm + 2 x 75cm smoothbore tubes, pediatric",
+        "ref": "EL-063106"
+      },
+      {
+        "spec": "22mm, 4 x 80cm smoothbore tubes, adult",
+        "ref": "EL-063107"
+      },
+      {
+        "spec": "22mm, 4 x 75cm smoothbore tubes, pediatric",
+        "ref": "EL-063108"
+      },
+      {
+        "spec": "for adult use",
+        "ref": "EL-3263"
+      },
+      {
+        "spec": "for pediatric use",
+        "ref": "EL-3264"
+      }
+    ]
+  },
+  {
+    "id": "EL-063301",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "MANUAL RESUSCITATOR",
+    "variants": [
+      {
+        "spec": "PVC, adult",
+        "ref": "EL-063301"
+      },
+      {
+        "spec": "PVC, pediatric",
+        "ref": "EL-063302"
+      },
+      {
+        "spec": "PVC, infant",
+        "ref": "EL-063303"
+      },
+      {
+        "spec": "PVC, neonate",
+        "ref": "EL-063304"
+      },
+      {
+        "spec": "silicone, adult",
+        "ref": "EL-063305"
+      },
+      {
+        "spec": "silicone, pediatric",
+        "ref": "EL-063306"
+      },
+      {
+        "spec": "silicone, infant",
+        "ref": "EL-063307"
+      },
+      {
+        "spec": "silicone, neonate",
+        "ref": "EL-063308"
+      },
+      {
+        "spec": "SEBS, adult",
+        "ref": "EL-3328"
+      },
+      {
+        "spec": "SEBS, pediatric",
+        "ref": "EL-3329"
+      },
+      {
+        "spec": "SEBS, infant",
+        "ref": "EL-3330"
+      },
+      {
+        "spec": "SEBS, neonate",
+        "ref": "EL-3331"
+      }
+    ]
+  },
+  {
+    "id": "EL063401",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "BREATHING TRAINING DEVICE",
+    "variants": [
+      {
+        "spec": "three",
+        "ref": "EL063401"
+      },
+      {
+        "spec": "one",
+        "ref": "EL063402"
+      }
+    ]
+  },
+  {
+    "id": "EL-063201",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "MOUTH OPENER",
+    "variants": [
+      {
+        "spec": "standard",
+        "ref": "EL-063201"
+      }
+    ]
+  },
+  {
+    "id": "EL-063501",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "HEAT MOISTURE EXCHANGER FILTER (HMEF)",
+    "variants": [
+      {
+        "spec": "paper, adult",
+        "ref": "EL-063501"
+      },
+      {
+        "spec": "paper, pediatric",
+        "ref": "EL-063502"
+      },
+      {
+        "spec": "for adult use",
+        "ref": "EL-3213"
+      },
+      {
+        "spec": "for pediatric use",
+        "ref": "EL-3214"
+      },
+      {
+        "spec": "for infant use",
+        "ref": "EL-3215"
+      }
+    ]
+  },
+  {
+    "id": "EL-063601",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "TRACHEOSTOMY HME FILTER",
+    "variants": [
+      {
+        "spec": "sponge",
+        "ref": "EL-063601"
+      },
+      {
+        "spec": "paper",
+        "ref": "EL-063602"
+      }
+    ]
+  },
+  {
+    "id": "EL-063701",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "HEAP FILTER",
+    "variants": [
+      {
+        "spec": "/",
+        "ref": "EL-063701"
+      }
+    ]
+  },
+  {
+    "id": "EL-063901",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "BACTERIAL /VIRAL FILTER",
+    "variants": [
+      {
+        "spec": "filtration efficiency: BFE 99.999%",
+        "ref": "EL-063901"
+      },
+      {
+        "spec": "with sampling port",
+        "ref": "EL-3216"
+      },
+      {
+        "spec": "without sampling port /ml",
+        "ref": "EL-3217"
+      }
+    ]
+  },
+  {
+    "id": "EL-063801",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "HUMIDIFICATION BOTTLE",
+    "variants": [
+      {
+        "spec": "40",
+        "ref": "EL-063801"
+      },
+      {
+        "spec": "150",
+        "ref": "EL-063802"
+      },
+      {
+        "spec": "200",
+        "ref": "EL-063803"
+      },
+      {
+        "spec": "250",
+        "ref": "EL-063804"
+      },
+      {
+        "spec": "500",
+        "ref": "EL-063805"
+      }
+    ]
+  },
+  {
+    "id": "EL-0645",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "GAS SAMPLING TUBE",
+    "variants": [
+      {
+        "spec": "normal",
+        "ref": "EL-0645"
+      }
+    ]
+  },
+  {
+    "id": "EL-3265",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "CATHETER MOUNT",
+    "variants": [
+      {
+        "spec": "for adult use",
+        "ref": "EL-3265"
+      },
+      {
+        "spec": "for pediatric use",
+        "ref": "EL-3266"
+      },
+      {
+        "spec": "corrugated 22F",
+        "ref": "EL-064001"
+      },
+      {
+        "spec": "corrugated 15M",
+        "ref": "EL-064002"
+      },
+      {
+        "spec": "smoothbore 22F",
+        "ref": "EL-064003"
+      },
+      {
+        "spec": "smoothbore 15M",
+        "ref": "EL-064004"
+      },
+      {
+        "spec": "expandable 22F",
+        "ref": "EL-064005"
+      },
+      {
+        "spec": "expandable 15M",
+        "ref": "EL-064006"
+      }
+    ]
+  },
+  {
+    "id": "EL-064101",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "ANESTHESIA LARYNGOSCOPE BLADES AND HANDLE",
+    "variants": [
+      {
+        "spec": "needs_review",
+        "ref": "EL-064101"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-064102"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-064103"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-064104"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-064105"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-064106"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-064107"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-064108"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-3206"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-3207"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-3208"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-3209"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-3210"
+      },
+      {
+        "spec": "needs_review",
+        "ref": "EL-3211"
+      },
+      {
+        "spec": "/L",
+        "ref": "EL-3212"
+      }
+    ]
+  },
+  {
+    "id": "EL-064201",
+    "category": "RESPIRATORY AND ANAESTHESIA PRODUCTS",
+    "name": "BREATHING BAG",
+    "variants": [
+      {
+        "spec": "latex, 0.5",
+        "ref": "EL-064201"
+      },
+      {
+        "spec": "latex, 1.0",
+        "ref": "EL-064202"
+      },
+      {
+        "spec": "latex, 2.0",
+        "ref": "EL-064203"
+      },
+      {
+        "spec": "latex, 3.0",
+        "ref": "EL-064204"
+      },
+      {
+        "spec": "latex free, 0.5",
+        "ref": "EL-064205"
+      },
+      {
+        "spec": "latex free, 1.0",
+        "ref": "EL-064206"
+      },
+      {
+        "spec": "latex free, 2.0",
+        "ref": "EL-064207"
+      },
+      {
+        "spec": "latex free, 3.0",
+        "ref": "EL-064208"
+      }
+    ]
+  },
+  {
+    "id": "EL-070201",
+    "category": "UROLOGY PRODUCTS",
+    "name": "2-WAY LATEX FOLEY CATHETER",
+    "variants": [
+      {
+        "spec": "Fr6",
+        "ref": "EL-070201"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL-070202"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-070203"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-070204"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-070205"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-070206"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-070207"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-070208"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL-070209"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL-070210"
+      },
+      {
+        "spec": "Fr26",
+        "ref": "EL-070211"
+      },
+      {
+        "spec": "Fr28",
+        "ref": "EL-070212"
+      },
+      {
+        "spec": "/soft valve Fr6",
+        "ref": "EL070201"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL070202"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL070203"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL070204"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL070205"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL070206"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL070207"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL070208"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL070209"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL070210"
+      },
+      {
+        "spec": "Fr26",
+        "ref": "EL070211"
+      },
+      {
+        "spec": "Fr28 /solid valve",
+        "ref": "EL070212"
+      }
+    ]
+  },
+  {
+    "id": "EL070302",
+    "category": "UROLOGY PRODUCTS",
+    "name": "3-WAY LATEX FOLEY CATHETER",
+    "variants": [
+      {
+        "spec": "Fr16",
+        "ref": "EL070302"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL070303"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL070304"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL070305"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL070306"
+      },
+      {
+        "spec": "Fr26",
+        "ref": "EL070307"
+      },
+      {
+        "spec": "/soft valve Fr16",
+        "ref": "EL070302-t"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL070303-t"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL070304-t"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL070305-t"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL070306-t"
+      },
+      {
+        "spec": "Fr26",
+        "ref": "EL070307-t"
+      }
+    ]
+  },
+  {
+    "id": "EL070401",
+    "category": "UROLOGY PRODUCTS",
+    "name": "2-WAY SILICONE FOLEY CATHETER",
+    "variants": [
+      {
+        "spec": "Fr6",
+        "ref": "EL070401"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL070402"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL070403"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL070404"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL070405"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL070406"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL070407"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL070408"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL070409"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL070410"
+      },
+      {
+        "spec": "Fr26",
+        "ref": "EL070411"
+      },
+      {
+        "spec": "Fr28",
+        "ref": "EL070412"
+      }
+    ]
+  },
+  {
+    "id": "EL070501",
+    "category": "UROLOGY PRODUCTS",
+    "name": "3-WAY SILICONE FOLEY CATHETER",
+    "variants": [
+      {
+        "spec": "Fr16",
+        "ref": "EL070501"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL070502"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL070503"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL070504"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL070505"
+      }
+    ]
+  },
+  {
+    "id": "EL070901",
+    "category": "UROLOGY PRODUCTS",
+    "name": "EXTERNAL CATHETER",
+    "variants": [
+      {
+        "spec": "latex, 22mm",
+        "ref": "EL070901"
+      },
+      {
+        "spec": "latex, 25mm",
+        "ref": "EL070902"
+      },
+      {
+        "spec": "latex, 30mm",
+        "ref": "EL070903"
+      },
+      {
+        "spec": "latex, 35mm",
+        "ref": "EL070904"
+      },
+      {
+        "spec": "XXL",
+        "ref": "EL-2126"
+      },
+      {
+        "spec": "XL",
+        "ref": "EL-2127"
+      },
+      {
+        "spec": "L",
+        "ref": "EL-2128"
+      },
+      {
+        "spec": "M",
+        "ref": "EL-2129"
+      },
+      {
+        "spec": "S",
+        "ref": "EL-2130"
+      }
+    ]
+  },
+  {
+    "id": "EL-071001",
+    "category": "UROLOGY PRODUCTS",
+    "name": "DISPOSABLE URETHRAL CATHETER TRAY",
+    "variants": [
+      {
+        "spec": "Fr12",
+        "ref": "EL-071001"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-071002"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-071003"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-071004"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-071005"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL-071006"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL-071007"
+      },
+      {
+        "spec": "Fr26",
+        "ref": "EL-071008"
+      }
+    ]
+  },
+  {
+    "id": "EL-071101",
+    "category": "UROLOGY PRODUCTS",
+    "name": "INTERMITTENT URINARY CATHETER",
+    "variants": [
+      {
+        "spec": "Fr6",
+        "ref": "EL-071101"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL-071102"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-071103"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-071104"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-071105"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-071106"
+      },
+      {
+        "spec": "Fr18 /PVC",
+        "ref": "EL-071107"
+      }
+    ]
+  },
+  {
+    "id": "EL-071201",
+    "category": "UROLOGY PRODUCTS",
+    "name": "STOMACH TUBE",
+    "variants": [
+      {
+        "spec": "Fr6",
+        "ref": "EL-071201"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL-071202"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-071203"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-071204"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-071205"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-071206"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-071207"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-071208"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL-071209"
+      },
+      {
+        "spec": "/silicone Fr8",
+        "ref": "EL-07120802"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-07121002"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-07121202"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-07121402"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-07121602"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-07121802"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-07122002"
+      },
+      {
+        "spec": "/ryles Fr10",
+        "ref": "EL-07121003"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-07121203"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-07121403"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-07121603"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-07121803"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-07122003"
+      }
+    ]
+  },
+  {
+    "id": "EL-07121004",
+    "category": "UROLOGY PRODUCTS",
+    "name": "STOMACH TUBE",
+    "variants": [
+      {
+        "spec": "/ryles with steel ball Fr10",
+        "ref": "EL-07121004"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-07121204"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-07121404"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-07121604"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-07121804"
+      },
+      {
+        "spec": "Fr20 /PVC",
+        "ref": "EL-07122004"
+      }
+    ]
+  },
+  {
+    "id": "EL-071301",
+    "category": "UROLOGY PRODUCTS",
+    "name": "FEEDING TUBE",
+    "variants": [
+      {
+        "spec": "Fr4",
+        "ref": "EL-071301"
+      },
+      {
+        "spec": "Fr5",
+        "ref": "EL-071300"
+      },
+      {
+        "spec": "Fr6",
+        "ref": "EL-071302"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL-071303"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-071304"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-071305"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-071306"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-071307"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-071308"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-071309"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL-071310"
+      },
+      {
+        "spec": "/silicone Fr6",
+        "ref": "EL-071311"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL-071312"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-071314"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-071315"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-071316"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-071317"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-071318"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-071319"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL-071320"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL-071321"
+      }
+    ]
+  },
+  {
+    "id": "EL-071401",
+    "category": "UROLOGY PRODUCTS",
+    "name": "NELATON TUBE",
+    "variants": [
+      {
+        "spec": "Fr6",
+        "ref": "EL-071401"
+      },
+      {
+        "spec": "Fr8",
+        "ref": "EL-071402"
+      },
+      {
+        "spec": "Fr10",
+        "ref": "EL-071403"
+      },
+      {
+        "spec": "Fr12",
+        "ref": "EL-071404"
+      },
+      {
+        "spec": "Fr14",
+        "ref": "EL-071405"
+      },
+      {
+        "spec": "Fr16",
+        "ref": "EL-071406"
+      },
+      {
+        "spec": "Fr18",
+        "ref": "EL-071407"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-071408"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL-071409"
+      }
+    ]
+  },
+  {
+    "id": "EL-071501",
+    "category": "UROLOGY PRODUCTS",
+    "name": "RECTAL TUBE",
+    "variants": [
+      {
+        "spec": "Fr18",
+        "ref": "EL-071501"
+      },
+      {
+        "spec": "Fr20",
+        "ref": "EL-071502"
+      },
+      {
+        "spec": "Fr22",
+        "ref": "EL-071503"
+      },
+      {
+        "spec": "Fr24",
+        "ref": "EL-071504"
+      },
+      {
+        "spec": "Fr26",
+        "ref": "EL-071505"
+      },
+      {
+        "spec": "Fr28",
+        "ref": "EL-071506"
+      },
+      {
+        "spec": "Fr30",
+        "ref": "EL-071507"
+      },
+      {
+        "spec": "Fr32",
+        "ref": "EL-071508"
+      },
+      {
+        "spec": "Fr34",
+        "ref": "EL-071509"
+      },
+      {
+        "spec": "Fr36 /ml",
+        "ref": "EL-071510"
+      }
+    ]
+  },
+  {
+    "id": "EL07170101",
+    "category": "UROLOGY PRODUCTS",
+    "name": "URINE BAG",
+    "variants": [
+      {
+        "spec": "with pull-push valve 1000",
+        "ref": "EL07170101"
+      },
+      {
+        "spec": "1500",
+        "ref": "EL07170102"
+      },
+      {
+        "spec": "2000 /ml",
+        "ref": "EL07170103"
+      },
+      {
+        "spec": "/ml with cross valve 1000",
+        "ref": "EL07170201"
+      },
+      {
+        "spec": "1500",
+        "ref": "EL07170202"
+      },
+      {
+        "spec": "2000",
+        "ref": "EL07170203"
+      }
+    ]
+  },
+  {
+    "id": "EL071801",
+    "category": "UROLOGY PRODUCTS",
+    "name": "LUXURIOUS URINE BAG",
+    "variants": [
+      {
+        "spec": "2000",
+        "ref": "EL071801"
+      },
+      {
+        "spec": "4000",
+        "ref": "EL071802"
+      },
+      {
+        "spec": "2200",
+        "ref": "EL071803"
+      },
+      {
+        "spec": "2500 /ml",
+        "ref": "EL071804"
+      }
+    ]
+  },
+  {
+    "id": "EL072001",
+    "category": "UROLOGY PRODUCTS",
+    "name": "PEDIATRIC URINE COLLECTOR",
+    "variants": [
+      {
+        "spec": "100",
+        "ref": "EL072001"
+      },
+      {
+        "spec": "200 /ml",
+        "ref": "EL072002"
+      }
+    ]
+  },
+  {
+    "id": "EL072101",
+    "category": "UROLOGY PRODUCTS",
+    "name": "MEDICAL PLASTIC URINAL",
+    "variants": [
+      {
+        "spec": "male, 1000",
+        "ref": "EL072101"
+      },
+      {
+        "spec": "female, 800",
+        "ref": "EL072102"
+      }
+    ]
+  },
+  {
+    "id": "EL-072301",
+    "category": "UROLOGY PRODUCTS",
+    "name": "PENROSE DRAIN",
+    "variants": [
+      {
+        "spec": "1 /4\" x 17\"",
+        "ref": "EL-072301"
+      },
+      {
+        "spec": "3 /8\" x 17\"",
+        "ref": "EL-072302"
+      },
+      {
+        "spec": "1 /2\" x 17\"",
+        "ref": "EL-072303"
+      },
+      {
+        "spec": "5 /8\" x 17\"",
+        "ref": "EL-072304"
+      },
+      {
+        "spec": "3 /4\" x 17\"",
+        "ref": "EL-072305"
+      },
+      {
+        "spec": "7 /8\" x 17\"",
+        "ref": "EL-072306"
+      },
+      {
+        "spec": "1\" x 17\"",
+        "ref": "EL-072307"
+      }
+    ]
+  },
+  {
+    "id": "EL07240101",
+    "category": "UROLOGY PRODUCTS",
+    "name": "DISPOSABLE COLOSTOMY BAG",
+    "variants": [
+      {
+        "spec": "one-piece ostomy bag (open)",
+        "ref": "EL07240101"
+      },
+      {
+        "spec": "one-piece ostomy bag (closed)",
+        "ref": "EL07240102"
+      },
+      {
+        "spec": "two-piece ostomy bag (open)",
+        "ref": "EL07240103"
+      },
+      {
+        "spec": "two-piece ostomy bag (closed)",
+        "ref": "EL07240104"
+      },
+      {
+        "spec": "one-piece urostomy bag (open)",
+        "ref": "EL07240105"
+      },
+      {
+        "spec": "two-piece urostomy bag (open)",
+        "ref": "EL07240106"
+      }
+    ]
+  },
+  {
+    "id": "EL07260101",
+    "category": "UROLOGY PRODUCTS",
+    "name": "TWO-PIECE BARRIER",
+    "variants": [
+      {
+        "spec": "Dia 44",
+        "ref": "EL07260101"
+      },
+      {
+        "spec": "Dia 57",
+        "ref": "EL07260102"
+      },
+      {
+        "spec": "Dia 66",
+        "ref": "EL07260103"
+      }
+    ]
+  },
+  {
+    "id": "EL-072701",
+    "category": "UROLOGY PRODUCTS",
+    "name": "ENEMA CLEANSING SET",
+    "variants": [
+      {
+        "spec": "1 x 1500ml enema bag, 1 x soap packet, 1 x waterproof drape",
+        "ref": "EL-072701"
+      },
+      {
+        "spec": "1 x 1500ml enema bucket, 1 x tube, 1 x soap packet, 1 x waterproof drape",
+        "ref": "EL-072702"
+      },
+      {
+        "spec": "/ml 12",
+        "ref": "EL-082501"
+      },
+      {
+        "spec": "20",
+        "ref": "EL-082502"
+      },
+      {
+        "spec": "30",
+        "ref": "EL-082503"
+      },
+      {
+        "spec": "50",
+        "ref": "EL-082504"
+      },
+      {
+        "spec": "60",
+        "ref": "EL-082505"
+      },
+      {
+        "spec": "65",
+        "ref": "EL-082506"
+      },
+      {
+        "spec": "100",
+        "ref": "EL-082507"
+      },
+      {
+        "spec": "115",
+        "ref": "EL-082508"
+      },
+      {
+        "spec": "125",
+        "ref": "EL-082509"
+      },
+      {
+        "spec": "130",
+        "ref": "EL-082510"
+      },
+      {
+        "spec": "140",
+        "ref": "EL-082511"
+      },
+      {
+        "spec": "150",
+        "ref": "EL-082512"
+      },
+      {
+        "spec": "200 /ml",
+        "ref": "EL-082513"
+      }
+    ]
+  },
+  {
+    "id": "EL08300005",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SELF-DESTRUCT TYPE SYRINGE",
+    "variants": [
+      {
+        "spec": "0.05",
+        "ref": "EL08300005"
+      },
+      {
+        "spec": "0.1",
+        "ref": "EL0830001"
+      },
+      {
+        "spec": "0.3",
+        "ref": "EL0830003"
+      },
+      {
+        "spec": "0.5",
+        "ref": "EL0830005"
+      },
+      {
+        "spec": "1",
+        "ref": "EL083001"
+      },
+      {
+        "spec": "2",
+        "ref": "EL083002"
+      },
+      {
+        "spec": "3",
+        "ref": "EL083003"
+      },
+      {
+        "spec": "5",
+        "ref": "EL083005"
+      },
+      {
+        "spec": "10",
+        "ref": "EL083010"
+      },
+      {
+        "spec": "20",
+        "ref": "EL083020"
+      }
+    ]
+  },
+  {
+    "id": "EL-0801",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "DISPOSABLE INFUSION SET",
+    "variants": [
+      {
+        "spec": "adult",
+        "ref": "EL-0801"
+      },
+      {
+        "spec": "standard",
+        "ref": "EL-3364"
+      },
+      {
+        "spec": "burette /ml",
+        "ref": "EL-3365"
+      }
+    ]
+  },
+  {
+    "id": "EL-080201",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "BURETTE SET",
+    "variants": [
+      {
+        "spec": "100",
+        "ref": "EL-080201"
+      },
+      {
+        "spec": "150",
+        "ref": "EL-080202"
+      }
+    ]
+  },
+  {
+    "id": "EL080301",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "DISPOSABLE BLOOD TRANSFUSION SET",
+    "variants": [
+      {
+        "spec": "adult",
+        "ref": "EL080301"
+      },
+      {
+        "spec": "pediatric /ml",
+        "ref": "EL080302"
+      }
+    ]
+  },
+  {
+    "id": "EL-080401",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SYRINGE WITH NEEDLE",
+    "variants": [
+      {
+        "spec": "1",
+        "ref": "EL-080401"
+      },
+      {
+        "spec": "2",
+        "ref": "EL-080402"
+      },
+      {
+        "spec": "3",
+        "ref": "EL-080403"
+      },
+      {
+        "spec": "5",
+        "ref": "EL-080404"
+      },
+      {
+        "spec": "10",
+        "ref": "EL-080405"
+      },
+      {
+        "spec": "20",
+        "ref": "EL-080406"
+      },
+      {
+        "spec": "30",
+        "ref": "EL-080407"
+      },
+      {
+        "spec": "50",
+        "ref": "EL-080408"
+      },
+      {
+        "spec": "60 /ml",
+        "ref": "EL-080409"
+      }
+    ]
+  },
+  {
+    "id": "EL-3372",
+    "category": "needs_review",
+    "name": "SYRINGE WITHOUT NEEDLE",
+    "variants": [
+      {
+        "spec": "insulin",
+        "ref": "EL-3372"
+      },
+      {
+        "spec": "heperin",
+        "ref": "EL-3373"
+      },
+      {
+        "spec": "1",
+        "ref": "EL-3374"
+      },
+      {
+        "spec": "2",
+        "ref": "EL-3375"
+      },
+      {
+        "spec": "3",
+        "ref": "EL-3376"
+      },
+      {
+        "spec": "5",
+        "ref": "EL-3377"
+      },
+      {
+        "spec": "10",
+        "ref": "EL-3378"
+      },
+      {
+        "spec": "20",
+        "ref": "EL-3379"
+      },
+      {
+        "spec": "50 /60",
+        "ref": "EL-3380"
+      }
+    ]
+  },
+  {
+    "id": "EL080501",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "DISPOSABLE HYPODERMIC NEEDLE",
+    "variants": [
+      {
+        "spec": "16",
+        "ref": "EL080501"
+      },
+      {
+        "spec": "18",
+        "ref": "EL080502"
+      },
+      {
+        "spec": "19",
+        "ref": "EL080503"
+      },
+      {
+        "spec": "20",
+        "ref": "EL080504"
+      },
+      {
+        "spec": "21",
+        "ref": "EL080505"
+      },
+      {
+        "spec": "22",
+        "ref": "EL080506"
+      },
+      {
+        "spec": "23",
+        "ref": "EL080507"
+      },
+      {
+        "spec": "24",
+        "ref": "EL080508"
+      },
+      {
+        "spec": "25",
+        "ref": "EL080509"
+      },
+      {
+        "spec": "26",
+        "ref": "EL080510"
+      },
+      {
+        "spec": "27",
+        "ref": "EL080511"
+      },
+      {
+        "spec": "28",
+        "ref": "EL080512"
+      },
+      {
+        "spec": "29",
+        "ref": "EL080513"
+      },
+      {
+        "spec": "30",
+        "ref": "EL080514"
+      },
+      {
+        "spec": "31",
+        "ref": "EL080515"
+      },
+      {
+        "spec": "32 /G",
+        "ref": "EL080516"
+      }
+    ]
+  },
+  {
+    "id": "EL-080601",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SCALP VEIN SET (LUER SLIP)",
+    "variants": [
+      {
+        "spec": "18",
+        "ref": "EL-080601"
+      },
+      {
+        "spec": "19",
+        "ref": "EL-080602"
+      },
+      {
+        "spec": "20",
+        "ref": "EL-080603"
+      },
+      {
+        "spec": "21",
+        "ref": "EL-080604"
+      },
+      {
+        "spec": "22",
+        "ref": "EL-080605"
+      },
+      {
+        "spec": "23",
+        "ref": "EL-080606"
+      },
+      {
+        "spec": "24",
+        "ref": "EL-080607"
+      },
+      {
+        "spec": "25",
+        "ref": "EL-080608"
+      },
+      {
+        "spec": "26",
+        "ref": "EL-080609"
+      },
+      {
+        "spec": "27 /G",
+        "ref": "EL-080610"
+      }
+    ]
+  },
+  {
+    "id": "EL-080611",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SCALP VEIN SET (LUER LOCK)",
+    "variants": [
+      {
+        "spec": "18",
+        "ref": "EL-080611"
+      },
+      {
+        "spec": "19",
+        "ref": "EL-080612"
+      },
+      {
+        "spec": "20",
+        "ref": "EL-080613"
+      },
+      {
+        "spec": "21",
+        "ref": "EL-080614"
+      },
+      {
+        "spec": "22",
+        "ref": "EL-080615"
+      },
+      {
+        "spec": "23",
+        "ref": "EL-080616"
+      },
+      {
+        "spec": "24",
+        "ref": "EL-080617"
+      },
+      {
+        "spec": "25",
+        "ref": "EL-080618"
+      },
+      {
+        "spec": "26",
+        "ref": "EL-080619"
+      },
+      {
+        "spec": "27",
+        "ref": "EL-080620"
+      },
+      {
+        "spec": "stainless steel",
+        "ref": "EL-3396"
+      }
+    ]
+  },
+  {
+    "id": "EL08070101",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "I.V. CATHETER (WITH INJECTION PORT AND WINGS)",
+    "variants": [
+      {
+        "spec": "14",
+        "ref": "EL08070101"
+      },
+      {
+        "spec": "16",
+        "ref": "EL08070102"
+      },
+      {
+        "spec": "18",
+        "ref": "EL08070103"
+      },
+      {
+        "spec": "20",
+        "ref": "EL08070104"
+      },
+      {
+        "spec": "22",
+        "ref": "EL08070105"
+      },
+      {
+        "spec": "24",
+        "ref": "EL08070106"
+      },
+      {
+        "spec": "26 /G",
+        "ref": "EL08070107"
+      }
+    ]
+  },
+  {
+    "id": "EL08070201",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "I.V. CATHETER (PEN TYPE)",
+    "variants": [
+      {
+        "spec": "14",
+        "ref": "EL08070201"
+      },
+      {
+        "spec": "16",
+        "ref": "EL08070202"
+      },
+      {
+        "spec": "18",
+        "ref": "EL08070203"
+      },
+      {
+        "spec": "20",
+        "ref": "EL08070204"
+      },
+      {
+        "spec": "22",
+        "ref": "EL08070205"
+      },
+      {
+        "spec": "24",
+        "ref": "EL08070206"
+      },
+      {
+        "spec": "26 /G",
+        "ref": "EL08070207"
+      }
+    ]
+  },
+  {
+    "id": "EL08070301",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "I.V. CATHETER (WITH WINGS)",
+    "variants": [
+      {
+        "spec": "14",
+        "ref": "EL08070301"
+      },
+      {
+        "spec": "16",
+        "ref": "EL08070302"
+      },
+      {
+        "spec": "18",
+        "ref": "EL08070303"
+      },
+      {
+        "spec": "20",
+        "ref": "EL08070304"
+      },
+      {
+        "spec": "22",
+        "ref": "EL08070305"
+      },
+      {
+        "spec": "24",
+        "ref": "EL08070306"
+      },
+      {
+        "spec": "26 /ml",
+        "ref": "EL08070307"
+      }
+    ]
+  },
+  {
+    "id": "EL-080801",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "INSULIN SYRINGE",
+    "variants": [
+      {
+        "spec": "0.5",
+        "ref": "EL-080801"
+      },
+      {
+        "spec": "1 /ml",
+        "ref": "EL-080802"
+      }
+    ]
+  },
+  {
+    "id": "EL-0809",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "TUBERCULIN SYRINGE",
+    "variants": [
+      {
+        "spec": "1",
+        "ref": "EL-0809"
+      }
+    ]
+  },
+  {
+    "id": "EL-081001",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "3-WAY STOPCOCK",
+    "variants": [
+      {
+        "spec": "normal",
+        "ref": "EL-081001"
+      },
+      {
+        "spec": "without extension tube",
+        "ref": "EL-3424"
+      },
+      {
+        "spec": "with extension tube /cm",
+        "ref": "EL-3425"
+      }
+    ]
+  },
+  {
+    "id": "EL-081101",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "EXTENSION TUBE WITH OR WITHOUT THREE-WAY STOPCOCK",
+    "variants": [
+      {
+        "spec": "10",
+        "ref": "EL-081101"
+      },
+      {
+        "spec": "25",
+        "ref": "EL-081102"
+      },
+      {
+        "spec": "50",
+        "ref": "EL-081103"
+      },
+      {
+        "spec": "75",
+        "ref": "EL-081104"
+      },
+      {
+        "spec": "100",
+        "ref": "EL-081105"
+      },
+      {
+        "spec": "150",
+        "ref": "EL-081106"
+      },
+      {
+        "spec": "200",
+        "ref": "EL-081107"
+      },
+      {
+        "spec": "/without stopcock 10",
+        "ref": "EL-086801"
+      },
+      {
+        "spec": "25",
+        "ref": "EL-086802"
+      },
+      {
+        "spec": "50",
+        "ref": "EL-086803"
+      },
+      {
+        "spec": "75",
+        "ref": "EL-086804"
+      },
+      {
+        "spec": "100",
+        "ref": "EL-086805"
+      },
+      {
+        "spec": "150",
+        "ref": "EL-086806"
+      },
+      {
+        "spec": "200",
+        "ref": "EL-086807"
+      }
+    ]
+  },
+  {
+    "id": "EL-081201",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "HEPARIN CAP",
+    "variants": [
+      {
+        "spec": "yellow",
+        "ref": "EL-081201"
+      },
+      {
+        "spec": "transparent",
+        "ref": "EL-081202"
+      },
+      {
+        "spec": "dysosma",
+        "ref": "EL-081203"
+      },
+      {
+        "spec": "normal",
+        "ref": "EL-3422"
+      }
+    ]
+  },
+  {
+    "id": "EL081501",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "NEEDLE FREE CONNECTOR",
+    "variants": [
+      {
+        "spec": "vertical /luer lock",
+        "ref": "EL081501"
+      },
+      {
+        "spec": "Y shape",
+        "ref": "EL081502"
+      },
+      {
+        "spec": "connecting tube /G",
+        "ref": "EL081503"
+      }
+    ]
+  },
+  {
+    "id": "EL3428",
+    "category": "needs_review",
+    "name": "COMBI STOPPER",
+    "variants": [
+      {
+        "spec": "normal",
+        "ref": "EL3428"
+      }
+    ]
+  },
+  {
+    "id": "EL081721",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "PRESSURE ACTIVATED SAFETY BLOOD LANCET",
+    "variants": [
+      {
+        "spec": "21",
+        "ref": "EL081721"
+      },
+      {
+        "spec": "23",
+        "ref": "EL081723"
+      },
+      {
+        "spec": "26",
+        "ref": "EL081726"
+      },
+      {
+        "spec": "28",
+        "ref": "EL081728"
+      },
+      {
+        "spec": "30 /G",
+        "ref": "EL081730"
+      }
+    ]
+  },
+  {
+    "id": "EL081821",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "BUTTON TYPE SAFETY BLOOD LANCET",
+    "variants": [
+      {
+        "spec": "21",
+        "ref": "EL081821"
+      },
+      {
+        "spec": "23",
+        "ref": "EL081823"
+      },
+      {
+        "spec": "26",
+        "ref": "EL081826"
+      },
+      {
+        "spec": "28",
+        "ref": "EL081828"
+      },
+      {
+        "spec": "30 /G",
+        "ref": "EL081830"
+      }
+    ]
+  },
+  {
+    "id": "EL081921",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "PLASTIC TWIST BLOOD LANCET",
+    "variants": [
+      {
+        "spec": "21",
+        "ref": "EL081921"
+      },
+      {
+        "spec": "23",
+        "ref": "EL081923"
+      },
+      {
+        "spec": "26",
+        "ref": "EL081926"
+      },
+      {
+        "spec": "28",
+        "ref": "EL081928"
+      },
+      {
+        "spec": "30 /G",
+        "ref": "EL081930"
+      }
+    ]
+  },
+  {
+    "id": "EL082329",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "INSULIN PEN NEEDLE",
+    "variants": [
+      {
+        "spec": "29",
+        "ref": "EL082329"
+      },
+      {
+        "spec": "30",
+        "ref": "EL082330"
+      },
+      {
+        "spec": "31",
+        "ref": "EL082331"
+      },
+      {
+        "spec": "32",
+        "ref": "EL082332"
+      },
+      {
+        "spec": "33",
+        "ref": "EL082333"
+      }
+    ]
+  },
+  {
+    "id": "EL081601",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "IV FLOW REGULATOR",
+    "variants": [
+      {
+        "spec": "single scale IV flow regulator",
+        "ref": "EL081601"
+      },
+      {
+        "spec": "double scale IV flow regulator",
+        "ref": "EL081602"
+      },
+      {
+        "spec": "single scale IV flow regulator with 45cm extension tube",
+        "ref": "EL081603"
+      },
+      {
+        "spec": "double scale IV flow regulator with 45cm extension tube",
+        "ref": "EL081604"
+      }
+    ]
+  },
+  {
+    "id": "EL08241801",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SPINAL NEEDLE",
+    "variants": [
+      {
+        "spec": "18",
+        "ref": "EL08241801"
+      },
+      {
+        "spec": "19",
+        "ref": "EL08241901"
+      },
+      {
+        "spec": "20",
+        "ref": "EL08242001"
+      },
+      {
+        "spec": "21",
+        "ref": "EL08242101"
+      },
+      {
+        "spec": "22",
+        "ref": "EL08242201"
+      },
+      {
+        "spec": "23",
+        "ref": "EL08242301"
+      },
+      {
+        "spec": "24",
+        "ref": "EL08242401"
+      },
+      {
+        "spec": "25",
+        "ref": "EL08242501"
+      },
+      {
+        "spec": "26",
+        "ref": "EL08242601"
+      },
+      {
+        "spec": "27",
+        "ref": "EL08242701"
+      },
+      {
+        "spec": "/pen (G) 18",
+        "ref": "EL08241802"
+      },
+      {
+        "spec": "19",
+        "ref": "EL08241902"
+      },
+      {
+        "spec": "20",
+        "ref": "EL08242002"
+      },
+      {
+        "spec": "21",
+        "ref": "EL08242102"
+      },
+      {
+        "spec": "22",
+        "ref": "EL08242202"
+      },
+      {
+        "spec": "23",
+        "ref": "EL08242302"
+      },
+      {
+        "spec": "24",
+        "ref": "EL08242402"
+      },
+      {
+        "spec": "25",
+        "ref": "EL08242502"
+      },
+      {
+        "spec": "26",
+        "ref": "EL08242602"
+      },
+      {
+        "spec": "27 /G",
+        "ref": "EL08242702"
+      }
+    ]
+  },
+  {
+    "id": "EL082515",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "EPIDURAL NEEDLE",
+    "variants": [
+      {
+        "spec": "15",
+        "ref": "EL082515"
+      },
+      {
+        "spec": "16",
+        "ref": "EL082516"
+      },
+      {
+        "spec": "17",
+        "ref": "EL082517"
+      },
+      {
+        "spec": "18",
+        "ref": "EL082518"
+      }
+    ]
+  },
+  {
+    "id": "EL0827",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "DENTAL SYRINGE",
+    "variants": [
+      {
+        "spec": "normal /G",
+        "ref": "EL0827"
+      }
+    ]
+  },
+  {
+    "id": "EL082916",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SAFETY NEEDLE",
+    "variants": [
+      {
+        "spec": "16",
+        "ref": "EL082916"
+      },
+      {
+        "spec": "18",
+        "ref": "EL082918"
+      },
+      {
+        "spec": "19",
+        "ref": "EL082919"
+      },
+      {
+        "spec": "20",
+        "ref": "EL082920"
+      },
+      {
+        "spec": "21",
+        "ref": "EL082921"
+      },
+      {
+        "spec": "22",
+        "ref": "EL082922"
+      },
+      {
+        "spec": "23",
+        "ref": "EL082923"
+      },
+      {
+        "spec": "24",
+        "ref": "EL082924"
+      },
+      {
+        "spec": "25",
+        "ref": "EL082925"
+      },
+      {
+        "spec": "26",
+        "ref": "EL082926"
+      },
+      {
+        "spec": "27",
+        "ref": "EL082927"
+      },
+      {
+        "spec": "28",
+        "ref": "EL082928"
+      },
+      {
+        "spec": "29",
+        "ref": "EL082929"
+      },
+      {
+        "spec": "30",
+        "ref": "EL082930"
+      },
+      {
+        "spec": "31",
+        "ref": "EL082931"
+      },
+      {
+        "spec": "32",
+        "ref": "EL082932"
+      },
+      {
+        "spec": "33 /ml",
+        "ref": "EL082933"
+      }
+    ]
+  },
+  {
+    "id": "EL082650A",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "IRRIGATION SYRINGE",
+    "variants": [
+      {
+        "spec": "50",
+        "ref": "EL082650A"
+      },
+      {
+        "spec": "100",
+        "ref": "EL0826100A"
+      },
+      {
+        "spec": "60",
+        "ref": "EL082660B"
+      },
+      {
+        "spec": "90",
+        "ref": "EL082690B"
+      }
+    ]
+  },
+  {
+    "id": "EL0835250S",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "BLOOD BAG",
+    "variants": [
+      {
+        "spec": "/single blood bag 250ml, 16G /17G, CPDA-1",
+        "ref": "EL0835250S"
+      },
+      {
+        "spec": "350ml, 16G /17G, CPDA-1",
+        "ref": "EL0835350S"
+      },
+      {
+        "spec": "450ml, 16G /17G, CPDA-1",
+        "ref": "EL0835450S"
+      },
+      {
+        "spec": "550ml, 16G /17G, CPDA-1",
+        "ref": "EL0835500S"
+      },
+      {
+        "spec": "/double blood bag 250ml + 1 x 200, 16G /17G, CPDA-1",
+        "ref": "EL0835250D"
+      },
+      {
+        "spec": "350ml + 1 x 300, 16G /17G, CPDA-1",
+        "ref": "EL0835350D"
+      },
+      {
+        "spec": "450ml + 1 x 400, 16G /17G, CPDA-1",
+        "ref": "EL0835450D"
+      },
+      {
+        "spec": "500ml + 1 x 400, 16G /17G, CPDA-1",
+        "ref": "EL0835500D"
+      },
+      {
+        "spec": "/triple blood bag 250ml + 2 x 200, 16G /17G, CPDA-1",
+        "ref": "EL0835250T"
+      },
+      {
+        "spec": "350ml + 2 x 300, 16G /17G, CPDA-1",
+        "ref": "EL0835350T"
+      },
+      {
+        "spec": "450ml + 2 x 400, 16G /17G, CPDA-1",
+        "ref": "EL0835450T"
+      },
+      {
+        "spec": "500ml + 2 x 400, 16G /17G, CPDA-1",
+        "ref": "EL0835500T"
+      },
+      {
+        "spec": "350ml + 2 x 300, 16G /17G, CPD + SAGM",
+        "ref": "EL0835350TS"
+      },
+      {
+        "spec": "450ml + 2 x 400, 16G /17G, CPD + SAGM",
+        "ref": "EL0835450TS"
+      },
+      {
+        "spec": "500ml + 2 x 400, 16G /17G, CPD + SAGM",
+        "ref": "EL0835500TS"
+      },
+      {
+        "spec": "/quadruple blood bag 350ml + 3 x 300, 16G /17G, CPDA-1",
+        "ref": "EL0835350Q"
+      },
+      {
+        "spec": "450ml + 3 x 400, 16G /17G, CPDA-1",
+        "ref": "EL0835450Q"
+      },
+      {
+        "spec": "500ml + 3 x 400, 16G /17G, CPDA-1",
+        "ref": "EL0835500Q"
+      },
+      {
+        "spec": "350ml + 3 x 300, 16G /17G, CPD + SAGM",
+        "ref": "EL0835350QS"
+      },
+      {
+        "spec": "450ml + 3 x 400, 16G /17G, CPD + SAGM",
+        "ref": "EL0835450QS"
+      },
+      {
+        "spec": "500ml + 3 x 400, 16G /17G, CPD + SAGM",
+        "ref": "EL0835500QS"
+      }
+    ]
+  },
+  {
+    "id": "EL083610C",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "STERILE SURGICAL BLADE",
+    "variants": [
+      {
+        "spec": "10#",
+        "ref": "EL083610C"
+      },
+      {
+        "spec": "11#",
+        "ref": "EL083611C"
+      },
+      {
+        "spec": "12#",
+        "ref": "EL083612C"
+      },
+      {
+        "spec": "13#",
+        "ref": "EL083613C"
+      },
+      {
+        "spec": "14#",
+        "ref": "EL083614C"
+      },
+      {
+        "spec": "15#",
+        "ref": "EL083615C"
+      },
+      {
+        "spec": "16#",
+        "ref": "EL083616C"
+      },
+      {
+        "spec": "18#",
+        "ref": "EL083618C"
+      },
+      {
+        "spec": "19#",
+        "ref": "EL083619C"
+      },
+      {
+        "spec": "20#",
+        "ref": "EL083620C"
+      },
+      {
+        "spec": "21#",
+        "ref": "EL083621C"
+      },
+      {
+        "spec": "22#",
+        "ref": "EL083622C"
+      },
+      {
+        "spec": "23#",
+        "ref": "EL083623C"
+      },
+      {
+        "spec": "24#",
+        "ref": "EL083624C"
+      },
+      {
+        "spec": "25#",
+        "ref": "EL083625C"
+      },
+      {
+        "spec": "36#",
+        "ref": "EL083636C"
+      },
+      {
+        "spec": "10#",
+        "ref": "EL083610S"
+      },
+      {
+        "spec": "11#",
+        "ref": "EL083611S"
+      },
+      {
+        "spec": "12#",
+        "ref": "EL083612S"
+      },
+      {
+        "spec": "13#",
+        "ref": "EL083613S"
+      },
+      {
+        "spec": "14#",
+        "ref": "EL083614S"
+      },
+      {
+        "spec": "15#",
+        "ref": "EL083615S"
+      },
+      {
+        "spec": "16#",
+        "ref": "EL083616S"
+      },
+      {
+        "spec": "18#",
+        "ref": "EL083618S"
+      },
+      {
+        "spec": "19#",
+        "ref": "EL083619S"
+      },
+      {
+        "spec": "20#",
+        "ref": "EL083620S"
+      },
+      {
+        "spec": "21#",
+        "ref": "EL083621S"
+      },
+      {
+        "spec": "22#",
+        "ref": "EL083622S"
+      },
+      {
+        "spec": "23#",
+        "ref": "EL083623S"
+      },
+      {
+        "spec": "24#",
+        "ref": "EL083624S"
+      },
+      {
+        "spec": "25#",
+        "ref": "EL083625S"
+      },
+      {
+        "spec": "36#",
+        "ref": "EL083636S"
+      }
+    ]
+  },
+  {
+    "id": "EL083710C",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "DISPOSABLE SAFETY SCALPEL",
+    "variants": [
+      {
+        "spec": "10#",
+        "ref": "EL083710C"
+      },
+      {
+        "spec": "11#",
+        "ref": "EL083711C"
+      },
+      {
+        "spec": "12#",
+        "ref": "EL083712C"
+      },
+      {
+        "spec": "13#",
+        "ref": "EL083713C"
+      },
+      {
+        "spec": "14#",
+        "ref": "EL083714C"
+      },
+      {
+        "spec": "15#",
+        "ref": "EL083715C"
+      },
+      {
+        "spec": "16#",
+        "ref": "EL083716C"
+      },
+      {
+        "spec": "18#",
+        "ref": "EL083718C"
+      },
+      {
+        "spec": "19#",
+        "ref": "EL083719C"
+      },
+      {
+        "spec": "20#",
+        "ref": "EL083720C"
+      },
+      {
+        "spec": "21#",
+        "ref": "EL083721C"
+      },
+      {
+        "spec": "22#",
+        "ref": "EL083722C"
+      },
+      {
+        "spec": "23#",
+        "ref": "EL083723C"
+      },
+      {
+        "spec": "24#",
+        "ref": "EL083724C"
+      },
+      {
+        "spec": "25#",
+        "ref": "EL083725C"
+      },
+      {
+        "spec": "36#",
+        "ref": "EL083736C"
+      },
+      {
+        "spec": "10#",
+        "ref": "EL083710S"
+      },
+      {
+        "spec": "11#",
+        "ref": "EL083711S"
+      },
+      {
+        "spec": "12#",
+        "ref": "EL083712S"
+      },
+      {
+        "spec": "13#",
+        "ref": "EL083713S"
+      },
+      {
+        "spec": "14#",
+        "ref": "EL083714S"
+      },
+      {
+        "spec": "15#",
+        "ref": "EL083715S"
+      },
+      {
+        "spec": "16#",
+        "ref": "EL083716S"
+      },
+      {
+        "spec": "18#",
+        "ref": "EL083718S"
+      },
+      {
+        "spec": "19#",
+        "ref": "EL083719S"
+      },
+      {
+        "spec": "20#",
+        "ref": "EL083720S"
+      },
+      {
+        "spec": "21#",
+        "ref": "EL083721S"
+      },
+      {
+        "spec": "22#",
+        "ref": "EL083722S"
+      },
+      {
+        "spec": "23#",
+        "ref": "EL083723S"
+      },
+      {
+        "spec": "24#",
+        "ref": "EL083724S"
+      },
+      {
+        "spec": "25#",
+        "ref": "EL083725S"
+      },
+      {
+        "spec": "36#",
+        "ref": "EL083736S"
+      }
+    ]
+  },
+  {
+    "id": "EL085010",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SILICONE ROUND CHANNEL / FLUTED DRAINS",
+    "variants": [
+      {
+        "spec": "10Fr",
+        "ref": "EL085010"
+      },
+      {
+        "spec": "15Fr",
+        "ref": "EL085015"
+      },
+      {
+        "spec": "19Fr",
+        "ref": "EL085019"
+      },
+      {
+        "spec": "24Fr",
+        "ref": "EL085024"
+      },
+      {
+        "spec": "28Fr",
+        "ref": "EL085028"
+      }
+    ]
+  },
+  {
+    "id": "EL085110",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SILICONE ROUND PERFORATED DRAINS",
+    "variants": [
+      {
+        "spec": "10Fr",
+        "ref": "EL085110"
+      },
+      {
+        "spec": "12Fr",
+        "ref": "EL085112"
+      },
+      {
+        "spec": "14Fr",
+        "ref": "EL085114"
+      },
+      {
+        "spec": "16Fr",
+        "ref": "EL085116"
+      },
+      {
+        "spec": "18Fr",
+        "ref": "EL085118"
+      },
+      {
+        "spec": "20Fr",
+        "ref": "EL085120"
+      },
+      {
+        "spec": "22Fr",
+        "ref": "EL085122"
+      },
+      {
+        "spec": "24Fr /mm",
+        "ref": "EL085124"
+      }
+    ]
+  },
+  {
+    "id": "EL085207",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SILICONE FLAT PERFORATED DRAIN",
+    "variants": [
+      {
+        "spec": "7",
+        "ref": "EL085207"
+      },
+      {
+        "spec": "10",
+        "ref": "EL085210"
+      },
+      {
+        "spec": "13",
+        "ref": "EL085213"
+      }
+    ]
+  },
+  {
+    "id": "EL085310",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SILICONE THORACIC DRAINAGE TUBE",
+    "variants": [
+      {
+        "spec": "10Fr",
+        "ref": "EL085310"
+      },
+      {
+        "spec": "12Fr",
+        "ref": "EL085312"
+      },
+      {
+        "spec": "14Fr",
+        "ref": "EL085314"
+      },
+      {
+        "spec": "16Fr",
+        "ref": "EL085316"
+      },
+      {
+        "spec": "18Fr",
+        "ref": "EL085318"
+      },
+      {
+        "spec": "20Fr",
+        "ref": "EL085320"
+      },
+      {
+        "spec": "22Fr",
+        "ref": "EL085322"
+      },
+      {
+        "spec": "24Fr",
+        "ref": "EL085324"
+      },
+      {
+        "spec": "26Fr",
+        "ref": "EL085326"
+      },
+      {
+        "spec": "28Fr",
+        "ref": "EL085328"
+      },
+      {
+        "spec": "30Fr",
+        "ref": "EL085330"
+      },
+      {
+        "spec": "32Fr",
+        "ref": "EL085332"
+      },
+      {
+        "spec": "34Fr",
+        "ref": "EL085334"
+      },
+      {
+        "spec": "36Fr /ml",
+        "ref": "EL085336"
+      }
+    ]
+  },
+  {
+    "id": "EL0854100",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SILICONE RESERVOIR",
+    "variants": [
+      {
+        "spec": "100",
+        "ref": "EL0854100"
+      },
+      {
+        "spec": "150",
+        "ref": "EL0854150"
+      },
+      {
+        "spec": "200",
+        "ref": "EL0854200"
+      },
+      {
+        "spec": "400",
+        "ref": "EL0854400"
+      }
+    ]
+  },
+  {
+    "id": "EL0855100",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "SILICONE CLOSED WOUND DRAINAGE SYSTEM",
+    "variants": [
+      {
+        "spec": "100",
+        "ref": "EL0855100"
+      },
+      {
+        "spec": "150",
+        "ref": "EL0855150"
+      },
+      {
+        "spec": "200",
+        "ref": "EL0855200"
+      },
+      {
+        "spec": "400 /ml",
+        "ref": "EL0855400"
+      }
+    ]
+  },
+  {
+    "id": "EL0856200",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "CLOSED WOUND DRAINAGE SYSTEM (SPRING)",
+    "variants": [
+      {
+        "spec": "200",
+        "ref": "EL0856200"
+      },
+      {
+        "spec": "400 /ml",
+        "ref": "EL0856400"
+      }
+    ]
+  },
+  {
+    "id": "EL-085701",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "CLOSED WOUND DRAINAGE SYSTEM (HOLLOW)",
+    "variants": [
+      {
+        "spec": "400",
+        "ref": "EL-085701"
+      },
+      {
+        "spec": "800",
+        "ref": "EL-085702"
+      }
+    ]
+  },
+  {
+    "id": "EL0858S",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "DISPOSABLE CHEST DRAINAGE BOTTLE",
+    "variants": [
+      {
+        "spec": "one chamber",
+        "ref": "EL0858S"
+      },
+      {
+        "spec": "two chamber",
+        "ref": "EL0858D"
+      },
+      {
+        "spec": "triple chamber",
+        "ref": "EL0858T"
+      }
+    ]
+  },
+  {
+    "id": "EL0859",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "EPIDURAL ANAESTHESIA PUNCTURE BAG",
+    "variants": [
+      {
+        "spec": "anesthesia filter-liquid anesthesia filter-air filter needle-for anesthesia and epidural puncture needle epidural anesthesia catheter conduit joint",
+        "ref": "EL0859"
+      },
+      {
+        "spec": "WITHOUT SOLIDIFYING&FILTER",
+        "ref": "EL-3267"
+      },
+      {
+        "spec": "WITH SOLIDIFYING",
+        "ref": "EL-3268"
+      },
+      {
+        "spec": "WITH FILTER",
+        "ref": "EL-3269"
+      }
+    ]
+  },
+  {
+    "id": "EL086014S",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "CENTRAL VENOUS CATHETER KIT",
+    "variants": [
+      {
+        "spec": "14Ga",
+        "ref": "EL086014S"
+      },
+      {
+        "spec": "16Ga",
+        "ref": "EL086016S"
+      },
+      {
+        "spec": "18Ga",
+        "ref": "EL086018S"
+      },
+      {
+        "spec": "20Ga",
+        "ref": "EL086020S"
+      },
+      {
+        "spec": "22Ga",
+        "ref": "EL086022S"
+      },
+      {
+        "spec": "/double 4Fr",
+        "ref": "EL086040D"
+      },
+      {
+        "spec": "5Fr",
+        "ref": "EL086050D"
+      },
+      {
+        "spec": "7Fr",
+        "ref": "EL086070D"
+      },
+      {
+        "spec": "8Fr",
+        "ref": "EL086080D"
+      },
+      {
+        "spec": "8.5Fr",
+        "ref": "EL086085D"
+      },
+      {
+        "spec": "/triple 4.5Fr",
+        "ref": "EL086045T"
+      },
+      {
+        "spec": "5.5Fr",
+        "ref": "EL086055T"
+      },
+      {
+        "spec": "7Fr",
+        "ref": "EL086070T"
+      },
+      {
+        "spec": "8.5Fr",
+        "ref": "EL086085T"
+      },
+      {
+        "spec": "/quadruple 8.5Fr /cm",
+        "ref": "EL086085Q"
+      }
+    ]
+  },
+  {
+    "id": "EL086106",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "DRAINAGE CATHETER",
+    "variants": [
+      {
+        "spec": "6Fr 20/30",
+        "ref": "EL086106"
+      },
+      {
+        "spec": "8Fr 20/30",
+        "ref": "EL086108"
+      },
+      {
+        "spec": "10Fr 20/30",
+        "ref": "EL086110"
+      },
+      {
+        "spec": "12Fr 20/30 /cm",
+        "ref": "EL086112"
+      }
+    ]
+  },
+  {
+    "id": "EL0862",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "CENTRAL VENOUS LINE PICC",
+    "variants": [
+      {
+        "spec": "4Fr 60",
+        "ref": "EL0862"
+      },
+      {
+        "spec": "/ml 1000",
+        "ref": "EL-3271"
+      },
+      {
+        "spec": "1500",
+        "ref": "EL-3272"
+      },
+      {
+        "spec": "2000",
+        "ref": "EL-3273"
+      },
+      {
+        "spec": "3000",
+        "ref": "EL-3274"
+      }
+    ]
+  },
+  {
+    "id": "EL0863",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "HEMODIALYSIS BLOOD TUBING SET",
+    "variants": [
+      {
+        "spec": "normal /single",
+        "ref": "EL0863"
+      }
+    ]
+  },
+  {
+    "id": "EL086470S",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "HEMODIALYSIS CATHETER",
+    "variants": [
+      {
+        "spec": "7Fr",
+        "ref": "EL086470S"
+      },
+      {
+        "spec": "8Fr",
+        "ref": "EL086480S"
+      },
+      {
+        "spec": "/double 6.5Fr",
+        "ref": "EL086465D"
+      },
+      {
+        "spec": "8.5Fr",
+        "ref": "EL086485D"
+      },
+      {
+        "spec": "11.5Fr",
+        "ref": "EL0864115D"
+      },
+      {
+        "spec": "12Fr",
+        "ref": "EL0864120D"
+      },
+      {
+        "spec": "14Fr",
+        "ref": "EL0864140D"
+      },
+      {
+        "spec": "/triple 12Fr",
+        "ref": "EL0864120T"
+      }
+    ]
+  },
+  {
+    "id": "EL086515",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "FISTULA NEEDLE",
+    "variants": [
+      {
+        "spec": "15Ga",
+        "ref": "EL086515"
+      },
+      {
+        "spec": "16Ga",
+        "ref": "EL086516"
+      },
+      {
+        "spec": "17Ga EFFECTIVE SURFACE",
+        "ref": "EL086517"
+      }
+    ]
+  },
+  {
+    "id": "EL086614",
+    "category": "INTRAVENOUS INJECTION AND SURGICAL PRODUCTS",
+    "name": "HEMODIALYSER",
+    "variants": [
+      {
+        "spec": "1.4m2",
+        "ref": "EL086614"
+      },
+      {
+        "spec": "1.6m2",
+        "ref": "EL086616"
+      },
+      {
+        "spec": "1.8m2",
+        "ref": "EL086618"
+      },
+      {
+        "spec": "2.0m2",
+        "ref": "EL086620"
+      }
+    ]
+  },
+  {
+    "id": "EL0901",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "UMBILICAL CORD CLAMP",
+    "variants": [
+      {
+        "spec": "/",
+        "ref": "EL0901"
+      }
+    ]
+  },
+  {
+    "id": "EL09020101",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "ID WRISTBAND",
+    "variants": [
+      {
+        "spec": "adult, insert card",
+        "ref": "EL09020101"
+      },
+      {
+        "spec": "child, insert card",
+        "ref": "EL09020102"
+      },
+      {
+        "spec": "Id band for mother and child, insert card",
+        "ref": "EL09020103"
+      },
+      {
+        "spec": "adult, write-on",
+        "ref": "EL09020201"
+      },
+      {
+        "spec": "child, write-on",
+        "ref": "EL09020202"
+      },
+      {
+        "spec": "Id band for mother and child, write-on /S M L",
+        "ref": "EL09020203"
+      }
+    ]
+  },
+  {
+    "id": "EL-090301",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "VAGINAL SPECULUM",
+    "variants": [
+      {
+        "spec": "side screw",
+        "ref": "EL-090301"
+      },
+      {
+        "spec": "speculum",
+        "ref": "EL-090303"
+      },
+      {
+        "spec": "frehsh",
+        "ref": "EL-090304"
+      },
+      {
+        "spec": "speculum",
+        "ref": "EL-090306"
+      },
+      {
+        "spec": "spainish",
+        "ref": "EL-090307"
+      },
+      {
+        "spec": "speculum",
+        "ref": "EL-090309"
+      },
+      {
+        "spec": "middle screw",
+        "ref": "EL-2123"
+      },
+      {
+        "spec": "speculum",
+        "ref": "EL-2125"
+      }
+    ]
+  },
+  {
+    "id": "EL090401",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "CERVICAL BRUSH",
+    "variants": [
+      {
+        "spec": "A-type",
+        "ref": "EL090401"
+      },
+      {
+        "spec": "C-type",
+        "ref": "EL090402"
+      },
+      {
+        "spec": "H-type",
+        "ref": "EL090403"
+      }
+    ]
+  },
+  {
+    "id": "EL090501",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "CERVICAL SPATULA",
+    "variants": [
+      {
+        "spec": "PP",
+        "ref": "EL090501"
+      },
+      {
+        "spec": "ABS",
+        "ref": "EL090502"
+      }
+    ]
+  },
+  {
+    "id": "EL090701",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "MEDICAL BRUSH",
+    "variants": [
+      {
+        "spec": "dry",
+        "ref": "EL090701"
+      },
+      {
+        "spec": "with iodine /ml",
+        "ref": "EL090702"
+      }
+    ]
+  },
+  {
+    "id": "EL090901",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "AIR SICKNESS BAG",
+    "variants": [
+      {
+        "spec": "1000",
+        "ref": "EL090901"
+      }
+    ]
+  },
+  {
+    "id": "EL09100101",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "LATEX SURGICAL GLOVES (POWDER FREE)",
+    "variants": [
+      {
+        "spec": "6.0",
+        "ref": "EL09100101"
+      },
+      {
+        "spec": "6.5",
+        "ref": "EL09100102"
+      },
+      {
+        "spec": "7.0",
+        "ref": "EL09100103"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL09100104"
+      },
+      {
+        "spec": "8.0",
+        "ref": "EL09100105"
+      },
+      {
+        "spec": "8.5",
+        "ref": "EL09100106"
+      },
+      {
+        "spec": "9.0",
+        "ref": "EL09100107"
+      }
+    ]
+  },
+  {
+    "id": "EL09100201",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "LATEX SURGICAL GLOVES (POWDERED)",
+    "variants": [
+      {
+        "spec": "6.0",
+        "ref": "EL09100201"
+      },
+      {
+        "spec": "6.5",
+        "ref": "EL09100202"
+      },
+      {
+        "spec": "7.0",
+        "ref": "EL09100203"
+      },
+      {
+        "spec": "7.5",
+        "ref": "EL09100204"
+      },
+      {
+        "spec": "8.0",
+        "ref": "EL09100205"
+      },
+      {
+        "spec": "8.5",
+        "ref": "EL09100206"
+      },
+      {
+        "spec": "9.0",
+        "ref": "EL09100207"
+      }
+    ]
+  },
+  {
+    "id": "EL09110101",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "LATEX EXAMINATION GLOVES (POWDER FREE)",
+    "variants": [
+      {
+        "spec": "S",
+        "ref": "EL09110101"
+      },
+      {
+        "spec": "M",
+        "ref": "EL09110102"
+      },
+      {
+        "spec": "L",
+        "ref": "EL09110103"
+      }
+    ]
+  },
+  {
+    "id": "EL09110201",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "LATEX EXAMINATION GLOVES (POWDERED)",
+    "variants": [
+      {
+        "spec": "S",
+        "ref": "EL09110201"
+      },
+      {
+        "spec": "M",
+        "ref": "EL09110202"
+      },
+      {
+        "spec": "L",
+        "ref": "EL09110203"
+      }
+    ]
+  },
+  {
+    "id": "EL091201",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "needs_review",
+    "variants": [
+      {
+        "spec": "adult",
+        "ref": "EL091201"
+      },
+      {
+        "spec": "pediatric",
+        "ref": "EL091202"
+      }
+    ]
+  },
+  {
+    "id": "EL091301",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "DIGITAL THERMOMETER",
+    "variants": [
+      {
+        "spec": "standard",
+        "ref": "EL091301"
+      },
+      {
+        "spec": "baby nipple",
+        "ref": "EL091302"
+      }
+    ]
+  },
+  {
+    "id": "EL091401",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "STETHOSCOPE",
+    "variants": [
+      {
+        "spec": "single head",
+        "ref": "EL091401"
+      },
+      {
+        "spec": "dual head",
+        "ref": "EL091402"
+      }
+    ]
+  },
+  {
+    "id": "EL091501",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "ANEROID SPHYGMOMANOMETER",
+    "variants": [
+      {
+        "spec": "with stethoscope",
+        "ref": "EL091501"
+      },
+      {
+        "spec": "without stethoscope",
+        "ref": "EL091502"
+      }
+    ]
+  },
+  {
+    "id": "EL0920",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "STRETCHER",
+    "variants": [
+      {
+        "spec": "/",
+        "ref": "EL0920"
+      }
+    ]
+  },
+  {
+    "id": "EL0921",
+    "category": "DISPOSABLE AND DIAGNOSTIC PRODUCTS",
+    "name": "SPINE BOARD",
+    "variants": [
+      {
+        "spec": "/",
+        "ref": "EL0921"
+      }
+    ]
+  },
+  {
+    "id": "EL150101",
+    "category": "RECOVERY",
+    "name": "WALKING STICK AND CRUTCH",
+    "variants": [
+      {
+        "spec": "75-97",
+        "ref": "EL150101"
+      },
+      {
+        "spec": "98.5-118.5",
+        "ref": "EL150102"
+      },
+      {
+        "spec": "115-135 /cm x cm x cm",
+        "ref": "EL150103"
+      }
+    ]
+  },
+  {
+    "id": "EL1502",
+    "category": "RECOVERY",
+    "name": "WALKER",
+    "variants": [
+      {
+        "spec": "61 x 52 x (79-94.5)",
+        "ref": "EL1502"
+      }
+    ]
+  },
+  {
+    "id": "EL150301",
+    "category": "RECOVERY",
+    "name": "WHEEL CHAIR",
+    "variants": [
+      {
+        "spec": "adult",
+        "ref": "EL150301"
+      },
+      {
+        "spec": "pediatric /cm x cm x cm",
+        "ref": "EL150302"
+      }
+    ]
+  },
+  {
+    "id": "EL1505",
+    "category": "RECOVERY",
+    "name": "ANTI-BEDSORE MATTRESS",
+    "variants": [
+      {
+        "spec": "200 x 90 x 7",
+        "ref": "EL1505"
+      }
+    ]
+  },
+  {
+    "id": "EL160101",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "PLAIN TUBE /NO ADDITIVE TUBE",
+    "variants": [
+      {
+        "spec": "13 x 75",
+        "ref": "EL160101"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160102"
+      },
+      {
+        "spec": "16 x 100",
+        "ref": "EL160103"
+      },
+      {
+        "spec": "/glass (mm) 13 x 75",
+        "ref": "EL160104"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160105"
+      },
+      {
+        "spec": "16 x 100 /PET (mm)",
+        "ref": "EL160106"
+      }
+    ]
+  },
+  {
+    "id": "EL160201",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "PRO-COAGULATION TUBE /CLOT ACTIVATOR TUBE",
+    "variants": [
+      {
+        "spec": "13 x 75",
+        "ref": "EL160201"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160202"
+      },
+      {
+        "spec": "16 x 100",
+        "ref": "EL160203"
+      },
+      {
+        "spec": "/glass (mm) 13 x 75",
+        "ref": "EL160204"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160205"
+      },
+      {
+        "spec": "16 x 100 /PET (mm)",
+        "ref": "EL160206"
+      }
+    ]
+  },
+  {
+    "id": "EL160301",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "GEL & CLOT ACTIVATOR TUBE",
+    "variants": [
+      {
+        "spec": "13 x 75",
+        "ref": "EL160301"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160302"
+      },
+      {
+        "spec": "16 x 100",
+        "ref": "EL160303"
+      },
+      {
+        "spec": "/glass (mm) 13 x 75",
+        "ref": "EL160304"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160305"
+      },
+      {
+        "spec": "16 x 100 /PET (mm)",
+        "ref": "EL160306"
+      }
+    ]
+  },
+  {
+    "id": "EL160401",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "GLUCOSE TUBE",
+    "variants": [
+      {
+        "spec": "13 x 75",
+        "ref": "EL160401"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160402"
+      },
+      {
+        "spec": "16 x 100",
+        "ref": "EL160403"
+      },
+      {
+        "spec": "/glass (mm) 13 x 75",
+        "ref": "EL160404"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160405"
+      },
+      {
+        "spec": "16 x 100",
+        "ref": "EL160406"
+      }
+    ]
+  },
+  {
+    "id": "EL160501",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "PT TUBE",
+    "variants": [
+      {
+        "spec": "13 x 75",
+        "ref": "EL160501"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160502"
+      },
+      {
+        "spec": "/glass (mm) 13 x 75",
+        "ref": "EL160503"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160504"
+      },
+      {
+        "spec": "/PP+PET (mm) 13 x 75",
+        "ref": "EL160505"
+      },
+      {
+        "spec": "13 x 100 /PET (mm)",
+        "ref": "EL160506"
+      }
+    ]
+  },
+  {
+    "id": "EL160601",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "HEPARIN TUBE",
+    "variants": [
+      {
+        "spec": "13 x 75",
+        "ref": "EL160601"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160602"
+      },
+      {
+        "spec": "16 x 100",
+        "ref": "EL160603"
+      },
+      {
+        "spec": "/glass (mm) 13 x 75",
+        "ref": "EL160604"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160605"
+      },
+      {
+        "spec": "16 x 100 /PET (mm)",
+        "ref": "EL160606"
+      }
+    ]
+  },
+  {
+    "id": "EL160701",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "EDTA TUBE",
+    "variants": [
+      {
+        "spec": "13 x 75",
+        "ref": "EL160701"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160702"
+      },
+      {
+        "spec": "16 x 100",
+        "ref": "EL160703"
+      },
+      {
+        "spec": "/glass (mm) 13 x 75",
+        "ref": "EL160704"
+      },
+      {
+        "spec": "13 x 100",
+        "ref": "EL160705"
+      },
+      {
+        "spec": "16 x 100 /PET (mm)",
+        "ref": "EL160706"
+      }
+    ]
+  },
+  {
+    "id": "EL160801",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "ESR TUBE",
+    "variants": [
+      {
+        "spec": "13 x 75",
+        "ref": "EL160801"
+      },
+      {
+        "spec": "/glass (mm) 13 x 75",
+        "ref": "EL160802"
+      },
+      {
+        "spec": "8 x 120",
+        "ref": "EL160803"
+      },
+      {
+        "spec": "9 x 120",
+        "ref": "EL160804"
+      }
+    ]
+  },
+  {
+    "id": "EL161401",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "BLOOD COLLECTION SET",
+    "variants": [
+      {
+        "spec": "25G (0.5)mm",
+        "ref": "EL161401"
+      },
+      {
+        "spec": "23G (0.6)mm",
+        "ref": "EL161402"
+      },
+      {
+        "spec": "22G (0.7)mm",
+        "ref": "EL161403"
+      },
+      {
+        "spec": "21G (0.8)mm",
+        "ref": "EL161404"
+      },
+      {
+        "spec": "20G (0.9)mm",
+        "ref": "EL161405"
+      },
+      {
+        "spec": "18G (1.2)mm",
+        "ref": "EL161406"
+      }
+    ]
+  },
+  {
+    "id": "EL161501",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "FLASHBACK BLOOD COLLECTION NEEDLE",
+    "variants": [
+      {
+        "spec": "23G (0.6)mm",
+        "ref": "EL161501"
+      },
+      {
+        "spec": "22G (0.7)mm",
+        "ref": "EL161502"
+      },
+      {
+        "spec": "21G (0.8)mm",
+        "ref": "EL161503"
+      },
+      {
+        "spec": "20G (0.9)mm /without ties",
+        "ref": "EL161504"
+      }
+    ]
+  },
+  {
+    "id": "EL161701",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "BIOHAZARD BAG",
+    "variants": [
+      {
+        "spec": "12 x 24\"",
+        "ref": "EL161701"
+      },
+      {
+        "spec": "29 x 23\"",
+        "ref": "EL161702"
+      },
+      {
+        "spec": "24 x 30\"",
+        "ref": "EL161703"
+      },
+      {
+        "spec": "25 x 35\"",
+        "ref": "EL161704"
+      },
+      {
+        "spec": "35 x 40\"",
+        "ref": "EL161705"
+      },
+      {
+        "spec": "38 x 48\"",
+        "ref": "EL161706"
+      },
+      {
+        "spec": "/with ties 12 x 24\"",
+        "ref": "EL161707"
+      },
+      {
+        "spec": "29 x 23\"",
+        "ref": "EL161708"
+      },
+      {
+        "spec": "24 x 30\"",
+        "ref": "EL161709"
+      },
+      {
+        "spec": "25 x 35\"",
+        "ref": "EL161710"
+      },
+      {
+        "spec": "35 x 40\"",
+        "ref": "EL161711"
+      },
+      {
+        "spec": "38 x 48\"",
+        "ref": "EL161712"
+      }
+    ]
+  },
+  {
+    "id": "EL161901",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "needs_review",
+    "variants": [
+      {
+        "spec": "6\" x 9\"",
+        "ref": "EL161901"
+      }
+    ]
+  },
+  {
+    "id": "EL162001",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "SHARPS CONTAINER",
+    "variants": [
+      {
+        "spec": "1",
+        "ref": "EL162001"
+      },
+      {
+        "spec": "2",
+        "ref": "EL162002"
+      },
+      {
+        "spec": "3",
+        "ref": "EL162003"
+      },
+      {
+        "spec": "6",
+        "ref": "EL162004"
+      },
+      {
+        "spec": "/square (L) 1",
+        "ref": "EL162005"
+      },
+      {
+        "spec": "2",
+        "ref": "EL162006"
+      },
+      {
+        "spec": "3",
+        "ref": "EL162007"
+      },
+      {
+        "spec": "5",
+        "ref": "EL162008"
+      },
+      {
+        "spec": "7",
+        "ref": "EL162009"
+      },
+      {
+        "spec": "10",
+        "ref": "EL162010"
+      },
+      {
+        "spec": "15 /ground edges",
+        "ref": "EL162011"
+      }
+    ]
+  },
+  {
+    "id": "EL170101",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "MICROSCOPE SLIDES",
+    "variants": [
+      {
+        "spec": "7101, 90 Corners",
+        "ref": "EL170101"
+      },
+      {
+        "spec": "/cut edges 7102, 90 Corners",
+        "ref": "EL170102"
+      },
+      {
+        "spec": "/beveled edges 7101, 45 Corners /7201 (mm)",
+        "ref": "EL170103"
+      }
+    ]
+  },
+  {
+    "id": "EL170601",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "MICROSCOPE COVER GLASS",
+    "variants": [
+      {
+        "spec": "18 x 18",
+        "ref": "EL170601"
+      },
+      {
+        "spec": "20 x 20",
+        "ref": "EL170602"
+      },
+      {
+        "spec": "22 x 22",
+        "ref": "EL170603"
+      },
+      {
+        "spec": "24 x 24",
+        "ref": "EL170604"
+      },
+      {
+        "spec": "24 x 32",
+        "ref": "EL170605"
+      },
+      {
+        "spec": "24 x 40",
+        "ref": "EL170606"
+      },
+      {
+        "spec": "24 x 50",
+        "ref": "EL170607"
+      },
+      {
+        "spec": "24 x 60",
+        "ref": "EL170608"
+      }
+    ]
+  },
+  {
+    "id": "EL180101",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "URINE CONTAINER",
+    "variants": [
+      {
+        "spec": "30",
+        "ref": "EL180101"
+      },
+      {
+        "spec": "40",
+        "ref": "EL180102"
+      },
+      {
+        "spec": "60",
+        "ref": "EL180103"
+      },
+      {
+        "spec": "100",
+        "ref": "EL180104"
+      },
+      {
+        "spec": "120",
+        "ref": "EL180105"
+      },
+      {
+        "spec": "250 /ml",
+        "ref": "EL180106"
+      }
+    ]
+  },
+  {
+    "id": "EL180501",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "MEDICINE CUP",
+    "variants": [
+      {
+        "spec": "30",
+        "ref": "EL180501"
+      },
+      {
+        "spec": "60 /PS (mm)",
+        "ref": "EL180502"
+      }
+    ]
+  },
+  {
+    "id": "EL180801",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "TEST TUBE",
+    "variants": [
+      {
+        "spec": "6 x 100",
+        "ref": "EL180801"
+      },
+      {
+        "spec": "5 x 100",
+        "ref": "EL180802"
+      },
+      {
+        "spec": "3 x 100",
+        "ref": "EL180803"
+      },
+      {
+        "spec": "2 x 75",
+        "ref": "EL180804"
+      },
+      {
+        "spec": "2 x 60",
+        "ref": "EL180805"
+      },
+      {
+        "spec": "/PP (mm) 6 x 100",
+        "ref": "EL180806"
+      },
+      {
+        "spec": "5 x 100",
+        "ref": "EL180807"
+      },
+      {
+        "spec": "3 x 100",
+        "ref": "EL180808"
+      },
+      {
+        "spec": "2 x 75",
+        "ref": "EL180809"
+      },
+      {
+        "spec": "2 x 60",
+        "ref": "EL180810"
+      }
+    ]
+  },
+  {
+    "id": "EL1810",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "URINARY SEDIMENT TUBE",
+    "variants": []
+  },
+  {
+    "id": "EL182401",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "INOCULATING LOOPS",
+    "variants": [
+      {
+        "spec": "1 l",
+        "ref": "EL182401"
+      },
+      {
+        "spec": "10 l",
+        "ref": "EL182402"
+      },
+      {
+        "spec": "1 l + 10 l /(mm)",
+        "ref": "EL182403"
+      }
+    ]
+  },
+  {
+    "id": "EL1826",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "TRANSPORT SWAB",
+    "variants": []
+  },
+  {
+    "id": "EL182901",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "DISPOSABLE TRANSFER PIPETTE",
+    "variants": [
+      {
+        "spec": "0.2ml",
+        "ref": "EL182901"
+      },
+      {
+        "spec": "0.2ml elongated",
+        "ref": "EL182902"
+      },
+      {
+        "spec": "0.5ml",
+        "ref": "EL182903"
+      },
+      {
+        "spec": "1ml",
+        "ref": "EL182904"
+      },
+      {
+        "spec": "1ml elongated",
+        "ref": "EL182905"
+      },
+      {
+        "spec": "2ml",
+        "ref": "EL182906"
+      },
+      {
+        "spec": "3ml",
+        "ref": "EL182907"
+      },
+      {
+        "spec": "3ml elongated",
+        "ref": "EL182908"
+      },
+      {
+        "spec": "5ml",
+        "ref": "EL182909"
+      },
+      {
+        "spec": "10ml",
+        "ref": "EL182910"
+      },
+      {
+        "spec": "14.6ml",
+        "ref": "EL182911"
+      }
+    ]
+  },
+  {
+    "id": "EL1830",
+    "category": "LABORATORY CONSUMABLES",
+    "name": "PIPETTE TIP",
+    "variants": []
   }
 ]

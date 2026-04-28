@@ -51,7 +51,7 @@ export default function Home() {
         </div>
 
         <section className="product-grid" aria-label="Featured products">
-          {products.map((product) => (
+          {products.slice(0, 6).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </section>
