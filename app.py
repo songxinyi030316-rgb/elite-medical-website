@@ -35,13 +35,23 @@ CORE_CATEGORIES = [
     "Laboratory",
 ]
 
-PAGE_SLUGS = {
+PAGES = [
+    ("home", "Home"),
+    ("about", "About Us"),
+    ("products", "Products"),
+    ("contact", "Contact"),
+]
+PAGE_LABELS = {slug: label for slug, label in PAGES}
+PAGE_ALIASES = {
+    "home": "home",
     "Home": "home",
+    "about": "about",
     "About Us": "about",
+    "products": "products",
     "Products": "products",
+    "contact": "contact",
     "Contact": "contact",
 }
-SLUG_PAGES = {slug: page for page, slug in PAGE_SLUGS.items()}
 
 FALLBACK_PRODUCTS = [
     {
@@ -163,8 +173,11 @@ def reset_filters():
 
 
 def navigate_to(page):
-    st.session_state.current_page = page
-    st.query_params["page"] = PAGE_SLUGS.get(page, PAGE_SLUGS["Home"])
+    page_slug = PAGE_ALIASES.get(str(page), str(page).lower())
+    if page_slug not in PAGE_LABELS:
+        page_slug = "home"
+    st.session_state["page"] = page_slug
+    st.session_state.current_page = PAGE_LABELS[page_slug]
 
 
 def start_product_inquiry(product_name):
@@ -439,7 +452,10 @@ st.markdown(
     h1, h2, h3, p {{
         color: {DARK};
     }}
-    .site-header {{
+    .site-header-marker {{
+        display: none;
+    }}
+    div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] {{
         margin: 1.8rem calc(50% - 50vw) 1rem;
         padding: 0 max(1.5rem, calc((100vw - 1120px) / 2));
         background: #ffffff;
@@ -447,83 +463,57 @@ st.markdown(
         box-shadow: 0 12px 32px rgba(37, 48, 43, .08);
         position: relative;
         z-index: 20;
-    }}
-    .site-header a,
-    .site-header a:link,
-    .site-header a:visited,
-    .site-header a:hover,
-    .site-header a:active {{
-        text-decoration: none !important;
-    }}
-    .site-header-inner {{
         min-height: 86px;
-        display: flex;
+        display: flex !important;
         align-items: center;
-        gap: 1.15rem;
     }}
-    .brand-link {{
+    .brand-static {{
         display: flex;
         align-items: center;
         gap: .7rem;
-        text-decoration: none;
-        min-width: 250px;
+        min-height: 72px;
     }}
-    .brand-link img {{
+    .brand-static img {{
         width: 62px;
         height: 62px;
         object-fit: contain;
     }}
-    .brand-link span {{
+    .brand-static span {{
         color: {DARK};
         font-size: 1.12rem;
         font-weight: 950;
         letter-spacing: .04em;
         white-space: nowrap;
     }}
-    .nav-links {{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1.25rem;
-        flex: 1;
-    }}
-    .nav-link {{
-        position: relative;
+    div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button {{
+        min-height: 46px;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
         color: {DARK} !important;
         text-decoration: none !important;
         font-size: .98rem;
         font-weight: 900;
-        padding: .55rem .05rem;
-        white-space: nowrap;
+        box-shadow: none;
+        padding: .35rem .1rem;
     }}
-    .nav-link:link,
-    .nav-link:visited {{
-        color: {DARK} !important;
-    }}
-    .nav-link:hover {{
+    div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button:hover {{
         color: {GREEN} !important;
+        background: transparent;
     }}
-    .nav-link.active {{
+    div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button[kind="primary"] {{
+        position: relative;
+        background: transparent;
         color: {GREEN} !important;
+        border-bottom: 3px solid {GREEN};
+        border-radius: 0;
     }}
-    .nav-link.active::after {{
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: .18rem;
-        height: 3px;
-        border-radius: 999px;
-        background: {GREEN};
-    }}
-    .quote-link {{
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+    div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div[data-testid="column"]:last-child div.stButton > button {{
         min-height: 44px;
         padding: 0 1.08rem;
         border-radius: 999px;
         background: #18a66a;
+        border: 1px solid #18a66a;
         color: #ffffff !important;
         text-decoration: none !important;
         font-weight: 900;
@@ -531,13 +521,9 @@ st.markdown(
         box-shadow: 0 12px 24px rgba(17, 132, 87, .18);
         transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
     }}
-    .quote-link:link,
-    .quote-link:visited {{
-        color: #ffffff !important;
-        text-decoration: none !important;
-    }}
-    .quote-link:hover {{
+    div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div[data-testid="column"]:last-child div.stButton > button:hover {{
         background: #128b59;
+        border-color: #128b59;
         color: #ffffff !important;
         text-decoration: none !important;
         box-shadow: 0 14px 28px rgba(17, 132, 87, .24);
@@ -1097,35 +1083,24 @@ st.markdown(
         .block-container {{
             padding-top: 2.25rem;
         }}
-        .site-header {{
+        div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] {{
             margin-top: 1.45rem;
             padding: 0 1rem;
-        }}
-        .site-header-inner {{
             min-height: auto;
             padding: .85rem 0;
-            flex-wrap: wrap;
+            flex-wrap: wrap !important;
         }}
-        .brand-link {{
+        .brand-static {{
             min-width: 0;
             flex: 1 1 100%;
         }}
-        .brand-link img {{
+        .brand-static img {{
             width: 54px;
             height: 54px;
         }}
-        .nav-links {{
-            order: 2;
-            flex: 1 1 100%;
-            justify-content: flex-start;
-            gap: .9rem;
-            overflow-x: auto;
-            padding-bottom: .15rem;
-        }}
-        .quote-link {{
-            order: 1;
+        div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button {{
             min-height: 38px;
-            padding: 0 .85rem;
+            font-size: .9rem;
         }}
         .stat-grid, .company-layout, .about-grid, .about-card-grid, .certificate-grid {{
             grid-template-columns: 1fr;
@@ -1171,11 +1146,13 @@ st.markdown(
 products = load_products()
 counts = category_counts(products)
 
-page_slug = st.query_params.get("page", PAGE_SLUGS["Home"])
-if isinstance(page_slug, list):
-    page_slug = page_slug[0] if page_slug else PAGE_SLUGS["Home"]
-requested_page = SLUG_PAGES.get(str(page_slug).lower(), "Home")
-st.session_state.current_page = requested_page
+if "page" not in st.session_state:
+    st.session_state["page"] = "home"
+page = st.session_state["page"]
+if page not in PAGE_LABELS:
+    page = "home"
+    st.session_state["page"] = page
+st.session_state.current_page = PAGE_LABELS[page]
 if "product_category" not in st.session_state:
     st.session_state.product_category = "All Categories"
 if "product_search" not in st.session_state:
@@ -1186,33 +1163,41 @@ if "inquiry_product" not in st.session_state:
     st.session_state.inquiry_product = st.session_state.selected_product
 
 logo_tag = f'<img src="{logo_image}" alt="Elite Medical logo">' if logo_image else ""
-nav_links = "\n".join(
-    f'<a class="nav-link {"active" if st.session_state.current_page == page else ""}" '
-    f'href="?page={slug}">{page}</a>'
-    for page, slug in PAGE_SLUGS.items()
-)
-st.markdown(
-    f"""
-    <header class="site-header">
-      <div class="site-header-inner">
-        <a class="brand-link" href="?page=home">
+st.markdown('<span class="site-header-marker"></span>', unsafe_allow_html=True)
+header_columns = st.columns([2.45, .72, 1.02, .9, .88, 1.35])
+with header_columns[0]:
+    st.markdown(
+        f"""
+        <div class="brand-static">
           {logo_tag}
           <span>ELITE MEDICAL</span>
-        </a>
-        <nav class="nav-links">
-          {nav_links}
-        </nav>
-        <a class="quote-link" href="?page=contact">Request a Quote</a>
-      </div>
-    </header>
-    """,
-    unsafe_allow_html=True,
-)
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+for column, (page_slug, page_label) in zip(header_columns[1:5], PAGES):
+    with column:
+        st.button(
+            page_label,
+            key=f"nav_{page_slug}",
+            type="primary" if page == page_slug else "secondary",
+            width="stretch",
+            on_click=navigate_to,
+            args=(page_slug,),
+        )
+with header_columns[5]:
+    st.button(
+        "Request a Quote",
+        key="nav_request_quote",
+        width="stretch",
+        on_click=navigate_to,
+        args=("contact",),
+    )
 
 if LOGO_PATH.exists():
     st.sidebar.image(str(LOGO_PATH), width=150)
 
-if st.session_state.current_page == "Products":
+if page == "products":
     st.sidebar.header("Product Navigation")
     st.sidebar.selectbox(
         "Category filter",
@@ -1251,7 +1236,7 @@ else:
         unsafe_allow_html=True,
     )
 
-if st.session_state.current_page == "Home":
+if page == "home":
     st.markdown(
         """
         <section class="home-hero">
@@ -1335,7 +1320,7 @@ if st.session_state.current_page == "Home":
         unsafe_allow_html=True,
     )
 
-elif st.session_state.current_page == "About Us":
+elif page == "about":
     st.markdown(
         """
         <section class="about-hero">
@@ -1426,7 +1411,7 @@ elif st.session_state.current_page == "About Us":
         unsafe_allow_html=True,
     )
 
-elif st.session_state.current_page == "Products":
+elif page == "products":
     render_section_heading(
         "Product Catalog",
         "Medical Product Catalog",
