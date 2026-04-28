@@ -7,21 +7,35 @@ import streamlit as st
 ROOT = Path(__file__).parent
 DATA_PATH = ROOT / "data" / "products.json"
 
-BRAND_GREEN = "#118457"
-BRAND_DARK = "#2b2f33"
+GREEN = "#118457"
+DARK = "#25302b"
+MUTED = "#65736d"
+LIGHT_GREEN = "#eefaf3"
+
+CORE_CATEGORIES = [
+    "Medical Dressing",
+    "Bandage",
+    "Protective Products",
+    "Respiratory",
+    "Urology",
+    "Injection",
+    "Laboratory",
+]
 
 FALLBACK_PRODUCTS = [
     {
         "id": "EL010101",
         "name": "Transparent Film Dressing",
-        "category": "Medical Dressing Pad",
+        "category": "Medical Dressing",
+        "raw_category": "Medical Dressing Pad",
         "image": "",
         "variants": [{"spec": "paper frame", "ref": "EL010101"}],
     },
     {
         "id": "EL010201",
         "name": "Wound Care Dressing",
-        "category": "Medical Dressing Pad",
+        "category": "Medical Dressing",
+        "raw_category": "Medical Dressing Pad",
         "image": "",
         "variants": [{"spec": "non-woven + absorbent pad", "ref": "EL010201"}],
     },
@@ -29,10 +43,34 @@ FALLBACK_PRODUCTS = [
         "id": "EL-030101",
         "name": "High Elastic Bandage",
         "category": "Bandage",
+        "raw_category": "Bandage",
         "image": "",
         "variants": [{"spec": "5 cm", "ref": "EL-030101"}],
     },
 ]
+
+
+def broad_category(raw_category):
+    category = str(raw_category).upper()
+    if "BANDAGE" in category:
+        return "Bandage"
+    if "RESPIRATORY" in category or "ANAESTHESIA" in category:
+        return "Respiratory"
+    if "UROLOGY" in category:
+        return "Urology"
+    if "INJECTION" in category or "INTRAVENOUS" in category or "SURGICAL" in category:
+        return "Injection"
+    if "LABORATORY" in category:
+        return "Laboratory"
+    if "PROTECTIVE" in category or "DIAGNOSTIC" in category or "RECOVERY" in category:
+        return "Protective Products"
+    if "DRESSING" in category or "GAUZE" in category or "TAPE" in category:
+        return "Medical Dressing"
+    return "Protective Products"
+
+
+def title_case(value):
+    return str(value).replace("  ", " ").strip().title()
 
 
 def image_path_for(product):
@@ -62,11 +100,13 @@ def load_products():
         if not isinstance(variants, list):
             variants = []
 
+        raw_category = product.get("category", "Uncategorized")
         products.append(
             {
                 "id": str(product.get("id", "needs_review")),
-                "name": str(product.get("name", "Unnamed product")).title(),
-                "category": str(product.get("category", "Uncategorized")).title(),
+                "name": title_case(product.get("name", "Unnamed product")),
+                "category": broad_category(raw_category),
+                "raw_category": title_case(raw_category),
                 "image": image_path_for(product),
                 "variants": [
                     {
@@ -87,6 +127,7 @@ def matches_search(product, query):
         [
             product["name"],
             product["category"],
+            product["raw_category"],
             product["id"],
             " ".join(variant["spec"] for variant in product["variants"]),
             " ".join(variant["ref"] for variant in product["variants"]),
@@ -95,28 +136,57 @@ def matches_search(product, query):
     return query.lower().strip() in searchable
 
 
-def render_product_card(product):
-    if product.get("image"):
-        st.image(product["image"], width=150)
-    else:
-        st.write("No image available")
+def set_category(category):
+    st.session_state.product_category = category
 
+
+def reset_filters():
+    st.session_state.product_category = "All Categories"
+    st.session_state.product_search = ""
+
+
+def render_section_heading(kicker, title, body=""):
     st.markdown(
         f"""
-        <div class="product-card">
-          <div class="product-name">{product["name"]}</div>
-          <div class="product-meta">{product["category"]}</div>
-          <div class="variant-count">{len(product["variants"])} variants</div>
+        <div class="section-heading">
+          <span>{kicker}</span>
+          <h2>{title}</h2>
+          {f"<p>{body}</p>" if body else ""}
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    with st.expander("View Details"):
-        if product["variants"]:
-            st.table(product["variants"])
+
+def render_product_card(product):
+    with st.container():
+        st.markdown('<div class="product-shell">', unsafe_allow_html=True)
+        if product.get("image"):
+            st.image(product["image"], width=145)
         else:
-            st.write("Variant details need review.")
+            st.markdown('<div class="image-placeholder">No image available</div>', unsafe_allow_html=True)
+
+        st.markdown(
+            f"""
+            <div class="product-name">{product["name"]}</div>
+            <div class="product-category">{product["category"]}</div>
+            <div class="variant-pill">{len(product["variants"])} variants</div>
+            """,
+            unsafe_allow_html=True,
+        )
+        with st.expander("View Details"):
+            if product["variants"]:
+                st.table(product["variants"])
+            else:
+                st.write("Variant details need review.")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+
+def category_counts(products):
+    return {
+        category: sum(1 for product in products if product["category"] == category)
+        for category in CORE_CATEGORIES
+    }
 
 
 st.set_page_config(page_title="Elite Medical Product Catalog", layout="wide")
@@ -126,150 +196,231 @@ st.markdown(
     <style>
     .stApp {{
         background: #ffffff;
-        color: {BRAND_DARK};
+        color: {DARK};
     }}
-    h1, h2, h3 {{
-        color: {BRAND_DARK};
+    .block-container {{
+        max-width: 1220px;
+        padding-top: 1.4rem;
+        padding-bottom: 2rem;
+    }}
+    h1, h2, h3, p {{
+        color: {DARK};
+    }}
+    div[data-testid="stTabs"] button {{
+        color: {DARK};
+        font-weight: 800;
     }}
     section[data-testid="stSidebar"] {{
-        background: #f3faf6;
+        background: #f4fbf7;
         border-right: 1px solid #dcefe5;
     }}
-    .text-logo {{
-        color: {BRAND_GREEN};
-        font-weight: 900;
-        font-size: 1rem;
-        letter-spacing: .04em;
-        margin-bottom: .75rem;
-    }}
-    .hero {{
-        background: linear-gradient(135deg, #eefaf4 0%, #ffffff 72%);
-        border: 1px solid #dcefe5;
-        border-radius: 14px;
-        padding: 2.2rem;
-        margin-bottom: 1.6rem;
-    }}
-    .hero-title {{
-        color: {BRAND_DARK};
-        font-size: 2.8rem;
-        line-height: 1.05;
-        font-weight: 900;
-        margin: 0 0 .65rem;
-    }}
-    .hero-subtitle {{
-        color: #53605a;
-        max-width: 760px;
-        font-size: 1.05rem;
-        line-height: 1.55;
+    .site-hero {{
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+        gap: 1.2rem;
+        align-items: stretch;
         margin-bottom: 1rem;
     }}
-    .cta {{
-        display: inline-block;
-        background: {BRAND_GREEN};
-        color: white;
-        border-radius: 999px;
-        padding: .72rem 1.15rem;
-        font-weight: 800;
-    }}
-    .badge-row {{
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: .8rem;
-        margin: .4rem 0 1.8rem;
-    }}
-    .trust-badge, .category-card, .product-card, .quote-card, .footer-card {{
+    .hero-copy, .hero-visual, .section-card, .trust-card, .category-card, .product-shell, .quote-card, .contact-card {{
         border: 1px solid #dcefe5;
-        border-radius: 12px;
+        border-radius: 16px;
         background: #ffffff;
-        box-shadow: 0 8px 24px rgba(17, 132, 87, .07);
+        box-shadow: 0 10px 30px rgba(17, 132, 87, .08);
     }}
-    .trust-badge {{
-        padding: .95rem 1rem;
-        color: {BRAND_DARK};
-        font-weight: 800;
-        text-align: center;
+    .hero-copy {{
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #effaf4 0%, #ffffff 76%);
+        border-left: 7px solid {GREEN};
     }}
-    .section-heading {{
-        margin: 1.4rem 0 .9rem;
-    }}
-    .section-heading span {{
-        color: {BRAND_GREEN};
-        font-weight: 900;
-        text-transform: uppercase;
-        font-size: .78rem;
-    }}
-    .section-heading h2 {{
-        margin: .2rem 0 0;
-        font-size: 1.65rem;
-    }}
-    .category-card {{
-        padding: 1rem;
-        min-height: 108px;
-        background: #f8fdf9;
-    }}
-    .category-name {{
-        color: {BRAND_DARK};
-        font-weight: 850;
-        min-height: 42px;
-    }}
-    .category-count {{
-        color: {BRAND_GREEN};
-        font-weight: 800;
-        margin-top: .55rem;
-    }}
-    .product-card {{
-        margin-top: .65rem;
+    .text-logo {{
+        color: {GREEN};
+        font-size: 1.1rem;
+        font-weight: 950;
+        letter-spacing: .05em;
         margin-bottom: .45rem;
-        padding: 1rem;
-        min-height: 145px;
-        background: #fbfefd;
     }}
-    .product-name {{
-        color: {BRAND_DARK};
-        font-size: 1.05rem;
-        line-height: 1.25;
+    .hero-title {{
+        font-size: 2.7rem;
+        line-height: 1.02;
+        font-weight: 950;
+        margin-bottom: .75rem;
+    }}
+    .hero-body {{
+        color: {MUTED};
+        font-size: 1.03rem;
+        line-height: 1.5;
+        max-width: 720px;
+    }}
+    .cta-row {{
+        display: flex;
+        gap: .7rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }}
+    .primary-cta, .secondary-cta {{
+        display: inline-block;
+        border-radius: 999px;
+        padding: .68rem 1rem;
         font-weight: 850;
-        min-height: 54px;
     }}
-    .product-meta {{
-        color: #66726d;
-        font-size: .9rem;
-        margin: .5rem 0;
-    }}
-    .variant-count {{
-        color: {BRAND_GREEN};
-        font-weight: 800;
-    }}
-    .quote-card {{
-        padding: 1.25rem;
-        background: #f6fcf8;
-    }}
-    .footer-card {{
-        margin-top: 1.7rem;
-        padding: 1.25rem;
-        background: {BRAND_DARK};
+    .primary-cta {{
+        background: {GREEN};
         color: #ffffff;
     }}
-    .footer-card a, .footer-card p {{
+    .secondary-cta {{
+        border: 1px solid #b9dfc9;
+        color: {GREEN};
+        background: #ffffff;
+    }}
+    .hero-visual {{
+        padding: 1rem;
+        background:
+            radial-gradient(circle at 15% 15%, #c7ecd6 0, transparent 26%),
+            linear-gradient(145deg, #f5fcf7 0%, #ffffff 66%);
+    }}
+    .visual-grid {{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .65rem;
+        margin-top: .5rem;
+    }}
+    .visual-note {{
+        color: {MUTED};
+        font-weight: 750;
+        font-size: .9rem;
+    }}
+    .section-heading {{
+        margin: 1rem 0 .65rem;
+    }}
+    .section-heading span {{
+        color: {GREEN};
+        font-weight: 950;
+        text-transform: uppercase;
+        font-size: .76rem;
+        letter-spacing: .03em;
+    }}
+    .section-heading h2 {{
+        margin: .16rem 0 .15rem;
+        font-size: 1.55rem;
+        line-height: 1.15;
+    }}
+    .section-heading p {{
+        color: {MUTED};
+        margin: 0;
+    }}
+    .section-card {{
+        padding: 1.15rem;
+        background: {LIGHT_GREEN};
+    }}
+    .stat-grid {{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: .75rem;
+        margin: .85rem 0 1rem;
+    }}
+    .trust-card {{
+        padding: .9rem;
+        min-height: 96px;
+        border-top: 4px solid {GREEN};
+    }}
+    .trust-card strong {{
+        display: block;
+        color: {DARK};
+        font-size: .98rem;
+        margin-bottom: .25rem;
+    }}
+    .trust-card span {{
+        color: {MUTED};
+        font-size: .86rem;
+    }}
+    .category-card {{
+        padding: .9rem;
+        min-height: 96px;
+        background: #f8fdf9;
+    }}
+    .category-card strong {{
+        display: block;
+        min-height: 38px;
+    }}
+    .category-count {{
+        color: {GREEN};
+        font-weight: 850;
+        margin-top: .35rem;
+    }}
+    .product-shell {{
+        padding: .85rem;
+        margin-bottom: .85rem;
+        min-height: 360px;
+        background: #ffffff;
+    }}
+    .product-shell img {{
+        max-height: 126px;
+        object-fit: contain;
+    }}
+    .image-placeholder {{
+        display: grid;
+        place-items: center;
+        width: 145px;
+        height: 110px;
+        background: #f2f8f4;
+        color: {MUTED};
+        border-radius: 10px;
+        border: 1px dashed #bddfc9;
+        font-size: .85rem;
+    }}
+    .product-name {{
+        color: {DARK};
+        font-weight: 900;
+        line-height: 1.2;
+        min-height: 46px;
+        margin-top: .4rem;
+    }}
+    .product-category {{
+        color: {MUTED};
+        font-size: .88rem;
+        margin: .35rem 0;
+    }}
+    .variant-pill {{
+        display: inline-block;
+        color: {GREEN};
+        background: #eaf8f0;
+        border-radius: 999px;
+        padding: .22rem .55rem;
+        font-size: .82rem;
+        font-weight: 850;
+    }}
+    .quote-card, .contact-card {{
+        padding: 1.15rem;
+        background: #f8fdf9;
+    }}
+    .footer {{
+        margin-top: 1.1rem;
+        padding: 1rem 1.15rem;
+        border-radius: 14px;
+        background: {DARK};
+        color: #ffffff;
+    }}
+    .footer strong, .footer span {{
         color: #ffffff;
     }}
     div.stButton > button {{
-        border: 1px solid #cde8d8;
-        background: #ffffff;
-        color: {BRAND_DARK};
         border-radius: 999px;
-        font-weight: 750;
+        border: 1px solid #b9dfc9;
+        color: {DARK};
+        background: #ffffff;
+        font-weight: 800;
+        padding: .35rem .9rem;
     }}
     div.stButton > button:hover {{
-        border-color: {BRAND_GREEN};
-        color: {BRAND_GREEN};
+        border-color: {GREEN};
+        color: {GREEN};
     }}
     @media (max-width: 900px) {{
-        .badge-row {{
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+        .site-hero, .stat-grid {{
+            grid-template-columns: 1fr;
         }}
         .hero-title {{
-            font-size: 2.1rem;
+            font-size: 2rem;
         }}
     }}
     </style>
@@ -278,166 +429,181 @@ st.markdown(
 )
 
 products = load_products()
-categories = sorted({product["category"] for product in products})
-category_counts = {
-    category: sum(1 for product in products if product["category"] == category)
-    for category in categories
-}
+counts = category_counts(products)
+hero_images = [product["image"] for product in products if product.get("image")][:4]
 
-if "selected_category" not in st.session_state:
-    st.session_state.selected_category = "All Categories"
-if "search_query" not in st.session_state:
-    st.session_state.search_query = ""
+if "product_category" not in st.session_state:
+    st.session_state.product_category = "All Categories"
+if "product_search" not in st.session_state:
+    st.session_state.product_search = ""
 
-st.markdown(
-    """
-    <div class="hero">
-      <div class="text-logo">ELITE MEDICAL</div>
-      <div class="hero-title">Product Brochure 2025 / Medical Product Catalog</div>
-      <div class="hero-subtitle">
-        Export-ready disposable medical products, medical consumables, laboratory consumables,
-        and healthcare supplies for distributors, hospitals, and procurement teams.
-      </div>
-      <span class="cta">Request a Quote</span>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+home_tab, products_tab, contact_tab = st.tabs(["Home", "Products", "Contact"])
 
-st.markdown(
-    """
-    <div class="badge-row">
-      <div class="trust-badge">CE Approved</div>
-      <div class="trust-badge">ISO13485:2016 Certified</div>
-      <div class="trust-badge">10+ Years Experience</div>
-      <div class="trust-badge">One-stop Medical Sourcing</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    """
-    <div class="section-heading">
-      <span>Browse by category</span>
-      <h2>Product Categories</h2>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-category_tiles = ["All Categories", *categories]
-tile_columns = st.columns(4)
-for index, category in enumerate(category_tiles):
-    count = len(products) if category == "All Categories" else category_counts[category]
-    with tile_columns[index % 4]:
+with home_tab:
+    hero_left, hero_right = st.columns([1.35, .85])
+    with hero_left:
         st.markdown(
-            f"""
-            <div class="category-card">
-              <div class="category-name">{category}</div>
-              <div class="category-count">{count} products</div>
+            """
+            <div class="hero-copy">
+              <div class="text-logo">ELITE MEDICAL</div>
+              <div class="hero-title">Medical Product Catalog 2025</div>
+              <div class="hero-body">
+                B2B medical consumables and healthcare supplies manufacturer based in
+                Nanjing, China, serving distributors, hospitals, and procurement teams
+                with export-ready product sourcing.
+              </div>
+              <div class="cta-row">
+                <span class="primary-cta">View Products</span>
+                <span class="secondary-cta">Request a Quote</span>
+              </div>
             </div>
             """,
             unsafe_allow_html=True,
         )
-        if st.button("Filter", key=f"category_{index}_{category}"):
-            st.session_state.selected_category = category
+    with hero_right:
+        st.markdown('<div class="hero-visual">', unsafe_allow_html=True)
+        st.markdown('<div class="visual-note">Product families from the 2025 brochure</div>', unsafe_allow_html=True)
+        image_cols = st.columns(2)
+        for index, image in enumerate(hero_images):
+            with image_cols[index % 2]:
+                st.image(image, use_container_width=True)
+        st.markdown("</div>", unsafe_allow_html=True)
 
-st.sidebar.header("Catalog Controls")
-if st.sidebar.button("Reset filters"):
-    st.session_state.selected_category = "All Categories"
-    st.session_state.search_query = ""
+    render_section_heading("Company Introduction", "Elite Medical (Nanjing) Co., Ltd.")
+    st.markdown(
+        """
+        <div class="section-card">
+          <strong>Based in Nanjing, Jiangsu, China</strong><br>
+          More than 20 years of experience in medical product design, manufacturing,
+          and export. Product coverage includes sports care, medical consumables,
+          laboratory consumables/instruments, and medical dressings. Elite Medical
+          supports distributors, hospitals, and procurement teams with CE approved
+          products, ISO13485:2016 certified facilities, and one-stop sourcing service.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-selected_category = st.sidebar.selectbox(
-    "Category filter",
-    ["All Categories", *categories],
-    key="selected_category",
-)
-search_query = st.sidebar.text_input(
-    "Search by product name or REF code",
-    key="search_query",
-)
+    st.markdown(
+        """
+        <div class="stat-grid">
+          <div class="trust-card"><strong>20+ Years Experience</strong><span>Medical product design, manufacturing, and export.</span></div>
+          <div class="trust-card"><strong>CE Approved</strong><span>Products prepared for international B2B markets.</span></div>
+          <div class="trust-card"><strong>ISO13485:2016 Certified</strong><span>Certified facilities and quality management.</span></div>
+          <div class="trust-card"><strong>One-stop Medical Sourcing</strong><span>Catalog support for distributors and procurement teams.</span></div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-filtered_products = [
-    product
-    for product in products
-    if (selected_category == "All Categories" or product["category"] == selected_category)
-    and matches_search(product, search_query)
-]
+with products_tab:
+    render_section_heading(
+        "Product categories",
+        "Browse Medical Product Families",
+        "Use category cards, search, and filters to review products from the brochure.",
+    )
 
-st.markdown(
-    f"""
-    <div class="section-heading">
-      <span>Catalog</span>
-      <h2>{len(filtered_products)} products shown</h2>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+    category_cols = st.columns(4)
+    for index, category in enumerate(CORE_CATEGORIES):
+        with category_cols[index % 4]:
+            st.markdown(
+                f"""
+                <div class="category-card">
+                  <strong>{category}</strong>
+                  <div class="category-count">{counts.get(category, 0)} products</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            st.button(
+                "Filter",
+                key=f"category_filter_{category}",
+                on_click=set_category,
+                args=(category,),
+            )
 
-if not filtered_products:
-    st.info("No matching products found. Use the sidebar to reset filters.")
-
-for start in range(0, len(filtered_products), 3):
-    columns = st.columns(3)
-    for column, product in zip(columns, filtered_products[start : start + 3]):
-        with column:
-            render_product_card(product)
-
-st.markdown("---")
-st.markdown(
-    """
-    <div class="section-heading">
-      <span>Request pricing</span>
-      <h2>Product Inquiry</h2>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown('<div class="quote-card">', unsafe_allow_html=True)
-with st.form("quote_request_form"):
-    col1, col2 = st.columns(2)
-    with col1:
-        name = st.text_input("Name")
-        company = st.text_input("Company")
-    with col2:
-        email = st.text_input("Email")
-        selected_product = st.selectbox(
-            "Product",
-            [product["name"] for product in products],
+    filter_left, filter_right, filter_reset = st.columns([1.1, 1.6, .75])
+    with filter_left:
+        selected_category = st.selectbox(
+            "Category filter",
+            ["All Categories", *CORE_CATEGORIES],
+            key="product_category",
         )
-    message = st.text_area("Message")
-    submitted = st.form_submit_button("Submit Quote Request")
+    with filter_right:
+        search_query = st.text_input(
+            "Search by product name or REF code",
+            key="product_search",
+        )
+    with filter_reset:
+        st.write("")
+        st.write("")
+        st.button("Reset", on_click=reset_filters)
 
-if submitted:
-    st.success("Thank you. Your quote request has been received.")
-st.markdown("</div>", unsafe_allow_html=True)
+    filtered_products = [
+        product
+        for product in products
+        if (
+            selected_category == "All Categories"
+            or product["category"] == selected_category
+        )
+        and matches_search(product, search_query)
+    ]
 
-st.markdown(
-    """
-    <div class="section-heading">
-      <span>Why choose us</span>
-      <h2>Why Choose Elite Medical</h2>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+    render_section_heading("Catalog", f"{len(filtered_products)} Products Shown")
+    if not filtered_products:
+        st.info("No matching products found. Try another category or search term.")
 
-why_columns = st.columns(4)
-why_points = [
-    ("10+ Years", "Manufacturing experience"),
-    ("CE Approved", "Products for international markets"),
-    ("ISO13485:2016", "Certified facilities"),
-    ("One-stop", "Medical sourcing service"),
-]
-for column, (title, text) in zip(why_columns, why_points):
-    with column:
+    for start in range(0, len(filtered_products), 3):
+        columns = st.columns(3)
+        for column, product in zip(columns, filtered_products[start : start + 3]):
+            with column:
+                render_product_card(product)
+
+with contact_tab:
+    render_section_heading(
+        "Quote request",
+        "Send Us Your Product Requirements",
+        "Our team will respond with specifications and quotation support.",
+    )
+
+    form_col, info_col = st.columns([1.25, .75])
+    with form_col:
+        st.markdown('<div class="quote-card">', unsafe_allow_html=True)
+        with st.form("inquiry_form"):
+            col1, col2 = st.columns(2)
+            with col1:
+                name = st.text_input("Name")
+                company = st.text_input("Company")
+            with col2:
+                email = st.text_input("Email")
+                interested_product = st.selectbox(
+                    "Interested product",
+                    [product["name"] for product in products],
+                )
+            message = st.text_area("Message")
+            submitted = st.form_submit_button("Submit Inquiry")
+        if submitted:
+            st.success("Thank you. Your inquiry has been received.")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    with info_col:
         st.markdown(
-            f"""
-            <div class="trust-badge">
-              <div>{title}</div>
-              <small>{text}</small>
+            """
+            <div class="contact-card">
+              <h3>Contact Information</h3>
+              <strong>Elite Medical (Nanjing) Co., Ltd.</strong><br><br>
+              <strong>Email:</strong> info@elitemedline.com<br>
+              <strong>Website:</strong> www.elitemedline.com<br>
+              <strong>Location:</strong> Nanjing, Jiangsu, China
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            """
+            <div class="section-card" style="margin-top:.8rem;">
+              Send us your product requirements and our team will respond with
+              specifications and quotation support.
             </div>
             """,
             unsafe_allow_html=True,
@@ -445,11 +611,9 @@ for column, (title, text) in zip(why_columns, why_points):
 
 st.markdown(
     """
-    <div class="footer-card">
+    <div class="footer">
       <strong>Elite Medical (Nanjing) Co., Ltd.</strong><br>
-      www.elitemedline.com<br>
-      info@elitemedline.com<br>
-      Professional B2B medical product supplier
+      <span>www.elitemedline.com | info@elitemedline.com | Professional B2B medical product supplier</span>
     </div>
     """,
     unsafe_allow_html=True,
