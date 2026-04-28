@@ -176,6 +176,19 @@ def set_product_category(category):
     st.session_state.product_category = category
 
 
+def toggle_compare_product(product_id):
+    selected = list(st.session_state.get("compare_products", []))
+    if product_id in selected:
+        selected.remove(product_id)
+        st.session_state.compare_notice = ""
+    elif len(selected) < 3:
+        selected.append(product_id)
+        st.session_state.compare_notice = ""
+    else:
+        st.session_state.compare_notice = "You can compare up to 3 products at a time."
+    st.session_state.compare_products = selected
+
+
 def navigate_to(page):
     page_slug = PAGE_ALIASES.get(str(page), str(page).lower())
     if page_slug not in PAGE_LABELS:
@@ -264,6 +277,201 @@ def render_section_heading(kicker, title, body=""):
     )
 
 
+def render_trust_section():
+    st.markdown(
+        f"""
+        <section class="trust-section">
+          <div class="trust-heading">
+            <span>Why Choose Us</span>
+            <h2>Reliable B2B Medical Supply Partner</h2>
+          </div>
+          <div class="premium-trust-grid">
+            <div class="premium-trust-card">
+              <img src="{experience_icon}" alt="10+ Years Experience">
+              <strong>10+ Years Experience</strong>
+              <span>Experienced medical product manufacturing and export support.</span>
+            </div>
+            <div class="premium-trust-card">
+              <img src="{ce_icon}" alt="CE Approved">
+              <strong>CE Approved</strong>
+              <span>Documentation support for CE approved product sourcing.</span>
+            </div>
+            <div class="premium-trust-card">
+              <img src="{iso_icon}" alt="ISO13485:2016 Certified">
+              <strong>ISO13485:2016 Certified</strong>
+              <span>Certified quality management and facility support.</span>
+            </div>
+            <div class="premium-trust-card">
+              <img src="{service_icon}" alt="One-stop Medical Sourcing">
+              <strong>One-stop Medical Sourcing</strong>
+              <span>Efficient sourcing support for distributors and procurement teams.</span>
+            </div>
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_export_markets_section():
+    st.markdown(
+        """
+        <section class="export-section">
+          <div>
+            <span>Export Markets</span>
+            <h2>Serving Global Medical Procurement Needs</h2>
+            <p>
+              Elite Medical supports B2B buyers, distributors, hospitals, and procurement
+              teams sourcing medical consumables for international supply programs.
+            </p>
+          </div>
+          <div class="market-grid">
+            <div>Europe</div>
+            <div>Middle East</div>
+            <div>Southeast Asia</div>
+            <div>North America</div>
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_faq_section():
+    st.markdown(
+        """
+        <div class="section-heading compact-heading">
+          <span>FAQ</span>
+          <h2>Common Procurement Questions</h2>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    with st.expander("What products does Elite Medical supply?"):
+        st.write(
+            "Elite Medical supplies disposable medical products, medical consumables, "
+            "laboratory consumables, medical dressings, respiratory products, injection "
+            "products, and related healthcare supplies."
+        )
+    with st.expander("Do products come with CE approval?"):
+        st.write("Many products are CE approved. Please share the product and market requirements so our team can confirm documentation.")
+    with st.expander("Are facilities ISO13485:2016 certified?"):
+        st.write("Yes. Elite Medical works with ISO13485:2016 certified facilities and quality management support.")
+    with st.expander("Can customers request customization?"):
+        st.write("Yes. Customization services are available for suitable products, packaging, and sourcing requirements.")
+    with st.expander("How can I request a quotation?"):
+        st.write("Use the Quick Request a Quote form, Contact page, or product Contact Now button with product name, quantity, and target market.")
+
+
+def render_quick_rfq(form_key, compact_title="Quick Request a Quote"):
+    product_key = f"{form_key}_product"
+    if st.session_state.get("selected_product") and not st.session_state.get(product_key):
+        st.session_state[product_key] = st.session_state.selected_product
+
+    st.markdown('<span class="quick-rfq-marker"></span>', unsafe_allow_html=True)
+    with st.container():
+        st.markdown(
+            f"""
+            <div class="quick-rfq-copy">
+              <span>RFQ</span>
+              <h2>{compact_title}</h2>
+              <p>Send basic requirements and our team will follow up with product and quotation support.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        with st.form(form_key):
+            name_col, email_col, company_col = st.columns(3)
+            with name_col:
+                name = st.text_input("Name", key=f"{form_key}_name")
+            with email_col:
+                email = st.text_input("Email", key=f"{form_key}_email")
+            with company_col:
+                company = st.text_input("Company", key=f"{form_key}_company")
+            product_col, quantity_col = st.columns([1.2, .8])
+            with product_col:
+                product = st.text_input(
+                    "Product of Interest",
+                    key=product_key,
+                    placeholder="Product name or REF code",
+                )
+            with quantity_col:
+                quantity = st.text_input(
+                    "Quantity",
+                    key=f"{form_key}_quantity",
+                    placeholder="e.g., 500 boxes / 10,000 pcs",
+                )
+            message = st.text_area(
+                "Message",
+                key=f"{form_key}_message",
+                placeholder="Share specifications, destination market, packaging, or certification needs.",
+                height=84,
+            )
+            submitted = st.form_submit_button("Submit Quick RFQ")
+        if submitted:
+            st.success("Thank you. Your quote request has been received.")
+            st.session_state.last_quick_rfq = {
+                "name": name,
+                "email": email,
+                "company": company,
+                "product": product,
+                "quantity": quantity,
+                "message": message,
+            }
+
+
+def product_sample_refs(product, limit=3):
+    refs = [
+        str(variant.get("ref", "needs_review"))
+        for variant in product.get("variants", [])[:limit]
+        if isinstance(variant, dict)
+    ]
+    return ", ".join(refs) if refs else "needs review"
+
+
+def render_compare_panel(products):
+    selected_ids = st.session_state.get("compare_products", [])
+    product_lookup = {product["id"]: product for product in products}
+    selected_products = [
+        product_lookup[product_id]
+        for product_id in selected_ids
+        if product_id in product_lookup
+    ]
+
+    st.markdown(
+        f"""
+        <div class="compare-bar">
+          <strong>Product Compare</strong>
+          <span>{len(selected_products)} / 3 selected</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    if st.session_state.get("compare_notice"):
+        st.warning(st.session_state.compare_notice)
+
+    if st.button(
+        "Compare Selected Products",
+        width="stretch",
+        disabled=not selected_products,
+        key="compare_selected_products_button",
+    ):
+        st.session_state.show_compare_table = True
+
+    if st.session_state.get("show_compare_table") and selected_products:
+        st.table(
+            [
+                {
+                    "Product name": product["name"],
+                    "Category": product["category"],
+                    "Number of variants": len(product.get("variants", [])),
+                    "Sample REF codes": product_sample_refs(product),
+                }
+                for product in selected_products
+            ]
+        )
+
+
 def render_product_card(product, card_index=0):
     with st.container():
         st.markdown('<div class="product-shell">', unsafe_allow_html=True)
@@ -293,6 +501,15 @@ def render_product_card(product, card_index=0):
             width="stretch",
             on_click=start_product_inquiry,
             args=(product["name"],),
+        )
+        selected_for_compare = product["id"] in st.session_state.get("compare_products", [])
+        compare_label = "Remove from Compare" if selected_for_compare else "Add to Compare"
+        st.button(
+            compare_label,
+            key=f"compare_{card_index}_{product['id']}",
+            width="stretch",
+            on_click=toggle_compare_product,
+            args=(product["id"],),
         )
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -426,6 +643,23 @@ def search_products_for_chat(query, products):
     return [product for _, product in scored_matches[:5]]
 
 
+def related_chatbot_recommendations(matches, products, limit=3):
+    if not matches:
+        return []
+
+    matched_ids = {product["id"] for product in matches}
+    primary_category = matches[0].get("category", "")
+    recommendations = []
+    for product in products:
+        if product.get("id") in matched_ids:
+            continue
+        if product.get("category") == primary_category:
+            recommendations.append(product)
+        if len(recommendations) >= limit:
+            break
+    return recommendations
+
+
 def chat_has_word(query, words):
     tokens = chat_tokens(query)
     return any(word in tokens for word in words)
@@ -489,6 +723,18 @@ def build_chatbot_reply(query, products):
                     f"- {product['name']}",
                     f"  Category: {product['category']}",
                     f"  {sample_ref_summary(product)}",
+                ]
+            )
+        )
+
+    recommendations = related_chatbot_recommendations(matches, products)
+    if recommendations:
+        lines.append(
+            "You may also be interested in…\n"
+            + "\n".join(
+                [
+                    f"- {product['name']} ({sample_ref_summary(product)})"
+                    for product in recommendations
                 ]
             )
         )
@@ -860,6 +1106,125 @@ st.markdown(
         font-size: .84rem;
         line-height: 1.34;
     }}
+    .trust-section, .quick-rfq, .export-section {{
+        max-width: 1120px;
+        margin: 1rem auto;
+        border-radius: 18px;
+        border: 1px solid #dcefe5;
+        background: #ffffff;
+        box-shadow: 0 12px 34px rgba(17, 132, 87, .08);
+    }}
+    .trust-section {{
+        padding: 1rem;
+        background:
+            linear-gradient(135deg, #ffffff 0%, #f3fbf6 100%);
+    }}
+    .trust-heading {{
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 1rem;
+        margin-bottom: .75rem;
+        border-bottom: 1px solid #e5f3eb;
+        padding-bottom: .65rem;
+    }}
+    .trust-heading span, .export-section span, .quick-rfq-copy span {{
+        color: {GREEN};
+        font-size: .76rem;
+        font-weight: 950;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+    }}
+    .trust-heading h2, .export-section h2, .quick-rfq-copy h2 {{
+        color: {DARK};
+        margin: .12rem 0 0;
+        font-size: 1.38rem;
+        line-height: 1.18;
+    }}
+    .premium-trust-grid {{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: .75rem;
+    }}
+    .premium-trust-card {{
+        min-height: 150px;
+        border-radius: 16px;
+        border: 1px solid #dcefe5;
+        background: #ffffff;
+        padding: .9rem .75rem;
+        text-align: center;
+        box-shadow: 0 10px 24px rgba(17, 132, 87, .07);
+    }}
+    .premium-trust-card img {{
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+        margin-bottom: .55rem;
+    }}
+    .premium-trust-card strong {{
+        display: block;
+        color: {DARK};
+        font-size: .96rem;
+        line-height: 1.18;
+        margin-bottom: .28rem;
+    }}
+    .premium-trust-card span {{
+        color: {MUTED};
+        font-size: .82rem;
+        line-height: 1.35;
+    }}
+    .quick-rfq {{
+        padding: .95rem;
+        background: linear-gradient(135deg, #f4fbf7 0%, #ffffff 72%);
+    }}
+    .quick-rfq-marker {{
+        display: none;
+    }}
+    div[data-testid="element-container"]:has(.quick-rfq-marker) + div[data-testid="stVerticalBlock"] {{
+        max-width: 1120px;
+        margin: 1rem auto;
+        padding: .95rem;
+        border-radius: 18px;
+        border: 1px solid #dcefe5;
+        background: linear-gradient(135deg, #f4fbf7 0%, #ffffff 72%);
+        box-shadow: 0 12px 34px rgba(17, 132, 87, .08);
+    }}
+    .quick-rfq-copy {{
+        margin-bottom: .65rem;
+    }}
+    .quick-rfq-copy p {{
+        color: {MUTED};
+        margin: .22rem 0 0;
+        font-size: .9rem;
+    }}
+    .export-section {{
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, .75fr);
+        gap: 1rem;
+        align-items: center;
+        padding: 1rem;
+        background: linear-gradient(135deg, #ffffff 0%, #eefaf3 100%);
+    }}
+    .export-section p {{
+        color: {MUTED};
+        margin: .4rem 0 0;
+        line-height: 1.5;
+    }}
+    .market-grid {{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .55rem;
+    }}
+    .market-grid div {{
+        border-radius: 14px;
+        border: 1px solid #dcefe5;
+        background: #ffffff;
+        padding: .7rem;
+        color: {DARK};
+        font-weight: 900;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(17, 132, 87, .06);
+    }}
     .about-hero {{
         min-height: 370px;
         margin: .25rem calc(50% - 50vw) 1.15rem;
@@ -1174,6 +1539,25 @@ st.markdown(
         font-weight: 900;
         font-size: .88rem;
     }}
+    .compare-bar {{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .75rem;
+        margin: .65rem 0 .45rem;
+        padding: .68rem .8rem;
+        border-radius: 14px;
+        border: 1px solid #dcefe5;
+        background: #f8fdf9;
+    }}
+    .compare-bar strong {{
+        color: {DARK};
+    }}
+    .compare-bar span {{
+        color: {GREEN};
+        font-weight: 900;
+        font-size: .86rem;
+    }}
     .sidebar-category-list {{
         border-top: 1px solid #dcefe5;
         margin-top: .8rem;
@@ -1410,7 +1794,10 @@ st.markdown(
             min-height: 38px;
             font-size: .9rem;
         }}
-        .stat-grid, .company-layout, .about-grid, .about-card-grid, .certificate-grid {{
+        .stat-grid, .company-layout, .about-grid, .about-card-grid, .certificate-grid, .premium-trust-grid, .export-section {{
+            grid-template-columns: 1fr;
+        }}
+        .market-grid {{
             grid-template-columns: 1fr;
         }}
         .home-hero {{
@@ -1489,6 +1876,14 @@ if "selected_product" not in st.session_state:
     st.session_state.selected_product = ""
 if "inquiry_product" not in st.session_state:
     st.session_state.inquiry_product = st.session_state.selected_product
+if "compare_products" not in st.session_state:
+    st.session_state.compare_products = []
+if "compare_notice" not in st.session_state:
+    st.session_state.compare_notice = ""
+if "show_compare_table" not in st.session_state:
+    st.session_state.show_compare_table = False
+if "last_quick_rfq" not in st.session_state:
+    st.session_state.last_quick_rfq = {}
 
 logo_tag = f'<img src="{logo_image}" alt="Elite Medical logo">' if logo_image else ""
 st.markdown('<span class="site-header-marker"></span>', unsafe_allow_html=True)
@@ -1648,6 +2043,10 @@ if page == "home":
         unsafe_allow_html=True,
     )
 
+    render_trust_section()
+    render_export_markets_section()
+    render_quick_rfq("home_quick_rfq")
+
 elif page == "about":
     st.markdown(
         """
@@ -1739,6 +2138,9 @@ elif page == "about":
         unsafe_allow_html=True,
     )
 
+    render_export_markets_section()
+    render_faq_section()
+
 elif page == "products":
     product_quick_categories = [
         "Medical Dressing",
@@ -1783,6 +2185,7 @@ elif page == "products":
         unsafe_allow_html=True,
     )
     render_category_quick_cards(product_quick_categories, counts)
+    render_compare_panel(products)
 
     selected_category = st.session_state.product_category
     search_query = st.session_state.product_search
@@ -1816,6 +2219,8 @@ elif page == "products":
         ):
             with column:
                 render_product_card(product, start + offset)
+
+    render_quick_rfq("products_quick_rfq")
 
 else:
     st.markdown(
