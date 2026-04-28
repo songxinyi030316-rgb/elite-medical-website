@@ -172,6 +172,10 @@ def reset_filters():
     st.session_state.product_search = ""
 
 
+def set_product_category(category):
+    st.session_state.product_category = category
+
+
 def navigate_to(page):
     page_slug = PAGE_ALIASES.get(str(page), str(page).lower())
     if page_slug not in PAGE_LABELS:
@@ -219,6 +223,30 @@ def image_data_uri(path):
     return f"data:image/png;base64,{encoded}"
 
 
+def product_image_path(product):
+    image = str(product.get("image", "")).strip()
+    if not image or image == "needs_review":
+        return None
+
+    path = ROOT / image.lstrip("/")
+    return path if path.exists() else None
+
+
+def category_preview_images(products, categories, limit=3):
+    images = []
+    for category in categories:
+        for product in products:
+            if product.get("category") != category:
+                continue
+            path = product_image_path(product)
+            if path:
+                images.append((category, image_data_uri(path)))
+                break
+        if len(images) >= limit:
+            break
+    return images
+
+
 def render_section_heading(kicker, title, body=""):
     st.markdown(
         f"""
@@ -235,11 +263,9 @@ def render_section_heading(kicker, title, body=""):
 def render_product_card(product, card_index=0):
     with st.container():
         st.markdown('<div class="product-shell">', unsafe_allow_html=True)
-        if product.get("image"):
-            try:
-                st.image(product["image"], width=150)
-            except Exception:
-                st.markdown('<span class="no-image">No image</span>', unsafe_allow_html=True)
+        image_path = product_image_path(product)
+        if image_path:
+            st.image(str(image_path), width=150)
         else:
             st.markdown('<span class="no-image">No image</span>', unsafe_allow_html=True)
 
@@ -265,6 +291,24 @@ def render_product_card(product, card_index=0):
             args=(product["name"],),
         )
         st.markdown("</div>", unsafe_allow_html=True)
+
+
+def render_category_quick_cards(categories, counts):
+    for row_start in range(0, len(categories), 3):
+        row_categories = categories[row_start : row_start + 3]
+        st.markdown('<span class="category-quick-marker"></span>', unsafe_allow_html=True)
+        columns = st.columns(3)
+        for column, category in zip(columns, row_categories):
+            is_selected = st.session_state.product_category == category
+            with column:
+                st.button(
+                    f"{category}\n{counts.get(category, 0)} products",
+                    key=f"quick_category_{category}",
+                    type="primary" if is_selected else "secondary",
+                    width="stretch",
+                    on_click=set_product_category,
+                    args=(category,),
+                )
 
 
 def category_counts(products):
@@ -991,6 +1035,141 @@ st.markdown(
         font-weight: 850;
         margin-top: .35rem;
     }}
+    .products-landing {{
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(230px, .42fr);
+        gap: 1.25rem;
+        align-items: center;
+        min-height: 170px;
+        padding: 1.35rem 1.45rem;
+        margin: .2rem 0 .95rem;
+        border-radius: 20px;
+        border: 1px solid #d7efe1;
+        background:
+            radial-gradient(circle at 85% 20%, rgba(255, 255, 255, .92), rgba(255, 255, 255, 0) 30%),
+            linear-gradient(135deg, #e7f8ee 0%, #f9fffb 62%, #ffffff 100%);
+        box-shadow: 0 18px 44px rgba(17, 132, 87, .10);
+        overflow: hidden;
+    }}
+    .products-landing-kicker {{
+        color: {GREEN};
+        font-size: .78rem;
+        font-weight: 950;
+        text-transform: uppercase;
+        letter-spacing: .07em;
+        margin-bottom: .25rem;
+    }}
+    .products-landing h1 {{
+        color: {DARK};
+        font-size: 2.15rem;
+        line-height: 1.05;
+        margin: 0 0 .35rem;
+        font-weight: 950;
+    }}
+    .products-landing p {{
+        color: {MUTED};
+        max-width: 560px;
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.45;
+    }}
+    .products-hero-images {{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: .55rem;
+    }}
+    .products-hero-image {{
+        width: 86px;
+        height: 104px;
+        border-radius: 16px;
+        background: #ffffff;
+        border: 1px solid #dcefe5;
+        box-shadow: 0 14px 30px rgba(37, 48, 43, .10);
+        object-fit: contain;
+        padding: .45rem;
+    }}
+    .products-hero-image:nth-child(2) {{
+        width: 104px;
+        height: 124px;
+    }}
+    .products-section-label {{
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: .1rem 0 .55rem;
+    }}
+    .products-section-label h2 {{
+        margin: 0;
+        color: {DARK};
+        font-size: 1.2rem;
+        font-weight: 950;
+    }}
+    .products-section-label span {{
+        color: {MUTED};
+        font-size: .88rem;
+    }}
+    .category-quick-marker {{
+        display: none;
+    }}
+    div[data-testid="element-container"]:has(.category-quick-marker) + div[data-testid="stHorizontalBlock"] {{
+        gap: .55rem;
+        margin-bottom: .8rem;
+    }}
+    div[data-testid="element-container"]:has(.category-quick-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button {{
+        min-height: 78px;
+        border-radius: 16px;
+        background: #ffffff;
+        border: 1px solid #dcefe5;
+        color: {DARK};
+        box-shadow: 0 10px 24px rgba(17, 132, 87, .07);
+        line-height: 1.18;
+        padding: .58rem .62rem;
+        white-space: pre-line;
+        text-align: left;
+        justify-content: flex-start;
+    }}
+    div[data-testid="element-container"]:has(.category-quick-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button::before {{
+        content: "";
+        width: 26px;
+        height: 26px;
+        border-radius: 9px;
+        margin-right: .5rem;
+        background: linear-gradient(135deg, #18a66a, #bcebd0);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .68);
+    }}
+    div[data-testid="element-container"]:has(.category-quick-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button:hover {{
+        border-color: {GREEN};
+        background: #f4fbf7;
+        color: {GREEN};
+        transform: translateY(-1px);
+        box-shadow: 0 14px 28px rgba(17, 132, 87, .12);
+    }}
+    div[data-testid="element-container"]:has(.category-quick-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button[kind="primary"] {{
+        border-color: {GREEN};
+        background: #eaf8f0;
+        color: {GREEN};
+        box-shadow: inset 0 0 0 1px rgba(17, 132, 87, .18), 0 12px 26px rgba(17, 132, 87, .12);
+    }}
+    .catalog-count-line {{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .8rem;
+        margin: .65rem 0 .7rem;
+        padding-top: .45rem;
+        border-top: 1px solid #e4f2ea;
+    }}
+    .catalog-count-line strong {{
+        color: {DARK};
+        font-size: 1.02rem;
+    }}
+    .catalog-count-line span {{
+        color: {GREEN};
+        font-weight: 900;
+        font-size: .88rem;
+    }}
     .sidebar-category-list {{
         border-top: 1px solid #dcefe5;
         margin-top: .8rem;
@@ -1247,6 +1426,26 @@ st.markdown(
         }}
         .about-hero h1 {{
             font-size: 2.35rem;
+        }}
+        .products-landing {{
+            grid-template-columns: 1fr;
+            min-height: auto;
+            padding: 1.05rem;
+        }}
+        .products-landing h1 {{
+            font-size: 1.8rem;
+        }}
+        .products-hero-images {{
+            justify-content: flex-start;
+        }}
+        .products-hero-image {{
+            width: 74px;
+            height: 88px;
+        }}
+        .products-section-label {{
+            align-items: flex-start;
+            flex-direction: column;
+            gap: .12rem;
         }}
         div[data-testid="element-container"]:has(.chatbot-panel-marker) + div[data-testid="stVerticalBlock"] {{
             right: .75rem;
@@ -1528,11 +1727,49 @@ elif page == "about":
     )
 
 elif page == "products":
-    render_section_heading(
-        "Product Catalog",
-        "Medical Product Catalog",
-        "Search and filter products from the sidebar, then open product details for specs and REF codes.",
+    product_quick_categories = [
+        "Medical Dressing",
+        "Bandage",
+        "Protective Products",
+        "Respiratory",
+        "Injection",
+        "Laboratory",
+    ]
+    preview_images = category_preview_images(products, product_quick_categories)
+    if not preview_images and service_icon:
+        preview_images = [("Medical Products", service_icon)]
+    preview_html = "".join(
+        f'<img class="products-hero-image" src="{image}" alt="{html.escape(category)} product">'
+        for category, image in preview_images
+        if image
     )
+
+    st.markdown(
+        f"""
+        <section class="products-landing">
+          <div>
+            <div class="products-landing-kicker">Elite Medical Catalog</div>
+            <h1>Product Catalog</h1>
+            <p>Explore our full range of medical products for B2B sourcing and quotation support.</p>
+          </div>
+          <div class="products-hero-images">
+            {preview_html}
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <div class="products-section-label">
+          <h2>Browse by Category</h2>
+          <span>Select a category to filter the catalog.</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    render_category_quick_cards(product_quick_categories, counts)
 
     selected_category = st.session_state.product_category
     search_query = st.session_state.product_search
@@ -1547,7 +1784,15 @@ elif page == "products":
         and matches_search(product, search_query)
     ]
 
-    render_section_heading("Catalog", f"{len(filtered_products)} Products Shown")
+    st.markdown(
+        f"""
+        <div class="catalog-count-line">
+          <strong>Product Grid</strong>
+          <span>{len(filtered_products)} products shown</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     if not filtered_products:
         st.info("No matching products found. Try another category or search term.")
 
