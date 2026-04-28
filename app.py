@@ -1145,31 +1145,14 @@ st.markdown(
         margin: 1.05rem auto;
     }}
     .compact-section-title {{
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 1rem;
-        margin-bottom: .85rem;
-    }}
-    .compact-section-title span {{
-        color: {GREEN};
-        font-size: .76rem;
-        font-weight: 950;
-        letter-spacing: .06em;
-        text-transform: uppercase;
+        margin: 0 0 1rem;
     }}
     .compact-section-title h2 {{
-        color: {DARK};
-        font-size: 1.45rem;
+        color: {GREEN};
+        font-size: 1.65rem;
         line-height: 1.16;
-        margin: .12rem 0 0;
-    }}
-    .compact-section-title p {{
-        max-width: 420px;
-        color: {MUTED};
-        font-size: .9rem;
-        line-height: 1.45;
         margin: 0;
+        font-weight: 950;
     }}
     .work-steps {{
         display: grid;
@@ -2076,11 +2059,6 @@ st.markdown(
         .feature-grid {{
             grid-template-columns: 1fr;
         }}
-        .compact-section-title {{
-            align-items: flex-start;
-            flex-direction: column;
-            gap: .35rem;
-        }}
         .work-steps,
         .support-grid {{
             grid-template-columns: 1fr;
@@ -2308,11 +2286,7 @@ if page == "home":
         """
         <section class="buyer-flow-section">
           <div class="compact-section-title">
-            <div>
-              <span>Buyer Process</span>
-              <h2>How We Work With Buyers</h2>
-            </div>
-            <p>A clear sourcing workflow helps purchasing teams move from inquiry to shipment with fewer delays.</p>
+            <h2>How We Work With Buyers</h2>
           </div>
           <div class="work-steps">
             <div class="work-step">
@@ -2345,11 +2319,7 @@ if page == "home":
         """
         <section class="support-section">
           <div class="compact-section-title">
-            <div>
-              <span>B2B Support</span>
-              <h2>Who We Support</h2>
-            </div>
-            <p>Built for buyers who need dependable medical product sourcing and responsive quotation support.</p>
+            <h2>Who We Support</h2>
           </div>
           <div class="support-grid">
             <div class="support-card">
