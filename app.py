@@ -228,7 +228,11 @@ def product_image_path(product):
     if not image or image == "needs_review":
         return None
 
-    path = ROOT / image.lstrip("/")
+    if image.startswith("/public/"):
+        path = ROOT / image.lstrip("/")
+    else:
+        raw_path = Path(image)
+        path = raw_path if raw_path.is_absolute() else ROOT / image.lstrip("/")
     return path if path.exists() else None
 
 
@@ -1206,9 +1210,18 @@ st.markdown(
         border-color: #128b59;
         color: #ffffff;
     }}
+    .product-shell div[data-testid="stImage"] {{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: .45rem;
+    }}
     .product-shell img {{
-        max-height: 118px;
+        max-width: 160px;
+        max-height: 140px;
         object-fit: contain;
+        display: block;
+        margin: 0 auto;
     }}
     .no-image {{
         display: inline-block;
