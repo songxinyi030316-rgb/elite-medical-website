@@ -16,6 +16,9 @@ EXPERIENCE_ICON_PATH = ICON_DIR / "experience.png"
 CE_ICON_PATH = ICON_DIR / "ce.png"
 ISO_ICON_PATH = ICON_DIR / "iso.png"
 SERVICE_ICON_PATH = ICON_DIR / "service.png"
+COMPANY_DIR = ROOT / "public" / "company"
+COMPANY_IMAGE_PATH = COMPANY_DIR / "company.png"
+INNER_COMPANY_IMAGE_PATH = COMPANY_DIR / "innercompany.png"
 
 GREEN = "#118457"
 DARK = "#25302b"
@@ -381,10 +384,19 @@ hero_background_css = (
     if hero_background
     else "linear-gradient(90deg, rgba(7, 74, 50, .94) 0%, rgba(11, 108, 70, .24) 100%)"
 )
+about_background = image_data_uri(COMPANY_IMAGE_PATH)
+about_background_css = (
+    "linear-gradient(90deg, rgba(7, 74, 50, .93) 0%, "
+    "rgba(13, 103, 68, .72) 42%, rgba(13, 103, 68, .14) 100%), "
+    f"url('{about_background}')"
+    if about_background
+    else "linear-gradient(90deg, rgba(7, 74, 50, .93) 0%, rgba(13, 103, 68, .18) 100%)"
+)
 experience_icon = image_data_uri(EXPERIENCE_ICON_PATH)
 ce_icon = image_data_uri(CE_ICON_PATH)
 iso_icon = image_data_uri(ISO_ICON_PATH)
 service_icon = image_data_uri(SERVICE_ICON_PATH)
+inner_company_image = image_data_uri(INNER_COMPANY_IMAGE_PATH)
 
 st.set_page_config(page_title="Elite Medical Product Catalog", layout="wide")
 
@@ -585,6 +597,127 @@ st.markdown(
         color: {MUTED};
         font-size: .84rem;
         line-height: 1.34;
+    }}
+    .about-hero {{
+        min-height: 370px;
+        margin: .25rem calc(50% - 50vw) 1.15rem;
+        padding: 0 max(1.5rem, calc((100vw - 1120px) / 2));
+        background-image: {about_background_css};
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+    }}
+    .about-hero-content {{
+        max-width: 620px;
+    }}
+    .about-hero h1 {{
+        color: #ffffff;
+        font-size: 3rem;
+        line-height: 1.05;
+        margin: 0 0 .55rem;
+        font-weight: 950;
+    }}
+    .about-hero p {{
+        color: #eefaf3;
+        font-size: 1.12rem;
+        line-height: 1.5;
+        margin: 0;
+    }}
+    .about-section {{
+        max-width: 1120px;
+        margin: 0 auto 1.05rem;
+    }}
+    .about-grid {{
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+        gap: 1.25rem;
+        align-items: center;
+    }}
+    .about-copy {{
+        padding-right: .4rem;
+    }}
+    .about-kicker {{
+        color: {GREEN};
+        font-size: .78rem;
+        font-weight: 950;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        margin-bottom: .35rem;
+    }}
+    .about-copy h2, .about-section h2 {{
+        color: {DARK};
+        font-size: 1.65rem;
+        line-height: 1.18;
+        margin: 0 0 .55rem;
+    }}
+    .about-copy p {{
+        color: {MUTED};
+        line-height: 1.62;
+        margin: 0 0 .72rem;
+    }}
+    .about-image {{
+        width: 100%;
+        max-height: 360px;
+        object-fit: cover;
+        border-radius: 18px;
+        box-shadow: 0 18px 46px rgba(37, 48, 43, .16);
+        border: 1px solid #dcefe5;
+    }}
+    .category-cloud {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: .42rem;
+        margin-top: .75rem;
+    }}
+    .category-chip {{
+        border-radius: 999px;
+        background: #eefaf3;
+        color: {DARK};
+        border: 1px solid #d8efe2;
+        padding: .28rem .58rem;
+        font-size: .82rem;
+        font-weight: 760;
+    }}
+    .about-card-grid {{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: .75rem;
+        margin-top: .7rem;
+    }}
+    .about-card, .certificate-card {{
+        border: 1px solid #dcefe5;
+        border-radius: 14px;
+        background: #ffffff;
+        padding: .9rem;
+        box-shadow: 0 10px 28px rgba(17, 132, 87, .08);
+    }}
+    .about-card strong, .certificate-card strong {{
+        display: block;
+        color: {DARK};
+        line-height: 1.2;
+        margin-bottom: .28rem;
+    }}
+    .about-card span, .certificate-card span {{
+        color: {MUTED};
+        font-size: .84rem;
+        line-height: 1.35;
+    }}
+    .certificate-grid {{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: .75rem;
+        margin-top: .7rem;
+    }}
+    .certificate-card {{
+        text-align: center;
+        min-height: 150px;
+    }}
+    .certificate-card img {{
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+        margin-bottom: .55rem;
     }}
     .section-heading {{
         margin: 1rem 0 .65rem;
@@ -836,7 +969,7 @@ st.markdown(
         font-size: .78rem;
     }}
     @media (max-width: 900px) {{
-        .stat-grid, .company-layout {{
+        .stat-grid, .company-layout, .about-grid, .about-card-grid, .certificate-grid {{
             grid-template-columns: 1fr;
         }}
         .home-hero {{
@@ -858,6 +991,13 @@ st.markdown(
         }}
         .feature-grid {{
             grid-template-columns: 1fr;
+        }}
+        .about-hero {{
+            min-height: 320px;
+            padding: 0 1.25rem;
+        }}
+        .about-hero h1 {{
+            font-size: 2.35rem;
         }}
         div[data-testid="element-container"]:has(.chatbot-panel-marker) + div[data-testid="stVerticalBlock"] {{
             right: .75rem;
@@ -882,7 +1022,7 @@ if "product_search" not in st.session_state:
 
 st.radio(
     "Navigation",
-    ["Home", "Products", "Contact"],
+    ["Home", "About Us", "Products", "Contact"],
     key="current_page",
     horizontal=True,
     label_visibility="collapsed",
@@ -1008,6 +1148,97 @@ if st.session_state.current_page == "Home":
                 <span>Product sourcing and quotation support for procurement teams.</span>
               </div>
             </div>
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+elif st.session_state.current_page == "About Us":
+    st.markdown(
+        """
+        <section class="about-hero">
+          <div class="about-hero-content">
+            <h1>About Elite Medical</h1>
+            <p>Reliable Medical Product Partner in China</p>
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        f"""
+        <section class="about-section">
+          <div class="about-grid">
+            <div class="about-copy">
+              <div class="about-kicker">Elite Team</div>
+              <h2>Elite Medical (Nanjing) Co., Ltd.</h2>
+              <p>
+                Established in 2006, Elite Medical (Nanjing) Co., Ltd. is a
+                manufacturer and trader specializing in the research, development,
+                and production of medical consumables.
+              </p>
+              <p>
+                With mature production and after-sales service, Elite Medical helps
+                international buyers create an efficient procurement experience with
+                reliable, effective, convenient, and pleasant sourcing in China.
+              </p>
+              <p>
+                Our team provides professional advice and sufficient purchasing
+                suggestions, positioning Elite Medical as a reliable, efficient, and
+                quality-assured medical product supplier in China.
+              </p>
+            </div>
+            <div>
+              <img class="about-image" src="{inner_company_image}" alt="Elite Medical team and office">
+            </div>
+          </div>
+          <div class="category-cloud">
+            <span class="category-chip">Respiratory and anaesthesia products</span>
+            <span class="category-chip">Catheter products</span>
+            <span class="category-chip">Urology products</span>
+            <span class="category-chip">Intravenous injection and surgical products</span>
+            <span class="category-chip">Disposable and diagnostic products</span>
+            <span class="category-chip">Medical dressing pad</span>
+            <span class="category-chip">Gauze</span>
+            <span class="category-chip">Cotton</span>
+            <span class="category-chip">Non-woven fabrics</span>
+            <span class="category-chip">Plasters</span>
+            <span class="category-chip">Bandages</span>
+            <span class="category-chip">Tapes</span>
+            <span class="category-chip">Other medical products</span>
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <section class="about-section">
+          <div class="about-kicker">Why Choose Us</div>
+          <h2>Trusted B2B Medical Supply Support</h2>
+          <div class="about-card-grid">
+            <div class="about-card"><strong>Ranked High Locally</strong><span>Recognized within the local medical product industry.</span></div>
+            <div class="about-card"><strong>Multiple Certifications</strong><span>Compliance-focused supply and quality documentation support.</span></div>
+            <div class="about-card"><strong>Growing Customer Base</strong><span>Serving more buyers with reliable export and sourcing support.</span></div>
+            <div class="about-card"><strong>Quality Reputation</strong><span>Known for dependable product quality and practical service.</span></div>
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        f"""
+        <section class="about-section">
+          <div class="about-kicker">Certificates</div>
+          <h2>Quality and Verification Support</h2>
+          <div class="certificate-grid">
+            <div class="certificate-card"><img src="{ce_icon}" alt="CE Certificate"><strong>CE Certificate</strong><span>Product documentation support for international markets.</span></div>
+            <div class="certificate-card"><img src="{iso_icon}" alt="ISO Certificate"><strong>ISO Certificate</strong><span>Quality management and certified facility support.</span></div>
+            <div class="certificate-card"><img src="{service_icon}" alt="SFDA / MDMA Verification"><strong>SFDA / MDMA Verification</strong><span>Verification support for regulated sourcing workflows.</span></div>
           </div>
         </section>
         """,
