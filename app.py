@@ -4,7 +4,8 @@ from pathlib import Path
 import streamlit as st
 
 
-DATA_PATH = Path(__file__).parent / "data" / "products.json"
+ROOT = Path(__file__).parent
+DATA_PATH = ROOT / "data" / "products.json"
 
 FALLBACK_PRODUCTS = [
     {
@@ -44,11 +45,17 @@ def load_products():
         variants = product.get("variants", [])
         if not isinstance(variants, list):
             variants = []
+        image = str(product.get("image", "")).strip()
+        if image and image != "needs_review":
+            image_path = ROOT / image.lstrip("/")
+            image = str(image_path) if image_path.exists() else ""
+
         clean_products.append(
             {
                 "id": str(product.get("id", "needs_review")),
                 "name": str(product.get("name", "Unnamed product")).title(),
                 "category": str(product.get("category", "Uncategorized")).title(),
+                "image": image,
                 "variants": [
                     {
                         "spec": str(variant.get("spec", "needs_review")),
@@ -145,6 +152,14 @@ if not filtered_products:
     st.info("No matching products found. Try another category or search term.")
 
 for product in filtered_products:
+    if product.get("image"):
+        try:
+            st.image(product["image"], width=150)
+        except Exception:
+            st.write("No image available")
+    else:
+        st.write("No image available")
+
     st.markdown(
         f"""
         <div class="product-card">
