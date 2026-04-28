@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Canvas Tote",
+    "description": "A durable everyday tote made from heavyweight cotton canvas.",
+    "price": 24.99
+  },
+  {
+    "id": 2,
+    "name": "Desk Notebook",
+    "description": "A lay-flat notebook with dot-grid pages for planning and sketches.",
+    "price": 14.5
+  },
+  {
+    "id": 3,
+    "name": "Ceramic Mug",
+    "description": "A simple glazed mug for coffee, tea, or late-night debugging.",
+    "price": 18
+  }
+]
