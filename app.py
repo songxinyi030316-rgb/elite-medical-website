@@ -325,12 +325,46 @@ def chatbot_search_text(product):
     ).lower()
 
 
+CHATBOT_STOP_WORDS = {
+    "a",
+    "an",
+    "any",
+    "can",
+    "catalog",
+    "do",
+    "find",
+    "for",
+    "have",
+    "i",
+    "me",
+    "need",
+    "please",
+    "product",
+    "products",
+    "show",
+    "the",
+    "you",
+}
+
+
+def chat_tokens(query):
+    normalized = str(query).lower()
+    separators = ",.!?;:()[]{}\"'"
+    for separator in separators:
+        normalized = normalized.replace(separator, " ")
+    return [word for word in normalized.split() if word]
+
+
 def search_products_for_chat(query, products):
     cleaned_query = str(query).lower().strip()
     if not cleaned_query:
         return []
 
-    keywords = [word for word in cleaned_query.split() if word]
+    tokens = chat_tokens(cleaned_query)
+    keywords = [word for word in tokens if word not in CHATBOT_STOP_WORDS]
+    if not keywords:
+        keywords = tokens
+
     scored_matches = []
     for product in products:
         searchable = chatbot_search_text(product)
@@ -344,16 +378,59 @@ def search_products_for_chat(query, products):
     return [product for _, product in scored_matches[:5]]
 
 
+def chat_has_word(query, words):
+    tokens = chat_tokens(query)
+    return any(word in tokens for word in words)
+
+
+def chat_has_phrase(query, phrases):
+    normalized = str(query).lower()
+    return any(phrase in normalized for phrase in phrases)
+
+
 def build_chatbot_reply(query, products):
+    cleaned_query = str(query).lower().strip()
+
+    if chat_has_word(cleaned_query, ["hi", "hello", "hey"]):
+        return (
+            "Hi! 👋 I’m the Elite Medical assistant.\n"
+            "I can help you find products from our catalog or guide you to request a quote.\n\n"
+            "You can ask things like:\n"
+            "- Do you have hydrocolloid dressing?\n"
+            "- Show me bandage products\n"
+            "- I need respiratory products"
+        )
+
+    if chat_has_phrase(cleaned_query, ["thank you"]) or chat_has_word(cleaned_query, ["thanks"]):
+        return (
+            "You're welcome! 😊\n"
+            "Let me know if you need help finding any medical products."
+        )
+
+    if chat_has_phrase(cleaned_query, ["what can you do", "how to use"]) or chat_has_word(
+        cleaned_query, ["help"]
+    ):
+        return (
+            "I can help you:\n"
+            "- Search products by name or category\n"
+            "- Find REF codes and specifications\n"
+            "- Guide you to request a quote\n\n"
+            "Try asking:\n"
+            "'Show me medical dressing'\n"
+            "or\n"
+            "'I need bandage products'"
+        )
+
     matches = search_products_for_chat(query, products)
     if not matches:
         return (
-            "I could not find an exact match in the catalog. Please contact our team "
-            "for sourcing support.\n\n"
-            "Email: info@elitemedline.com\n"
-            "Website: www.elitemedline.com\n\n"
-            "You can also submit a quote request through the Contact page.\n\n"
-            "Try searching: dressing, bandage, respiratory"
+            "I couldn’t find an exact match in our catalog.\n\n"
+            "You can try:\n"
+            "- dressing\n"
+            "- bandage\n"
+            "- respiratory\n\n"
+            "Or contact our team for sourcing support:\n"
+            "info@elitemedline.com"
         )
 
     lines = ["Here are matching products from the Elite Medical catalog:"]
