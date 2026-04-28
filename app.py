@@ -1132,6 +1132,115 @@ st.markdown(
         font-size: .84rem;
         line-height: 1.34;
     }}
+    .buyer-flow-section,
+    .support-section {{
+        max-width: 1120px;
+        margin: 1.05rem auto;
+    }}
+    .compact-section-title {{
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: .85rem;
+    }}
+    .compact-section-title span {{
+        color: {GREEN};
+        font-size: .76rem;
+        font-weight: 950;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+    }}
+    .compact-section-title h2 {{
+        color: {DARK};
+        font-size: 1.45rem;
+        line-height: 1.16;
+        margin: .12rem 0 0;
+    }}
+    .compact-section-title p {{
+        max-width: 420px;
+        color: {MUTED};
+        font-size: .9rem;
+        line-height: 1.45;
+        margin: 0;
+    }}
+    .work-steps {{
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .75rem;
+        position: relative;
+    }}
+    .work-step {{
+        position: relative;
+        border: 1px solid #dcefe5;
+        border-radius: 16px;
+        background: linear-gradient(180deg, #ffffff 0%, #f6fcf9 100%);
+        padding: .95rem .85rem .9rem;
+        box-shadow: 0 10px 26px rgba(17, 132, 87, .07);
+        min-height: 126px;
+    }}
+    .work-step:not(:last-child)::after {{
+        content: "";
+        position: absolute;
+        top: 33px;
+        right: -.75rem;
+        width: .75rem;
+        height: 2px;
+        background: #bfe4d0;
+    }}
+    .step-number {{
+        width: 38px;
+        height: 38px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: {GREEN};
+        color: #ffffff;
+        font-weight: 950;
+        margin-bottom: .65rem;
+        box-shadow: 0 8px 18px rgba(17, 132, 87, .2);
+    }}
+    .work-step strong,
+    .support-card strong {{
+        display: block;
+        color: {DARK};
+        font-size: .98rem;
+        line-height: 1.2;
+        margin-bottom: .28rem;
+    }}
+    .work-step span,
+    .support-card span {{
+        display: block;
+        color: {MUTED};
+        font-size: .84rem;
+        line-height: 1.38;
+    }}
+    .support-grid {{
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .75rem;
+    }}
+    .support-card {{
+        border: 1px solid #e0eee6;
+        border-radius: 16px;
+        background: #ffffff;
+        padding: .95rem .85rem;
+        min-height: 138px;
+        box-shadow: 0 10px 26px rgba(37, 48, 43, .06);
+    }}
+    .support-icon {{
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e8f7ee;
+        color: {GREEN};
+        font-weight: 950;
+        margin-bottom: .7rem;
+    }}
     .quick-rfq, .export-section {{
         max-width: 1120px;
         margin: 1rem auto;
@@ -1916,6 +2025,18 @@ st.markdown(
         .feature-grid {{
             grid-template-columns: 1fr;
         }}
+        .compact-section-title {{
+            align-items: flex-start;
+            flex-direction: column;
+            gap: .35rem;
+        }}
+        .work-steps,
+        .support-grid {{
+            grid-template-columns: 1fr;
+        }}
+        .work-step:not(:last-child)::after {{
+            display: none;
+        }}
         .about-hero {{
             min-height: 320px;
             padding: 0 1.25rem;
@@ -2125,6 +2246,80 @@ if page == "home":
                 <strong>One-stop Medical Sourcing</strong>
                 <span>Product sourcing and quotation support for procurement teams.</span>
               </div>
+            </div>
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <section class="buyer-flow-section">
+          <div class="compact-section-title">
+            <div>
+              <span>Buyer Process</span>
+              <h2>How We Work With Buyers</h2>
+            </div>
+            <p>A clear sourcing workflow helps purchasing teams move from inquiry to shipment with fewer delays.</p>
+          </div>
+          <div class="work-steps">
+            <div class="work-step">
+              <div class="step-number">1</div>
+              <strong>Send Inquiry</strong>
+              <span>Share product requirements, REF codes, market needs, and expected quantity.</span>
+            </div>
+            <div class="work-step">
+              <div class="step-number">2</div>
+              <strong>Confirm Specifications</strong>
+              <span>Our team checks size, material, packaging, certification, and sourcing details.</span>
+            </div>
+            <div class="work-step">
+              <div class="step-number">3</div>
+              <strong>Sample &amp; Approval</strong>
+              <span>Review samples or documentation before confirming the purchase order.</span>
+            </div>
+            <div class="work-step">
+              <div class="step-number">4</div>
+              <strong>Production &amp; Delivery</strong>
+              <span>Coordinate production, inspection, export documents, and shipment support.</span>
+            </div>
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <section class="support-section">
+          <div class="compact-section-title">
+            <div>
+              <span>B2B Support</span>
+              <h2>Who We Support</h2>
+            </div>
+            <p>Built for buyers who need dependable medical product sourcing and responsive quotation support.</p>
+          </div>
+          <div class="support-grid">
+            <div class="support-card">
+              <div class="support-icon">D</div>
+              <strong>Medical Distributors</strong>
+              <span>Catalog sourcing, repeat supply, and documentation support for distributor programs.</span>
+            </div>
+            <div class="support-card">
+              <div class="support-icon">H</div>
+              <strong>Hospitals &amp; Clinics</strong>
+              <span>Practical product options for routine medical consumables and care supplies.</span>
+            </div>
+            <div class="support-card">
+              <div class="support-icon">P</div>
+              <strong>Procurement Teams</strong>
+              <span>Clear specifications and quotation support for comparison and approval workflows.</span>
+            </div>
+            <div class="support-card">
+              <div class="support-icon">I</div>
+              <strong>Importers &amp; Wholesalers</strong>
+              <span>Export-focused coordination for bulk orders, packaging needs, and market supply.</span>
             </div>
           </div>
         </section>
