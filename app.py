@@ -1192,7 +1192,8 @@ st.markdown(
     }}
     .export-map-section {{
         max-width: 1200px;
-        margin: 48px auto;
+        width: 100%;
+        margin: 40px auto;
         padding: 0;
     }}
     .export-map-section img {{
@@ -1201,8 +1202,6 @@ st.markdown(
         object-fit: contain;
         display: block;
         margin: 0 auto;
-        border-radius: 16px;
-        box-shadow: 0 18px 42px rgba(37, 48, 43, .12);
     }}
     .market-grid {{
         display: grid;
