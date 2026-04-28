@@ -279,34 +279,29 @@ def render_section_heading(kicker, title, body=""):
 
 
 def render_trust_section():
+    first_image = about_background
+    second_image = inner_company_image
+    image_html = "".join(
+        f'<img src="{image}" alt="Elite Medical production and company environment">'
+        for image in [first_image, second_image]
+        if image
+    )
     st.markdown(
         f"""
-        <section class="trust-section">
-          <div class="trust-heading">
-            <span>Why Choose Us</span>
-            <h2>Reliable B2B Medical Supply Partner</h2>
+        <section class="why-elite-section">
+          <div class="why-elite-copy">
+            <span>Why Choose Elite Medical</span>
+            <h2>Reliable manufacturing and export support for medical buyers.</h2>
+            <p>
+              Elite Medical combines medical product manufacturing experience,
+              practical sourcing support, and export-focused service for B2B
+              distributors, hospitals, and procurement teams. Our team helps buyers
+              move from product selection to quotation and documentation with clear
+              communication and quality-minded supply coordination.
+            </p>
           </div>
-          <div class="premium-trust-grid">
-            <div class="premium-trust-card">
-              <img src="{experience_icon}" alt="10+ Years Experience">
-              <strong>10+ Years Experience</strong>
-              <span>Experienced medical product manufacturing and export support.</span>
-            </div>
-            <div class="premium-trust-card">
-              <img src="{ce_icon}" alt="CE Approved">
-              <strong>CE Approved</strong>
-              <span>Documentation support for CE approved product sourcing.</span>
-            </div>
-            <div class="premium-trust-card">
-              <img src="{iso_icon}" alt="ISO13485:2016 Certified">
-              <strong>ISO13485:2016 Certified</strong>
-              <span>Certified quality management and facility support.</span>
-            </div>
-            <div class="premium-trust-card">
-              <img src="{service_icon}" alt="One-stop Medical Sourcing">
-              <strong>One-stop Medical Sourcing</strong>
-              <span>Efficient sourcing support for distributors and procurement teams.</span>
-            </div>
+          <div class="why-elite-images">
+            {image_html}
           </div>
         </section>
         """,
@@ -316,15 +311,17 @@ def render_trust_section():
 
 def render_export_markets_section(show_map=False):
     map_image = image_data_uri(EXPORT_MAP_PATH) if show_map else ""
-    map_html = (
-        f"""
-          <div class="export-map-wrap">
-            <img src="{map_image}" alt="Global export markets map">
-          </div>
-        """
-        if map_image
-        else ""
-    )
+    if map_image:
+        st.markdown(
+            f"""
+            <section class="export-map-section">
+              <img src="{map_image}" alt="Elite Medical export markets map">
+            </section>
+            """,
+            unsafe_allow_html=True,
+        )
+        return
+
     st.markdown(
         f"""
         <section class="export-section">
@@ -342,7 +339,6 @@ def render_export_markets_section(show_map=False):
             <div>Southeast Asia</div>
             <div>North America</div>
           </div>
-          {map_html}
         </section>
         """,
         unsafe_allow_html=True,
@@ -878,22 +874,32 @@ st.markdown(
         display: none;
     }}
     div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] {{
-        margin: 1.8rem calc(50% - 50vw) 1rem;
+        margin: 1.55rem calc(50% - 50vw) 1rem;
         padding: 0 max(1.5rem, calc((100vw - 1120px) / 2));
         background: #ffffff;
         border-bottom: 1px solid #e2eee8;
         box-shadow: 0 12px 32px rgba(37, 48, 43, .08);
         position: relative;
         z-index: 20;
-        min-height: 86px;
+        min-height: 80px;
         display: flex !important;
         align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }}
+    div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {{
+        display: flex;
+        align-items: center;
+        min-height: 80px;
+    }}
+    div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] > div[data-testid="column"] > div {{
+        width: 100%;
     }}
     .brand-static {{
         display: flex;
         align-items: center;
         gap: .7rem;
-        min-height: 72px;
+        min-height: 80px;
     }}
     .brand-static img {{
         width: 62px;
@@ -908,7 +914,7 @@ st.markdown(
         white-space: nowrap;
     }}
     div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button {{
-        min-height: 46px;
+        min-height: 42px;
         border: 0;
         border-radius: 0;
         background: transparent;
@@ -1097,7 +1103,7 @@ st.markdown(
         font-size: .84rem;
         line-height: 1.34;
     }}
-    .trust-section, .quick-rfq, .export-section {{
+    .quick-rfq, .export-section {{
         max-width: 1120px;
         margin: 1rem auto;
         border-radius: 18px;
@@ -1105,64 +1111,45 @@ st.markdown(
         background: #ffffff;
         box-shadow: 0 12px 34px rgba(17, 132, 87, .08);
     }}
-    .trust-section {{
-        padding: 1rem;
-        background:
-            linear-gradient(135deg, #ffffff 0%, #f3fbf6 100%);
+    .why-elite-section {{
+        max-width: 1120px;
+        margin: 1.05rem auto;
+        display: grid;
+        grid-template-columns: minmax(0, .95fr) minmax(420px, 1.05fr);
+        gap: 1.1rem;
+        align-items: center;
+        padding: .3rem 0;
     }}
-    .trust-heading {{
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        gap: 1rem;
-        margin-bottom: .75rem;
-        border-bottom: 1px solid #e5f3eb;
-        padding-bottom: .65rem;
-    }}
-    .trust-heading span, .export-section span, .quick-rfq-copy span {{
+    .why-elite-copy span, .export-section span, .quick-rfq-copy span {{
         color: {GREEN};
         font-size: .76rem;
         font-weight: 950;
         text-transform: uppercase;
         letter-spacing: .06em;
     }}
-    .trust-heading h2, .export-section h2, .quick-rfq-copy h2 {{
+    .why-elite-copy h2, .export-section h2, .quick-rfq-copy h2 {{
         color: {DARK};
         margin: .12rem 0 0;
         font-size: 1.38rem;
         line-height: 1.18;
     }}
-    .premium-trust-grid {{
+    .why-elite-copy p {{
+        color: {MUTED};
+        line-height: 1.6;
+        margin: .55rem 0 0;
+    }}
+    .why-elite-images {{
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: 1fr 1fr;
         gap: .75rem;
     }}
-    .premium-trust-card {{
-        min-height: 150px;
+    .why-elite-images img {{
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
         border-radius: 16px;
         border: 1px solid #dcefe5;
-        background: #ffffff;
-        padding: .9rem .75rem;
-        text-align: center;
-        box-shadow: 0 10px 24px rgba(17, 132, 87, .07);
-    }}
-    .premium-trust-card img {{
-        width: 56px;
-        height: 56px;
-        object-fit: contain;
-        margin-bottom: .55rem;
-    }}
-    .premium-trust-card strong {{
-        display: block;
-        color: {DARK};
-        font-size: .96rem;
-        line-height: 1.18;
-        margin-bottom: .28rem;
-    }}
-    .premium-trust-card span {{
-        color: {MUTED};
-        font-size: .82rem;
-        line-height: 1.35;
+        box-shadow: 0 12px 28px rgba(37, 48, 43, .12);
     }}
     .quick-rfq {{
         padding: .95rem;
@@ -1201,6 +1188,18 @@ st.markdown(
         margin: .4rem 0 0;
         line-height: 1.5;
     }}
+    .export-map-section {{
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0;
+    }}
+    .export-map-section img {{
+        width: 100%;
+        max-height: 350px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+    }}
     .market-grid {{
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -1215,22 +1214,6 @@ st.markdown(
         font-weight: 900;
         text-align: center;
         box-shadow: 0 8px 20px rgba(17, 132, 87, .06);
-    }}
-    .export-map-wrap {{
-        grid-column: 1 / -1;
-        margin-top: .25rem;
-        border-radius: 16px;
-        border: 1px solid #dcefe5;
-        background: #ffffff;
-        padding: .55rem;
-        overflow: hidden;
-    }}
-    .export-map-wrap img {{
-        width: 100%;
-        max-height: 330px;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto;
     }}
     .about-hero {{
         min-height: 370px;
@@ -1801,7 +1784,7 @@ st.markdown(
             min-height: 38px;
             font-size: .9rem;
         }}
-        .stat-grid, .company-layout, .about-grid, .about-card-grid, .certificate-grid, .premium-trust-grid, .export-section {{
+        .stat-grid, .company-layout, .about-grid, .about-card-grid, .certificate-grid, .why-elite-section, .why-elite-images, .export-section {{
             grid-template-columns: 1fr;
         }}
         .market-grid {{
