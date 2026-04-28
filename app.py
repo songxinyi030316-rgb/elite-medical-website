@@ -162,9 +162,12 @@ def render_product_card(product):
     with st.container():
         st.markdown('<div class="product-shell">', unsafe_allow_html=True)
         if product.get("image"):
-            st.image(product["image"], width=145)
+            try:
+                st.image(product["image"], width=150)
+            except Exception:
+                st.markdown('<span class="no-image">No image</span>', unsafe_allow_html=True)
         else:
-            st.markdown('<div class="image-placeholder">No image available</div>', unsafe_allow_html=True)
+            st.markdown('<span class="no-image">No image</span>', unsafe_allow_html=True)
 
         st.markdown(
             f"""
@@ -348,32 +351,31 @@ st.markdown(
         margin-top: .35rem;
     }}
     .product-shell {{
-        padding: .85rem;
-        margin-bottom: .85rem;
-        min-height: 360px;
+        padding: .78rem;
+        margin-bottom: .7rem;
         background: #ffffff;
     }}
     .product-shell img {{
-        max-height: 126px;
+        max-height: 118px;
         object-fit: contain;
     }}
-    .image-placeholder {{
-        display: grid;
-        place-items: center;
-        width: 145px;
-        height: 110px;
+    .no-image {{
+        display: inline-block;
         background: #f2f8f4;
         color: {MUTED};
-        border-radius: 10px;
+        border-radius: 999px;
         border: 1px dashed #bddfc9;
-        font-size: .85rem;
+        font-size: .78rem;
+        font-weight: 800;
+        padding: .18rem .55rem;
+        margin-bottom: .35rem;
     }}
     .product-name {{
         color: {DARK};
         font-weight: 900;
         line-height: 1.2;
-        min-height: 46px;
-        margin-top: .4rem;
+        min-height: 42px;
+        margin-top: .28rem;
     }}
     .product-category {{
         color: {MUTED};
