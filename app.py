@@ -6,6 +6,8 @@ import streamlit as st
 
 ROOT = Path(__file__).parent
 DATA_PATH = ROOT / "data" / "products.json"
+HERO_IMAGE = "/public/hero/cover.png"
+HERO_IMAGE_PATH = ROOT / HERO_IMAGE.lstrip("/")
 
 GREEN = "#118457"
 DARK = "#25302b"
@@ -446,7 +448,6 @@ st.markdown(
 
 products = load_products()
 counts = category_counts(products)
-hero_images = [product["image"] for product in products if product.get("image")][:4]
 
 if "product_category" not in st.session_state:
     st.session_state.product_category = "All Categories"
@@ -503,11 +504,11 @@ with home_tab:
         )
     with hero_right:
         st.markdown('<div class="hero-visual">', unsafe_allow_html=True)
-        st.markdown('<div class="visual-note">Product families from the 2025 brochure</div>', unsafe_allow_html=True)
-        image_cols = st.columns(2)
-        for index, image in enumerate(hero_images):
-            with image_cols[index % 2]:
-                st.image(image, use_container_width=True)
+        st.markdown('<div class="visual-note">Elite Medical product showcase</div>', unsafe_allow_html=True)
+        if HERO_IMAGE_PATH.exists():
+            st.image(str(HERO_IMAGE_PATH), use_container_width=True)
+        else:
+            st.markdown(f"<strong>{HERO_IMAGE}</strong>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
     render_section_heading("Company Introduction", "Elite Medical (Nanjing) Co., Ltd.")
