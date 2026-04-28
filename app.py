@@ -179,6 +179,7 @@ def set_product_category(category):
 
 def toggle_compare_product(product_id):
     selected = list(st.session_state.get("compare_products", []))
+    st.session_state.show_compare_table = False
     if product_id in selected:
         selected.remove(product_id)
         st.session_state.compare_notice = ""
@@ -445,39 +446,87 @@ def render_compare_panel(products):
         for product_id in selected_ids
         if product_id in product_lookup
     ]
+    selected_count = len(selected_products)
 
-    st.markdown(
-        f"""
-        <div class="compare-bar">
-          <strong>Product Compare</strong>
-          <span>{len(selected_products)} / 3 selected</span>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    if st.session_state.get("compare_notice"):
-        st.warning(st.session_state.compare_notice)
-
-    if st.button(
-        "Compare Selected Products",
-        width="stretch",
-        disabled=not selected_products,
-        key="compare_selected_products_button",
-    ):
-        st.session_state.show_compare_table = True
-
-    if st.session_state.get("show_compare_table") and selected_products:
-        st.table(
-            [
-                {
-                    "Product name": product["name"],
-                    "Category": product["category"],
-                    "Number of variants": len(product.get("variants", [])),
-                    "Sample REF codes": product_sample_refs(product),
-                }
-                for product in selected_products
-            ]
+    st.markdown('<span class="compare-panel-marker"></span>', unsafe_allow_html=True)
+    with st.container():
+        st.markdown(
+            f"""
+            <div class="compare-panel-header">
+              <div>
+                <h2>Product Compare</h2>
+                <p>Select up to 3 products to compare specifications and REF codes.</p>
+              </div>
+              <span>{selected_count} / 3 selected</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
+
+        if st.session_state.get("compare_notice"):
+            st.warning(st.session_state.compare_notice)
+
+        if not selected_products:
+            st.markdown(
+                """
+                <div class="compare-empty">
+                  No products selected yet. Use the compare button on product cards below.
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+        else:
+            chip_columns = st.columns(min(3, selected_count))
+            for column, product in zip(chip_columns, selected_products):
+                with column:
+                    st.markdown(
+                        f"""
+                        <div class="compare-chip">
+                          <strong>{html.escape(product["name"])}</strong>
+                          <span>{html.escape(product["category"])}</span>
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+                    st.button(
+                        "Remove",
+                        key=f"remove_compare_{product['id']}",
+                        width="stretch",
+                        on_click=toggle_compare_product,
+                        args=(product["id"],),
+                    )
+
+        can_compare = selected_count >= 2
+        action_col, helper_col = st.columns([.9, 1.6])
+        with action_col:
+            if st.button(
+                "Compare Selected Products",
+                width="stretch",
+                type="primary" if can_compare else "secondary",
+                disabled=not can_compare,
+                key="compare_selected_products_button",
+            ):
+                st.session_state.show_compare_table = True
+        with helper_col:
+            if not can_compare:
+                st.markdown(
+                    '<div class="compare-helper">Select at least 2 products to compare.</div>',
+                    unsafe_allow_html=True,
+                )
+
+        if st.session_state.get("show_compare_table") and can_compare:
+            st.markdown('<div class="compare-result-title">Comparison Results</div>', unsafe_allow_html=True)
+            st.table(
+                [
+                    {
+                        "Product": product["name"],
+                        "Category": product["category"],
+                        "Variants": len(product.get("variants", [])),
+                        "Sample REF Codes": product_sample_refs(product),
+                    }
+                    for product in selected_products
+                ]
+            )
 
 
 def render_product_card(product, card_index=0):
@@ -511,7 +560,9 @@ def render_product_card(product, card_index=0):
             args=(product["name"],),
         )
         selected_for_compare = product["id"] in st.session_state.get("compare_products", [])
-        compare_label = "Remove from Compare" if selected_for_compare else "Add to Compare"
+        compare_label = "Selected for Compare" if selected_for_compare else "Add to Compare"
+        compare_marker_class = "product-compare-button-marker selected" if selected_for_compare else "product-compare-button-marker"
+        st.markdown(f'<span class="{compare_marker_class}"></span>', unsafe_allow_html=True)
         st.button(
             compare_label,
             key=f"compare_{card_index}_{product['id']}",
@@ -874,37 +925,41 @@ st.markdown(
         display: none;
     }}
     div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] {{
-        margin: 1.55rem calc(50% - 50vw) 1rem;
-        padding: 0 max(1.5rem, calc((100vw - 1120px) / 2));
+        height: 96px;
+        margin: 1.25rem calc(50% - 50vw) 1rem;
+        padding: 0 72px;
         background: #ffffff;
         border-bottom: 1px solid #e2eee8;
         box-shadow: 0 12px 32px rgba(37, 48, 43, .08);
         position: relative;
         z-index: 20;
-        min-height: 80px;
         display: flex !important;
         align-items: center;
         justify-content: space-between;
-        gap: 1rem;
+        gap: 24px;
     }}
     div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {{
         display: flex;
         align-items: center;
-        min-height: 80px;
+        height: 96px;
     }}
     div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] > div[data-testid="column"] > div {{
         width: 100%;
+        display: flex;
+        align-items: center;
     }}
     .brand-static {{
         display: flex;
         align-items: center;
-        gap: .7rem;
-        min-height: 80px;
+        gap: 18px;
+        height: 96px;
+        line-height: 1;
     }}
     .brand-static img {{
-        width: 62px;
-        height: 62px;
+        width: auto;
+        height: 54px;
         object-fit: contain;
+        display: block;
     }}
     .brand-static span {{
         color: {DARK};
@@ -912,6 +967,7 @@ st.markdown(
         font-weight: 950;
         letter-spacing: .04em;
         white-space: nowrap;
+        line-height: 1;
     }}
     div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button {{
         min-height: 42px;
@@ -923,7 +979,11 @@ st.markdown(
         font-size: .98rem;
         font-weight: 900;
         box-shadow: none;
-        padding: .35rem .1rem;
+        padding: 0 .1rem;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }}
     div[data-testid="element-container"]:has(.site-header-marker) + div[data-testid="stHorizontalBlock"] div.stButton > button:hover {{
         color: {GREEN} !important;
@@ -1190,15 +1250,17 @@ st.markdown(
     }}
     .export-map-section {{
         max-width: 1200px;
-        margin: 40px auto;
+        margin: 48px auto;
         padding: 0;
     }}
     .export-map-section img {{
         width: 100%;
-        max-height: 350px;
+        height: auto;
         object-fit: contain;
         display: block;
         margin: 0 auto;
+        border-radius: 16px;
+        box-shadow: 0 18px 42px rgba(37, 48, 43, .12);
     }}
     .market-grid {{
         display: grid;
@@ -1529,24 +1591,86 @@ st.markdown(
         font-weight: 900;
         font-size: .88rem;
     }}
-    .compare-bar {{
+    .compare-panel-marker {{
+        display: none;
+    }}
+    div[data-testid="element-container"]:has(.compare-panel-marker) + div[data-testid="stVerticalBlock"] {{
+        margin: .9rem 0 1.35rem;
+        padding: 1rem;
+        border-radius: 18px;
+        border: 1px solid #cfead9;
+        background: linear-gradient(135deg, #edf9f3 0%, #ffffff 72%);
+        box-shadow: 0 14px 32px rgba(17, 132, 87, .08);
+    }}
+    .compare-panel-header {{
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
-        gap: .75rem;
-        margin: .65rem 0 .45rem;
-        padding: .68rem .8rem;
-        border-radius: 14px;
-        border: 1px solid #dcefe5;
-        background: #f8fdf9;
+        gap: 1rem;
+        margin-bottom: .75rem;
+        padding-bottom: .7rem;
+        border-bottom: 1px solid #dcefe5;
     }}
-    .compare-bar strong {{
+    .compare-panel-header h2 {{
         color: {DARK};
+        font-size: 1.28rem;
+        line-height: 1.15;
+        margin: 0 0 .2rem;
     }}
-    .compare-bar span {{
+    .compare-panel-header p {{
+        color: {MUTED};
+        font-size: .92rem;
+        margin: 0;
+    }}
+    .compare-panel-header span {{
+        flex: 0 0 auto;
         color: {GREEN};
-        font-weight: 900;
+        background: #ffffff;
+        border: 1px solid #cfead9;
+        border-radius: 999px;
+        padding: .32rem .7rem;
+        font-weight: 950;
         font-size: .86rem;
+        box-shadow: 0 8px 18px rgba(17, 132, 87, .07);
+    }}
+    .compare-empty {{
+        border-radius: 14px;
+        border: 1px dashed #bddfc9;
+        background: rgba(255,255,255,.72);
+        color: {MUTED};
+        font-size: .92rem;
+        padding: .75rem;
+        margin: .35rem 0 .75rem;
+    }}
+    .compare-chip {{
+        min-height: 76px;
+        border: 1px solid #dcefe5;
+        border-radius: 14px;
+        background: #ffffff;
+        padding: .65rem .7rem;
+        box-shadow: 0 8px 20px rgba(17, 132, 87, .06);
+    }}
+    .compare-chip strong {{
+        display: block;
+        color: {DARK};
+        font-size: .9rem;
+        line-height: 1.22;
+        margin-bottom: .25rem;
+    }}
+    .compare-chip span {{
+        color: {MUTED};
+        font-size: .82rem;
+    }}
+    .compare-helper {{
+        color: {MUTED};
+        font-size: .9rem;
+        padding-top: .5rem;
+    }}
+    .compare-result-title {{
+        margin: .9rem 0 .45rem;
+        color: {DARK};
+        font-weight: 950;
+        font-size: 1rem;
     }}
     .sidebar-category-list {{
         border-top: 1px solid #dcefe5;
@@ -1583,6 +1707,29 @@ st.markdown(
         background: #128b59;
         border-color: #128b59;
         color: #ffffff;
+    }}
+    .product-compare-button-marker {{
+        display: none;
+    }}
+    div[data-testid="element-container"]:has(.product-compare-button-marker) + div[data-testid="element-container"] div.stButton > button {{
+        min-height: 32px;
+        margin-top: .42rem;
+        background: #ffffff;
+        border: 1px solid #cfead9;
+        color: {DARK};
+        box-shadow: none;
+        font-size: .82rem;
+        font-weight: 850;
+    }}
+    div[data-testid="element-container"]:has(.product-compare-button-marker) + div[data-testid="element-container"] div.stButton > button:hover {{
+        background: #f4fbf7;
+        border-color: {GREEN};
+        color: {GREEN};
+    }}
+    div[data-testid="element-container"]:has(.product-compare-button-marker.selected) + div[data-testid="element-container"] div.stButton > button {{
+        background: #eaf8f0;
+        border-color: {GREEN};
+        color: {GREEN};
     }}
     .product-shell div[data-testid="stImage"] {{
         display: flex;
