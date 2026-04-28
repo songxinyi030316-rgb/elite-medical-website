@@ -136,10 +136,6 @@ def matches_search(product, query):
     return query.lower().strip() in searchable
 
 
-def set_category(category):
-    st.session_state.product_category = category
-
-
 def reset_filters():
     st.session_state.product_category = "All Categories"
     st.session_state.product_search = ""
@@ -350,6 +346,24 @@ st.markdown(
         font-weight: 850;
         margin-top: .35rem;
     }}
+    .sidebar-category-list {{
+        border-top: 1px solid #dcefe5;
+        margin-top: .8rem;
+        padding-top: .6rem;
+    }}
+    .sidebar-category-row {{
+        display: flex;
+        justify-content: space-between;
+        gap: .6rem;
+        padding: .22rem 0;
+        color: {DARK};
+        font-size: .9rem;
+        border-bottom: 1px solid #edf6f1;
+    }}
+    .sidebar-category-row span:last-child {{
+        color: {GREEN};
+        font-weight: 850;
+    }}
     .product-shell {{
         padding: .78rem;
         margin-bottom: .7rem;
@@ -439,6 +453,31 @@ if "product_category" not in st.session_state:
 if "product_search" not in st.session_state:
     st.session_state.product_search = ""
 
+st.sidebar.header("Product Navigation")
+st.sidebar.selectbox(
+    "Category filter",
+    ["All Categories", *CORE_CATEGORIES],
+    key="product_category",
+)
+st.sidebar.text_input(
+    "Search by product name or REF code",
+    key="product_search",
+)
+st.sidebar.button("Reset filter", on_click=reset_filters)
+st.sidebar.markdown("**Categories**")
+st.sidebar.markdown('<div class="sidebar-category-list">', unsafe_allow_html=True)
+for category in CORE_CATEGORIES:
+    st.sidebar.markdown(
+        f"""
+        <div class="sidebar-category-row">
+          <span>{category}</span>
+          <span>{counts.get(category, 0)}</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+st.sidebar.markdown("</div>", unsafe_allow_html=True)
+
 home_tab, products_tab, contact_tab = st.tabs(["Home", "Products", "Contact"])
 
 with home_tab:
@@ -500,46 +539,13 @@ with home_tab:
 
 with products_tab:
     render_section_heading(
-        "Product categories",
-        "Browse Medical Product Families",
-        "Use category cards, search, and filters to review products from the brochure.",
+        "Product Catalog",
+        "Medical Product Catalog",
+        "Search and filter products from the sidebar, then open product details for specs and REF codes.",
     )
 
-    category_cols = st.columns(4)
-    for index, category in enumerate(CORE_CATEGORIES):
-        with category_cols[index % 4]:
-            st.markdown(
-                f"""
-                <div class="category-card">
-                  <strong>{category}</strong>
-                  <div class="category-count">{counts.get(category, 0)} products</div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-            st.button(
-                "Filter",
-                key=f"category_filter_{category}",
-                on_click=set_category,
-                args=(category,),
-            )
-
-    filter_left, filter_right, filter_reset = st.columns([1.1, 1.6, .75])
-    with filter_left:
-        selected_category = st.selectbox(
-            "Category filter",
-            ["All Categories", *CORE_CATEGORIES],
-            key="product_category",
-        )
-    with filter_right:
-        search_query = st.text_input(
-            "Search by product name or REF code",
-            key="product_search",
-        )
-    with filter_reset:
-        st.write("")
-        st.write("")
-        st.button("Reset", on_click=reset_filters)
+    selected_category = st.session_state.product_category
+    search_query = st.session_state.product_search
 
     filtered_products = [
         product
