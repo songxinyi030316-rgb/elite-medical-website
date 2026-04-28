@@ -1,11 +1,21 @@
+import Link from "next/link";
+
 export default function ProductCard({ product }) {
   return (
-    <article className="product-card">
-      <div>
-        <h2>{product.name}</h2>
+    <article className="product-card" aria-label={product.name}>
+      <div className="product-image">
+        <img src={product.image} alt="" />
+      </div>
+
+      <div className="product-card-body">
+        <p className="product-category">{product.category}</p>
+        <h3>{product.name}</h3>
         <p>{product.description}</p>
       </div>
-      <strong>${product.price.toFixed(2)}</strong>
+
+      <Link className="text-link" href={`/products/${product.id}`}>
+        View product
+      </Link>
     </article>
   );
 }
