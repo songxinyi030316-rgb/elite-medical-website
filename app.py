@@ -1,4 +1,5 @@
 import base64
+import html
 import json
 from pathlib import Path
 
@@ -154,6 +155,31 @@ def navigate_to(page):
     st.session_state.current_page = page
 
 
+def open_chatbot():
+    st.session_state.chatbot_open = True
+
+
+def close_chatbot():
+    st.session_state.chatbot_open = False
+
+
+def add_chatbot_query(query, products):
+    cleaned_query = str(query).strip()
+    if not cleaned_query:
+        return
+
+    st.session_state.chatbot_open = True
+    st.session_state.chatbot_history.append({"role": "user", "content": cleaned_query})
+    st.session_state.chatbot_history.append(
+        {"role": "bot", "content": build_chatbot_reply(cleaned_query, products)}
+    )
+    st.session_state.chatbot_input = ""
+
+
+def send_current_chatbot_query(products):
+    add_chatbot_query(st.session_state.get("chatbot_input", ""), products)
+
+
 def image_data_uri(path):
     if not path.exists():
         return ""
@@ -207,6 +233,144 @@ def category_counts(products):
         category: sum(1 for product in products if product["category"] == category)
         for category in CORE_CATEGORIES
     }
+
+
+def variant_summary(product):
+    variants = product.get("variants", [])
+    if not variants:
+        return "REF/spec: needs review"
+
+    summaries = []
+    for variant in variants[:2]:
+        ref = str(variant.get("ref", "needs_review"))
+        spec = str(variant.get("spec", "needs_review"))
+        summaries.append(f"{ref} - {spec}")
+
+    if len(variants) > 2:
+        summaries.append(f"+{len(variants) - 2} more variants")
+
+    return "REF/spec: " + "; ".join(summaries)
+
+
+def search_products_for_chat(query, products):
+    cleaned_query = str(query).lower().strip()
+    if not cleaned_query:
+        return []
+
+    matches = []
+    for product in products:
+        if matches_search(product, cleaned_query):
+            matches.append(product)
+        if len(matches) == 5:
+            break
+
+    return matches
+
+
+def build_chatbot_reply(query, products):
+    matches = search_products_for_chat(query, products)
+    if not matches:
+        return (
+            "I could not find an exact match in the catalog. Please contact our team "
+            "for sourcing support.\n\n"
+            "Email: info@elitemedline.com\n"
+            "Website: www.elitemedline.com\n\n"
+            "You can also submit a quote request through the Contact page."
+        )
+
+    lines = ["Here are matching products from the Elite Medical catalog:"]
+    for product in matches:
+        lines.append(
+            "\n".join(
+                [
+                    f"- {product['name']}",
+                    f"  Category: {product['category']}",
+                    f"  {variant_summary(product)}",
+                ]
+            )
+        )
+
+    return "\n\n".join(lines)
+
+
+def render_chat_message(message):
+    role = "user" if message.get("role") == "user" else "bot"
+    content = html.escape(str(message.get("content", ""))).replace("\n", "<br>")
+    st.markdown(
+        f'<div class="chat-message {role}">{content}</div>',
+        unsafe_allow_html=True,
+    )
+
+
+def render_chatbot(products):
+    if "chatbot_open" not in st.session_state:
+        st.session_state.chatbot_open = False
+    if "chatbot_input" not in st.session_state:
+        st.session_state.chatbot_input = ""
+    if "chatbot_history" not in st.session_state:
+        st.session_state.chatbot_history = [
+            {
+                "role": "bot",
+                "content": "Hi! I can help you find products from the Elite Medical catalog.",
+            }
+        ]
+
+    if not st.session_state.chatbot_open:
+        st.markdown('<span class="chatbot-button-marker"></span>', unsafe_allow_html=True)
+        st.button("💬 Need help?", key="chatbot_open_button", on_click=open_chatbot)
+        return
+
+    st.markdown('<span class="chatbot-panel-marker"></span>', unsafe_allow_html=True)
+    with st.container():
+        st.markdown(
+            """
+            <div class="chatbot-title">
+              <strong>Elite Medical Assistant</strong>
+              <span>Local catalog search</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        for message in st.session_state.chatbot_history[-6:]:
+            render_chat_message(message)
+
+        st.markdown('<div class="chatbot-suggestions">Quick search</div>', unsafe_allow_html=True)
+        suggestion_row_1 = st.columns(3)
+        suggestion_row_2 = st.columns(2)
+        suggestions = [
+            ("Medical Dressing", suggestion_row_1[0]),
+            ("Bandage", suggestion_row_1[1]),
+            ("Respiratory", suggestion_row_1[2]),
+            ("Injection", suggestion_row_2[0]),
+            ("Laboratory", suggestion_row_2[1]),
+        ]
+        for suggestion, column in suggestions:
+            with column:
+                st.button(
+                    suggestion,
+                    key=f"chatbot_suggestion_{suggestion}",
+                    width="stretch",
+                    on_click=add_chatbot_query,
+                    args=(suggestion, products),
+                )
+
+        st.text_input(
+            "Search by product, category, or REF code",
+            key="chatbot_input",
+            placeholder="Example: dressing, EL010101, respiratory",
+        )
+        action_col_1, action_col_2 = st.columns([1, .72])
+        with action_col_1:
+            st.button(
+                "Send",
+                key="chatbot_send",
+                type="primary",
+                width="stretch",
+                on_click=send_current_chatbot_query,
+                args=(products,),
+            )
+        with action_col_2:
+            st.button("Close", key="chatbot_close", width="stretch", on_click=close_chatbot)
 
 
 hero_background = image_data_uri(HERO_IMAGE_PATH)
@@ -590,6 +754,87 @@ st.markdown(
         border-color: #0c6f49;
         color: #ffffff;
     }}
+    .chatbot-button-marker,
+    .chatbot-panel-marker {{
+        display: none;
+    }}
+    div[data-testid="element-container"]:has(.chatbot-button-marker) + div[data-testid="element-container"] {{
+        position: fixed;
+        right: 1.15rem;
+        bottom: 1.15rem;
+        z-index: 1000;
+        width: auto;
+    }}
+    div[data-testid="element-container"]:has(.chatbot-button-marker) + div[data-testid="element-container"] div.stButton > button {{
+        background: {GREEN};
+        color: #ffffff;
+        border: 1px solid #0e724b;
+        min-height: 44px;
+        padding: .45rem .9rem;
+        box-shadow: 0 14px 34px rgba(17, 132, 87, .28);
+    }}
+    div[data-testid="element-container"]:has(.chatbot-button-marker) + div[data-testid="element-container"] div.stButton > button:hover {{
+        background: #0c6f49;
+        color: #ffffff;
+    }}
+    div[data-testid="element-container"]:has(.chatbot-panel-marker) + div[data-testid="stVerticalBlock"] {{
+        position: fixed;
+        right: 1.15rem;
+        bottom: 1.15rem;
+        z-index: 1000;
+        width: min(370px, calc(100vw - 2rem));
+        max-height: min(76vh, 650px);
+        overflow-y: auto;
+        border: 1px solid #dcefe5;
+        border-radius: 18px;
+        background: #ffffff;
+        padding: .9rem;
+        box-shadow: 0 20px 60px rgba(37, 48, 43, .22);
+    }}
+    .chatbot-title {{
+        border-bottom: 1px solid #e5f2ea;
+        margin-bottom: .55rem;
+        padding-bottom: .5rem;
+    }}
+    .chatbot-title strong {{
+        display: block;
+        color: {DARK};
+        font-size: 1rem;
+    }}
+    .chatbot-title span {{
+        color: {MUTED};
+        font-size: .78rem;
+    }}
+    .chat-message {{
+        border-radius: 13px;
+        padding: .6rem .7rem;
+        margin: .45rem 0;
+        font-size: .86rem;
+        line-height: 1.4;
+    }}
+    .chat-message.bot {{
+        background: #effaf4;
+        color: {DARK};
+        border: 1px solid #d8efe2;
+    }}
+    .chat-message.user {{
+        background: {GREEN};
+        color: #ffffff;
+        margin-left: 2.5rem;
+    }}
+    .chatbot-suggestions {{
+        color: {GREEN};
+        font-weight: 900;
+        font-size: .78rem;
+        margin: .55rem 0 .25rem;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+    }}
+    div[data-testid="element-container"]:has(.chatbot-panel-marker) + div[data-testid="stVerticalBlock"] div.stButton > button {{
+        min-height: 34px;
+        padding: .2rem .5rem;
+        font-size: .78rem;
+    }}
     @media (max-width: 900px) {{
         .stat-grid, .company-layout {{
             grid-template-columns: 1fr;
@@ -613,6 +858,11 @@ st.markdown(
         }}
         .feature-grid {{
             grid-template-columns: 1fr;
+        }}
+        div[data-testid="element-container"]:has(.chatbot-panel-marker) + div[data-testid="stVerticalBlock"] {{
+            right: .75rem;
+            bottom: .75rem;
+            width: calc(100vw - 1.5rem);
         }}
     }}
     </style>
@@ -857,3 +1107,5 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+render_chatbot(products)
