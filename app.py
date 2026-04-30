@@ -6,6 +6,8 @@ from pathlib import Path
 import streamlit as st
 
 
+st.set_page_config(page_title="Elite Medical Product Catalog", layout="wide")
+
 ROOT = Path(__file__).parent
 DATA_PATH = ROOT / "data" / "products.json"
 HERO_IMAGE = "/public/hero/cover.png"
@@ -105,15 +107,46 @@ def title_case(value):
     return str(value).replace("  ", " ").strip().title()
 
 
+def existing_path(path):
+    try:
+        return path if path.exists() and path.is_file() else None
+    except OSError:
+        return None
+
+
+def resolve_asset_path(asset_path):
+    if asset_path is None:
+        return None
+
+    raw_value = str(asset_path).strip()
+    if not raw_value:
+        return None
+
+    repo_relative_path = ROOT / raw_value.lstrip("/")
+    if raw_value.startswith(("/public/", "public/")):
+        return existing_path(repo_relative_path)
+
+    try:
+        raw_path = Path(raw_value)
+    except (OSError, ValueError):
+        return None
+
+    if raw_path.is_absolute():
+        return existing_path(raw_path) or existing_path(repo_relative_path)
+
+    return existing_path(repo_relative_path)
+
+
 def image_path_for(product):
     image = str(product.get("image", "")).strip()
     if not image or image == "needs_review":
         return ""
 
-    image_path = ROOT / image.lstrip("/")
-    return str(image_path) if image_path.exists() else ""
+    image_path = resolve_asset_path(image)
+    return str(image_path) if image_path else ""
 
 
+@st.cache_data(show_spinner=False)
 def load_products():
     try:
         raw_products = json.loads(DATA_PATH.read_text(encoding="utf-8"))
@@ -230,12 +263,28 @@ def send_current_chatbot_query(products):
     add_chatbot_query(st.session_state.get("chatbot_input", ""), products)
 
 
+@st.cache_data(show_spinner=False)
 def image_data_uri(path):
-    if not path.exists():
+    image_path = resolve_asset_path(path)
+    if not image_path:
         return ""
 
-    encoded = base64.b64encode(path.read_bytes()).decode("ascii")
-    return f"data:image/png;base64,{encoded}"
+    try:
+        encoded = base64.b64encode(image_path.read_bytes()).decode("ascii")
+    except (OSError, ValueError):
+        return ""
+
+    suffix = image_path.suffix.lower().lstrip(".")
+    mime_type = "jpeg" if suffix in {"jpg", "jpeg"} else "png"
+    return f"data:image/{mime_type};base64,{encoded}"
+
+
+def html_image(data_uri, css_class="", alt=""):
+    if not data_uri:
+        return ""
+
+    class_attr = f' class="{html.escape(css_class)}"' if css_class else ""
+    return f'<img{class_attr} src="{data_uri}" alt="{html.escape(alt)}">'
 
 
 def product_image_path(product):
@@ -243,12 +292,7 @@ def product_image_path(product):
     if not image or image == "needs_review":
         return None
 
-    if image.startswith("/public/"):
-        path = ROOT / image.lstrip("/")
-    else:
-        raw_path = Path(image)
-        path = raw_path if raw_path.is_absolute() else ROOT / image.lstrip("/")
-    return path if path.exists() else None
+    return resolve_asset_path(image)
 
 
 def category_preview_images(products, categories, limit=3):
@@ -264,19 +308,6 @@ def category_preview_images(products, categories, limit=3):
         if len(images) >= limit:
             break
     return images
-
-
-def render_section_heading(kicker, title, body=""):
-    st.markdown(
-        f"""
-        <div class="section-heading">
-          <span>{kicker}</span>
-          <h2>{title}</h2>
-          {f"<p>{body}</p>" if body else ""}
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
 
 
 def render_export_markets_section(show_map=False):
@@ -339,63 +370,6 @@ def render_faq_section():
         st.write("Yes. Customization services are available for suitable products, packaging, and sourcing requirements.")
     with st.expander("How can I request a quotation?"):
         st.write("Use the Contact page or a product Contact Now button with product name, quantity, and target market.")
-
-
-def render_quick_rfq(form_key, compact_title="Quick Request a Quote"):
-    product_key = f"{form_key}_product"
-    if st.session_state.get("selected_product") and not st.session_state.get(product_key):
-        st.session_state[product_key] = st.session_state.selected_product
-
-    st.markdown('<span class="quick-rfq-marker"></span>', unsafe_allow_html=True)
-    with st.container():
-        st.markdown(
-            f"""
-            <div class="quick-rfq-copy">
-              <span>RFQ</span>
-              <h2>{compact_title}</h2>
-              <p>Send basic requirements and our team will follow up with product and quotation support.</p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-        with st.form(form_key):
-            name_col, email_col, company_col = st.columns(3)
-            with name_col:
-                name = st.text_input("Name", key=f"{form_key}_name")
-            with email_col:
-                email = st.text_input("Email", key=f"{form_key}_email")
-            with company_col:
-                company = st.text_input("Company", key=f"{form_key}_company")
-            product_col, quantity_col = st.columns([1.2, .8])
-            with product_col:
-                product = st.text_input(
-                    "Product of Interest",
-                    key=product_key,
-                    placeholder="Product name or REF code",
-                )
-            with quantity_col:
-                quantity = st.text_input(
-                    "Quantity",
-                    key=f"{form_key}_quantity",
-                    placeholder="e.g., 500 boxes / 10,000 pcs",
-                )
-            message = st.text_area(
-                "Message",
-                key=f"{form_key}_message",
-                placeholder="Share specifications, destination market, packaging, or certification needs.",
-                height=84,
-            )
-            submitted = st.form_submit_button("Submit Quick RFQ")
-        if submitted:
-            st.success("Thank you. Your quote request has been received.")
-            st.session_state.last_quick_rfq = {
-                "name": name,
-                "email": email,
-                "company": company,
-                "product": product,
-                "quantity": quantity,
-                "message": message,
-            }
 
 
 def product_sample_refs(product, limit=3):
@@ -500,10 +474,11 @@ def render_compare_panel(products):
 
 def render_product_card(product, card_index=0):
     image_path = product_image_path(product)
-    if image_path:
+    product_image = image_data_uri(image_path) if image_path else ""
+    if product_image:
         image_markup = (
             f'<div class="product-image-slot has-image">'
-            f'<img src="{image_data_uri(image_path)}" alt="{html.escape(product["name"])}">'
+            f'<img src="{product_image}" alt="{html.escape(product["name"])}">'
             f"</div>"
         )
     else:
@@ -572,23 +547,6 @@ def category_counts(products):
         category: sum(1 for product in products if product["category"] == category)
         for category in CORE_CATEGORIES
     }
-
-
-def variant_summary(product):
-    variants = product.get("variants", [])
-    if not variants:
-        return "REF/spec: needs review"
-
-    summaries = []
-    for variant in variants[:2]:
-        ref = str(variant.get("ref", "needs_review"))
-        spec = str(variant.get("spec", "needs_review"))
-        summaries.append(f"{ref} - {spec}")
-
-    if len(variants) > 2:
-        summaries.append(f"+{len(variants) - 2} more variants")
-
-    return "REF/spec: " + "; ".join(summaries)
 
 
 def sample_ref_summary(product):
@@ -879,8 +837,13 @@ iso_icon = image_data_uri(ISO_ICON_PATH)
 service_icon = image_data_uri(SERVICE_ICON_PATH)
 inner_company_image = image_data_uri(INNER_COMPANY_IMAGE_PATH)
 logo_image = image_data_uri(LOGO_PATH)
-
-st.set_page_config(page_title="Elite Medical Product Catalog", layout="wide")
+experience_icon_tag = html_image(experience_icon, "feature-icon-img", "10+ Years Experience")
+ce_icon_tag = html_image(ce_icon, "feature-icon-img", "CE Approved")
+iso_icon_tag = html_image(iso_icon, "feature-icon-img", "ISO13485:2016 Certified")
+service_icon_tag = html_image(service_icon, "feature-icon-img", "One-stop Medical Sourcing")
+about_image_tag = html_image(inner_company_image, "about-image", "Elite Medical team and office")
+if not about_image_tag:
+    about_image_tag = '<div class="about-image-placeholder">Company image unavailable</div>'
 
 st.markdown(
     f"""
@@ -1231,7 +1194,7 @@ st.markdown(
         font-weight: 950;
         margin-bottom: .7rem;
     }}
-    .quick-rfq, .export-section {{
+    .export-section {{
         max-width: 1120px;
         margin: 1rem auto;
         border-radius: 18px;
@@ -1239,42 +1202,18 @@ st.markdown(
         background: #ffffff;
         box-shadow: 0 12px 34px rgba(17, 132, 87, .08);
     }}
-    .export-section span, .quick-rfq-copy span {{
+    .export-section span {{
         color: {GREEN};
         font-size: .76rem;
         font-weight: 950;
         text-transform: uppercase;
         letter-spacing: .06em;
     }}
-    .export-section h2, .quick-rfq-copy h2 {{
+    .export-section h2 {{
         color: {DARK};
         margin: .12rem 0 0;
         font-size: 1.38rem;
         line-height: 1.18;
-    }}
-    .quick-rfq {{
-        padding: .95rem;
-        background: linear-gradient(135deg, #f4fbf7 0%, #ffffff 72%);
-    }}
-    .quick-rfq-marker {{
-        display: none;
-    }}
-    div[data-testid="element-container"]:has(.quick-rfq-marker) + div[data-testid="stVerticalBlock"] {{
-        max-width: 1120px;
-        margin: 1rem auto;
-        padding: .95rem;
-        border-radius: 18px;
-        border: 1px solid #dcefe5;
-        background: linear-gradient(135deg, #f4fbf7 0%, #ffffff 72%);
-        box-shadow: 0 12px 34px rgba(17, 132, 87, .08);
-    }}
-    .quick-rfq-copy {{
-        margin-bottom: .65rem;
-    }}
-    .quick-rfq-copy p {{
-        color: {MUTED};
-        margin: .22rem 0 0;
-        font-size: .9rem;
     }}
     .export-section {{
         display: grid;
@@ -1382,6 +1321,17 @@ st.markdown(
         border-radius: 18px;
         box-shadow: 0 18px 46px rgba(37, 48, 43, .16);
         border: 1px solid #dcefe5;
+    }}
+    .about-image-placeholder {{
+        min-height: 260px;
+        border-radius: 18px;
+        border: 1px dashed #bddfc9;
+        background: #f4fbf7;
+        color: {MUTED};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 850;
     }}
     .category-cloud {{
         display: flex;
@@ -2128,9 +2078,6 @@ if "compare_notice" not in st.session_state:
     st.session_state.compare_notice = ""
 if "show_compare_table" not in st.session_state:
     st.session_state.show_compare_table = False
-if "last_quick_rfq" not in st.session_state:
-    st.session_state.last_quick_rfq = {}
-
 logo_tag = f'<img src="{logo_image}" alt="Elite Medical logo">' if logo_image else ""
 st.markdown('<span class="site-header-marker"></span>', unsafe_allow_html=True)
 header_columns = st.columns([3.4, .82, 1.08, .98, .98])
@@ -2155,8 +2102,11 @@ for column, (page_slug, page_label) in zip(header_columns[1:], PAGES):
             args=(page_slug,),
         )
 
-if LOGO_PATH.exists():
-    st.sidebar.image(str(LOGO_PATH), width=150)
+if logo_image:
+    st.sidebar.markdown(
+        f'<img src="{logo_image}" alt="Elite Medical logo" style="max-width:150px;width:100%;height:auto;">',
+        unsafe_allow_html=True,
+    )
 
 if page == "products":
     st.sidebar.header("Product Navigation")
@@ -2256,22 +2206,22 @@ if page == "home":
             </div>
             <div class="feature-grid">
               <div class="feature-card">
-                <img class="feature-icon-img" src="{experience_icon}" alt="10+ Years Experience">
+                {experience_icon_tag}
                 <strong>10+ Years Experience</strong>
                 <span>Manufacturing and export support for medical product buyers.</span>
               </div>
               <div class="feature-card">
-                <img class="feature-icon-img" src="{ce_icon}" alt="CE Approved">
+                {ce_icon_tag}
                 <strong>CE Approved</strong>
                 <span>Product supply prepared for international medical markets.</span>
               </div>
               <div class="feature-card">
-                <img class="feature-icon-img" src="{iso_icon}" alt="ISO13485:2016 Certified">
+                {iso_icon_tag}
                 <strong>ISO13485:2016 Certified</strong>
                 <span>Certified facilities and quality management support.</span>
               </div>
               <div class="feature-card">
-                <img class="feature-icon-img" src="{service_icon}" alt="One-stop Medical Sourcing">
+                {service_icon_tag}
                 <strong>One-stop Medical Sourcing</strong>
                 <span>Product sourcing and quotation support for procurement teams.</span>
               </div>
@@ -2387,7 +2337,7 @@ elif page == "about":
               </p>
             </div>
             <div>
-              <img class="about-image" src="{inner_company_image}" alt="Elite Medical team and office">
+              {about_image_tag}
             </div>
           </div>
           <div class="category-cloud">
@@ -2432,9 +2382,9 @@ elif page == "about":
           <div class="about-kicker">Certificates</div>
           <h2>Quality and Verification Support</h2>
           <div class="certificate-grid">
-            <div class="certificate-card"><img src="{ce_icon}" alt="CE Certificate"><strong>CE Certificate</strong><span>Product documentation support for international markets.</span></div>
-            <div class="certificate-card"><img src="{iso_icon}" alt="ISO Certificate"><strong>ISO Certificate</strong><span>Quality management and certified facility support.</span></div>
-            <div class="certificate-card"><img src="{service_icon}" alt="SFDA / MDMA Verification"><strong>SFDA / MDMA Verification</strong><span>Verification support for regulated sourcing workflows.</span></div>
+            <div class="certificate-card">{html_image(ce_icon, "", "CE Certificate")}<strong>CE Certificate</strong><span>Product documentation support for international markets.</span></div>
+            <div class="certificate-card">{html_image(iso_icon, "", "ISO Certificate")}<strong>ISO Certificate</strong><span>Quality management and certified facility support.</span></div>
+            <div class="certificate-card">{html_image(service_icon, "", "SFDA / MDMA Verification")}<strong>SFDA / MDMA Verification</strong><span>Verification support for regulated sourcing workflows.</span></div>
           </div>
         </section>
         """,
