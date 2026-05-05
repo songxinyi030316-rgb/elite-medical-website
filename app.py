@@ -22,6 +22,7 @@ COMPANY_DIR = ROOT / "public" / "company"
 COMPANY_IMAGE_PATH = COMPANY_DIR / "company.png"
 INNER_COMPANY_IMAGE_PATH = COMPANY_DIR / "innercompany.png"
 EXPORT_MAP_PATH = ROOT / "public" / "map.png"
+HOME_VIDEO_PATH = ROOT / "public" / "videos" / "ad1.mp4"
 
 GREEN = "#118457"
 DARK = "#25302b"
@@ -1106,6 +1107,19 @@ st.markdown(
     .support-section {{
         max-width: 1120px;
         margin: 1.05rem auto;
+    }}
+    .home-video-marker {{
+        display: none;
+    }}
+    div[data-testid="element-container"]:has(.home-video-marker) + div[data-testid="element-container"] {{
+        max-width: 1120px;
+        margin: 1.05rem auto;
+    }}
+    div[data-testid="element-container"]:has(.home-video-marker) + div[data-testid="element-container"] video {{
+        width: 100%;
+        border-radius: 18px;
+        box-shadow: 0 16px 36px rgba(37, 48, 43, .14);
+        background: #f4fbf7;
     }}
     .compact-section-title {{
         margin: 0 0 1rem;
@@ -2231,6 +2245,17 @@ if page == "home":
         """,
         unsafe_allow_html=True,
     )
+
+    if existing_path(HOME_VIDEO_PATH):
+        st.markdown('<span class="home-video-marker"></span>', unsafe_allow_html=True)
+        st.video(
+            str(HOME_VIDEO_PATH),
+            format="video/mp4",
+            loop=True,
+            autoplay=True,
+            muted=True,
+            width="stretch",
+        )
 
     st.markdown(
         """
