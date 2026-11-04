@@ -4,9 +4,14 @@ import json
 from pathlib import Path
 
 import streamlit as st
+from site_metadata import PAGE_TITLE
 
 
-st.set_page_config(page_title="Elite Medical Product Catalog", layout="wide")
+st.set_page_config(
+    page_title=PAGE_TITLE,
+    page_icon=str(Path(__file__).parent / "public" / "icons" / "logo.png"),
+    layout="wide",
+)
 
 ROOT = Path(__file__).parent
 DATA_PATH = ROOT / "data" / "products.json"
