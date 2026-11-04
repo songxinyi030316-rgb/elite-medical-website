@@ -28,6 +28,7 @@ COMPANY_IMAGE_PATH = COMPANY_DIR / "company.png"
 INNER_COMPANY_IMAGE_PATH = COMPANY_DIR / "innercompany.png"
 EXPORT_MAP_PATH = ROOT / "public" / "map.png"
 HOME_VIDEO_PATH = ROOT / "public" / "videos" / "elite-product-video.mp4"
+BRAND_VIDEO_PATH = ROOT / "public" / "videos" / "elite-brand-video.mp4"
 
 GREEN = "#118457"
 DARK = "#25302b"
@@ -1305,6 +1306,52 @@ st.markdown(
         max-width: 1120px;
         margin: 0 auto 1.05rem;
     }}
+    .st-key-about_brand_film {{
+        max-width: 1120px;
+        margin: .2rem auto 1.3rem;
+        padding: 1.2rem 1.35rem;
+        border: 1px solid #dce8e0;
+        border-radius: 18px;
+        background: #f5f9f6;
+    }}
+    .brand-film-copy h2 {{
+        color: {DARK};
+        font-size: 1.45rem;
+        line-height: 1.2;
+        margin: 0 0 .55rem;
+    }}
+    .brand-film-copy p {{
+        max-width: 380px;
+        color: {MUTED};
+        font-size: .98rem;
+        line-height: 1.6;
+        margin: 0 0 .7rem;
+    }}
+    .brand-film-duration {{
+        color: {GREEN};
+        font-size: .8rem;
+        font-weight: 700;
+    }}
+    .st-key-about_brand_film [data-testid="stVideo"] {{
+        width: 100%;
+        max-width: 520px;
+        aspect-ratio: 16 / 9;
+        border-radius: 12px;
+        display: block;
+        margin: 0 auto;
+        background: #172d22;
+    }}
+    @media (max-width: 640px) {{
+        .st-key-about_brand_film {{ padding: 1rem; }}
+        .st-key-about_brand_film [data-testid="stHorizontalBlock"] {{
+            flex-direction: column;
+        }}
+        .st-key-about_brand_film [data-testid="stColumn"] {{
+            width: 100%;
+            flex: 1 1 100%;
+            min-width: 0;
+        }}
+    }}
     .about-grid {{
         display: grid;
         grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
@@ -2386,6 +2433,25 @@ elif page == "about":
         """,
         unsafe_allow_html=True,
     )
+
+    if existing_path(BRAND_VIDEO_PATH):
+        with st.container(key="about_brand_film"):
+            film_copy, film_player = st.columns([.9, 1.1], gap="medium", vertical_alignment="center")
+            with film_copy:
+                st.markdown(
+                    """
+                    <div class="brand-film-copy">
+                      <div class="about-kicker">Our Brand Film</div>
+                      <h2>Why Elite? A closer look.</h2>
+                      <p>Get to know Elite Medical and our approach to supporting
+                      medical product buyers around the world.</p>
+                      <span class="brand-film-duration">Watch our story &middot; 3 min 10 sec</span>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            with film_player:
+                st.video(str(BRAND_VIDEO_PATH), autoplay=False)
 
     st.markdown(
         """
