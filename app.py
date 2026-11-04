@@ -26,7 +26,7 @@ SERVICE_ICON_PATH = ICON_DIR / "service.png"
 COMPANY_DIR = ROOT / "public" / "company"
 COMPANY_IMAGE_PATH = COMPANY_DIR / "company.png"
 INNER_COMPANY_IMAGE_PATH = COMPANY_DIR / "innercompany.png"
-EXPORT_MAP_PATH = ROOT / "public" / "map.png"
+EXPORT_MAP_PATH = ROOT / "public" / "global-supply-globe.webp"
 HOME_VIDEO_PATH = ROOT / "public" / "videos" / "elite-product-video.mp4"
 BRAND_VIDEO_PATH = ROOT / "public" / "videos" / "elite-brand-video.mp4"
 
@@ -323,7 +323,19 @@ def render_export_markets_section(show_map=False):
         st.markdown(
             f"""
             <section class="export-map-section">
-              <img src="{map_image}" alt="Elite Medical export markets map">
+              <div class="export-map-copy">
+                <span class="export-eyebrow">Export markets</span>
+                <h2>Global reach.<br>Personal support.</h2>
+                <p>Connecting medical distributors, hospitals and procurement teams with medical consumables for international supply programs.</p>
+                <div class="export-market-tags" aria-label="Markets served">
+                  <span>Europe</span><span>Middle East</span>
+                  <span>Southeast Asia</span><span>North America</span>
+                </div>
+                <div class="export-map-note">B2B sourcing · Product documentation · Export coordination</div>
+              </div>
+              <div class="export-map-art">
+                <img src="{map_image}" alt="Emerald globe illustrating international medical supply connections" loading="lazy" width="1536" height="1024">
+              </div>
             </section>
             """,
             unsafe_allow_html=True,
@@ -1251,15 +1263,37 @@ st.markdown(
     .export-map-section {{
         max-width: 1200px;
         width: 100%;
-        margin: 40px auto;
+        margin: 2rem auto;
+        display: grid;
+        grid-template-columns: 1fr 1.12fr;
+        align-items: center;
+        overflow: hidden;
+        border: 1px solid #dcefe5;
+        border-radius: 24px;
+        background: #f5faf7;
+    }}
+    .export-map-copy {{ padding: clamp(24px, 3vw, 46px); }}
+    .export-eyebrow {{
+        color: {GREEN}; font-size: .75rem; font-weight: 800;
+        text-transform: uppercase; letter-spacing: .14em;
+    }}
+    .export-map-copy h2 {{
+        color: {DARK}; font-size: clamp(1.8rem, 3vw, 2.6rem);
+        line-height: 1.12; letter-spacing: -.035em; margin: .8rem 0 1rem;
         padding: 0;
     }}
-    .export-map-section img {{
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto;
+    .export-map-copy p {{ color: {MUTED}; font-size: .98rem; line-height: 1.7; margin: 0; }}
+    .export-market-tags {{ display: flex; flex-wrap: wrap; gap: 8px; margin: 1.3rem 0; }}
+    .export-market-tags span {{
+        background: #fff; border: 1px solid #d3e7dc; border-radius: 30px;
+        padding: 7px 12px; color: #226247; font-size: .8rem; font-weight: 600;
+    }}
+    .export-map-note {{ color: {MUTED}; font-size: .75rem; line-height: 1.6; }}
+    .export-map-art img {{ width: 100%; height: auto; display: block; }}
+    @media (max-width: 720px) {{
+        .export-map-section {{ grid-template-columns: 1fr; margin: 1.4rem auto; }}
+        .export-map-copy {{ padding: 26px 24px 12px; }}
+        .export-map-art {{ max-width: 480px; margin: 0 auto; }}
     }}
     .market-grid {{
         display: grid;
