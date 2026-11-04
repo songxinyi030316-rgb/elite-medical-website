@@ -27,7 +27,7 @@ COMPANY_DIR = ROOT / "public" / "company"
 COMPANY_IMAGE_PATH = COMPANY_DIR / "company.png"
 INNER_COMPANY_IMAGE_PATH = COMPANY_DIR / "innercompany.png"
 EXPORT_MAP_PATH = ROOT / "public" / "map.png"
-HOME_VIDEO_PATH = ROOT / "public" / "videos" / "ad2.mp4"
+HOME_VIDEO_PATH = ROOT / "public" / "videos" / "elite-product-video.mp4"
 
 GREEN = "#118457"
 DARK = "#25302b"
@@ -2254,7 +2254,7 @@ if page == "home":
     if existing_path(HOME_VIDEO_PATH):
         st.markdown('<span class="home-video-marker"></span>', unsafe_allow_html=True)
         st.video(
-            "public/videos/ad2.mp4",
+            str(HOME_VIDEO_PATH),
             autoplay=True,
             muted=True,
         )
