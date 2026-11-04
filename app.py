@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import streamlit as st
+from streamlit.components.v1 import declare_component
 from site_metadata import PAGE_TITLE
 
 
@@ -14,6 +15,7 @@ st.set_page_config(
 )
 
 ROOT = Path(__file__).parent
+chat_component = declare_component("elite_chat", path=str(ROOT / "components" / "elite_chat"))
 DATA_PATH = ROOT / "data" / "products.json"
 HERO_IMAGE = "/public/hero/cover.png"
 HERO_IMAGE_PATH = ROOT / HERO_IMAGE.lstrip("/")
@@ -243,31 +245,6 @@ def start_product_inquiry(product_name):
     st.session_state.selected_product = product_name
     st.session_state.inquiry_product = product_name
     navigate_to("Contact")
-
-
-def open_chatbot():
-    st.session_state.chatbot_open = True
-
-
-def close_chatbot():
-    st.session_state.chatbot_open = False
-
-
-def add_chatbot_query(query, products):
-    cleaned_query = str(query).strip()
-    if not cleaned_query:
-        return
-
-    st.session_state.chatbot_open = True
-    st.session_state.chatbot_history.append({"role": "user", "content": cleaned_query})
-    st.session_state.chatbot_history.append(
-        {"role": "bot", "content": build_chatbot_reply(cleaned_query, products)}
-    )
-    st.session_state.chatbot_input = ""
-
-
-def send_current_chatbot_query(products):
-    add_chatbot_query(st.session_state.get("chatbot_input", ""), products)
 
 
 @st.cache_data(show_spinner=False)
@@ -754,84 +731,27 @@ def build_chatbot_reply(query, products):
     return "\n\n".join(lines)
 
 
-def render_chat_message(message):
-    role = "user" if message.get("role") == "user" else "bot"
-    content = html.escape(str(message.get("content", ""))).replace("\n", "<br>")
-    st.markdown(
-        f'<div class="chat-message {role}">{content}</div>',
-        unsafe_allow_html=True,
-    )
-
-
 def render_chatbot(products):
-    if "chatbot_open" not in st.session_state:
-        st.session_state.chatbot_open = False
-    if "chatbot_input" not in st.session_state:
-        st.session_state.chatbot_input = ""
     if "chatbot_history" not in st.session_state:
-        st.session_state.chatbot_history = [
-            {
-                "role": "bot",
-                "content": "Hi! I can help you find products from the Elite Medical catalog.",
-            }
-        ]
-
-    if not st.session_state.chatbot_open:
-        st.markdown('<span class="chatbot-button-marker"></span>', unsafe_allow_html=True)
-        st.button("💬 Need help?", key="chatbot_open_button", on_click=open_chatbot)
-        return
-
-    st.markdown('<span class="chatbot-panel-marker"></span>', unsafe_allow_html=True)
-    with st.container():
-        st.markdown(
-            """
-            <div class="chatbot-title">
-              <strong>Elite Medical Assistant</strong>
-              <span>Local catalog search</span>
-            </div>
-            """,
-            unsafe_allow_html=True,
+        st.session_state.chatbot_history = [{
+            "role": "bot",
+            "content": "Welcome to Elite Medical. What can we help you source today? Search by product name, category or REF code.",
+        }]
+    with st.container(key="elite_chat_widget"):
+        event = chat_component(
+            history=st.session_state.chatbot_history[-12:],
+            key="elite_chat", default=None,
         )
-        for message in st.session_state.chatbot_history[-6:]:
-            render_chat_message(message)
-
-        st.markdown('<div class="chatbot-suggestions">Quick search</div>', unsafe_allow_html=True)
-        suggestion_row_1 = st.columns(3)
-        suggestion_row_2 = st.columns(2)
-        suggestions = [
-            ("Medical Dressing", suggestion_row_1[0]),
-            ("Bandage", suggestion_row_1[1]),
-            ("Respiratory", suggestion_row_1[2]),
-            ("Injection", suggestion_row_2[0]),
-            ("Laboratory", suggestion_row_2[1]),
-        ]
-        for suggestion, column in suggestions:
-            with column:
-                st.button(
-                    suggestion,
-                    key=f"chatbot_suggestion_{suggestion}",
-                    width="stretch",
-                    on_click=add_chatbot_query,
-                    args=(suggestion, products),
-                )
-
-        st.text_input(
-            "Search by product, category, or REF code",
-            key="chatbot_input",
-            placeholder="Example: dressing, EL010101, respiratory",
-        )
-        action_col_1, action_col_2 = st.columns([1, .72])
-        with action_col_1:
-            st.button(
-                "Send",
-                key="chatbot_send",
-                type="primary",
-                width="stretch",
-                on_click=send_current_chatbot_query,
-                args=(products,),
-            )
-        with action_col_2:
-            st.button("Close", key="chatbot_close", width="stretch", on_click=close_chatbot)
+    if isinstance(event, dict) and event.get("id") != st.session_state.get("chatbot_last_event"):
+        query = str(event.get("query", "")).strip()[:500]
+        st.session_state.chatbot_last_event = event.get("id")
+        if query:
+            st.session_state.chatbot_history.extend([
+                {"role": "user", "content": query},
+                {"role": "bot", "content": build_chatbot_reply(query, products)},
+            ])
+            st.session_state.chatbot_history = st.session_state.chatbot_history[-12:]
+            st.rerun()
 
 
 hero_background = image_data_uri(HERO_IMAGE_PATH)
@@ -1979,86 +1899,15 @@ st.markdown(
         border-color: #0c6f49;
         color: #ffffff;
     }}
-    .chatbot-button-marker,
-    .chatbot-panel-marker {{
-        display: none;
+    .st-key-elite_chat_widget {{
+        position: fixed; right: 16px; bottom: 12px; z-index: 1001;
+        width: min(390px, calc(100vw - 24px));
     }}
-    div[data-testid="element-container"]:has(.chatbot-button-marker) + div[data-testid="element-container"] {{
-        position: fixed;
-        right: 1.15rem;
-        bottom: 1.15rem;
-        z-index: 1000;
-        width: auto;
-    }}
-    div[data-testid="element-container"]:has(.chatbot-button-marker) + div[data-testid="element-container"] div.stButton > button {{
-        background: {GREEN};
-        color: #ffffff;
-        border: 1px solid #0e724b;
-        min-height: 44px;
-        padding: .45rem .9rem;
-        box-shadow: 0 14px 34px rgba(17, 132, 87, .28);
-    }}
-    div[data-testid="element-container"]:has(.chatbot-button-marker) + div[data-testid="element-container"] div.stButton > button:hover {{
-        background: #0c6f49;
-        color: #ffffff;
-    }}
-    div[data-testid="element-container"]:has(.chatbot-panel-marker) + div[data-testid="stVerticalBlock"] {{
-        position: fixed;
-        right: 1.15rem;
-        bottom: 1.15rem;
-        z-index: 1000;
-        width: min(370px, calc(100vw - 2rem));
-        max-height: min(76vh, 650px);
-        overflow-y: auto;
-        border: 1px solid #dcefe5;
-        border-radius: 18px;
-        background: #ffffff;
-        padding: .9rem;
-        box-shadow: 0 20px 60px rgba(37, 48, 43, .22);
-    }}
-    .chatbot-title {{
-        border-bottom: 1px solid #e5f2ea;
-        margin-bottom: .55rem;
-        padding-bottom: .5rem;
-    }}
-    .chatbot-title strong {{
-        display: block;
-        color: {DARK};
-        font-size: 1rem;
-    }}
-    .chatbot-title span {{
-        color: {MUTED};
-        font-size: .78rem;
-    }}
-    .chat-message {{
-        border-radius: 13px;
-        padding: .6rem .7rem;
-        margin: .45rem 0;
-        font-size: .86rem;
-        line-height: 1.4;
-    }}
-    .chat-message.bot {{
-        background: #effaf4;
-        color: {DARK};
-        border: 1px solid #d8efe2;
-    }}
-    .chat-message.user {{
-        background: {GREEN};
-        color: #ffffff;
-        margin-left: 2.5rem;
-    }}
-    .chatbot-suggestions {{
-        color: {GREEN};
-        font-weight: 900;
-        font-size: .78rem;
-        margin: .55rem 0 .25rem;
-        text-transform: uppercase;
-        letter-spacing: .03em;
-    }}
-    div[data-testid="element-container"]:has(.chatbot-panel-marker) + div[data-testid="stVerticalBlock"] div.stButton > button {{
-        min-height: 34px;
-        padding: .2rem .5rem;
-        font-size: .78rem;
+    .st-key-elite_chat_widget:has(iframe[height="72"]) {{ width: 168px; }}
+    .st-key-elite_chat_widget iframe {{ display: block; width: 100%; border: 0; }}
+    @media (max-height: 620px) {{
+        .st-key-elite_chat_widget {{ bottom: 4px; }}
+        .st-key-elite_chat_widget iframe:not([height="72"]) {{ max-height: calc(100dvh - 80px); }}
     }}
     @media (max-width: 900px) {{
         .block-container {{
@@ -2142,11 +1991,6 @@ st.markdown(
             align-items: flex-start;
             flex-direction: column;
             gap: .12rem;
-        }}
-        div[data-testid="element-container"]:has(.chatbot-panel-marker) + div[data-testid="stVerticalBlock"] {{
-            right: .75rem;
-            bottom: .75rem;
-            width: calc(100vw - 1.5rem);
         }}
     }}
     </style>

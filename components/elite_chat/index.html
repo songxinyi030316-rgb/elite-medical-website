@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+*{box-sizing:border-box}body{margin:0;padding:8px;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#25302b;background:transparent}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #70c9a2;outline-offset:2px}[hidden]{display:none!important}
+#launcher{float:right;height:54px;border:0;border-radius:28px;background:#118457;color:white;padding:0 20px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:650;box-shadow:0 3px 8px #153c2926}svg{width:21px;height:21px;flex-shrink:0}
+#panel{height:540px;display:flex;flex-direction:column;background:#fff;border:1px solid #dcebe3;border-radius:22px;overflow:hidden;box-shadow:0 3px 8px #153c291c}header{padding:18px;display:flex;align-items:center;gap:11px;background:#0d714d;color:#fff}.avatar{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#ffffff20}h1{font-size:16px;margin:0 0 4px;font-weight:650}header p{font-size:11px;margin:0;color:#d2eddf}#close{margin-left:auto;border:0;background:transparent;color:white;width:34px;height:34px;border-radius:50%;font-size:25px}#close:hover{background:#ffffff20}
+#history{overflow:auto;overscroll-behavior:contain;flex:1;padding:18px 16px;scrollbar-width:thin;background:#f7faf8;min-height:80px}.message{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.65;padding:12px 14px;border-radius:15px;margin:0 22px 12px 0;background:white;border:1px solid #e4ede7}.message.user{margin:0 0 12px 40px;background:#e0f2e8;border-color:#d2e9dc}.label{font-size:10px;font-weight:700;color:#55836d;margin-bottom:7px;letter-spacing:.06em;text-transform:uppercase}
+#suggestions{display:flex;gap:6px;flex-wrap:wrap;padding:12px 14px 0}#suggestions button{font-size:11px;color:#236348;background:#f4faf6;border:1px solid #d8e9df;padding:7px 10px;border-radius:20px}form{display:flex;gap:8px;padding:12px 14px 8px}input{min-width:0;flex:1;border:1px solid #dbe6df;border-radius:12px;padding:11px;font-size:13px;background:#fff;color:#25302b}#send{border:0;border-radius:12px;width:42px;background:#118457;color:white;display:grid;place-items:center}button:disabled{opacity:.45;cursor:wait}#hint{margin:0;padding:2px 14px 12px;font-size:10px;color:#738178;text-align:center}#keep{border:0;background:none;color:#16734e;font-size:10px;text-decoration:underline;padding:0 3px}.pending{color:#66796d;font-size:12px;padding:8px}
+@media(prefers-reduced-motion:no-preference){#panel{animation:appear .18s ease-out}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}}
+</style></head><body>
+<button id="launcher" aria-expanded="false" aria-controls="panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 11.5a8 8 0 0 1-8 8H5l-3 2v-10a9 9 0 0 1 18 0Z"/><path d="M7 10h8M7 14h5"/></svg>Ask Elite</button>
+<section id="panel" hidden aria-label="Elite Medical assistant">
+<header><div class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></svg></div><div><h1>Elite Medical</h1><p>Your product & sourcing assistant</p></div><button id="close" aria-label="Minimize chat" title="Minimize">−</button></header>
+<div id="history" role="log" aria-live="polite" aria-relevant="additions"></div>
+<div id="suggestions"><button type="button">Dressing</button><button type="button">Bandage</button><button type="button">Respiratory</button></div>
+<form id="form"><input id="query" maxlength="500" aria-label="Your question" placeholder="Product name or REF code…" autocomplete="off"><button id="send" aria-label="Send question" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m4 4 17 8-17 8 3-8-3-8ZM7 12h14"/></svg></button></form>
+<p id="hint">Product guidance, a click away.</p>
+</section>
+<script>
+const $=id=>document.getElementById(id);
+const post=(type,data={})=>parent.postMessage({isStreamlitMessage:true,type,...data},'*');
+let open=false, pending=false, messages=[], signature='', timer, answered=false, pinned=false, panelHeight=540;
+const idleMs=30000;
+function resize(){post('streamlit:setFrameHeight',{height:open?panelHeight+16:72});}
+function collapse(){open=false;clearTimeout(timer);$('panel').hidden=true;$('launcher').hidden=false;$('launcher').setAttribute('aria-expanded','false');resize();}
+function arm(){clearTimeout(timer);if(open&&answered&&!pending&&!pinned&&!$('query').value.trim()){timer=setTimeout(collapse,idleMs);}}
+function hint(){ $('hint').textContent=answered&&!pinned?'Minimizes after 30 seconds of inactivity. ': 'Product guidance, a click away.';if(answered&&!pinned){const b=document.createElement('button');b.id='keep';b.type='button';b.textContent='Keep open';b.onclick=()=>{pinned=true;clearTimeout(timer);hint()};$('hint').append(b);}}
+function expand(){open=true;pinned=false;$('launcher').hidden=true;$('panel').hidden=false;$('launcher').setAttribute('aria-expanded','true');hint();resize();arm();$('query').focus();}
+function render(){const box=$('history');box.replaceChildren();for(const message of messages){const el=document.createElement('div');el.className='message '+(message.role==='user'?'user':'bot');const label=document.createElement('div');label.className='label';label.textContent=message.role==='user'?'You':'Elite Medical';el.append(label,document.createTextNode(message.content));box.append(el);}if(pending){const el=document.createElement('div');el.className='pending';el.textContent='Finding products…';box.append(el);}box.scrollTop=box.scrollHeight;$('send').disabled=pending;document.querySelectorAll('#suggestions button').forEach(b=>b.disabled=pending);}
+function send(query){query=query.trim();if(!query||pending)return;clearTimeout(timer);pending=true;$('query').value='';messages.push({role:'user',content:query});render();post('streamlit:setComponentValue',{value:{id:Date.now().toString()+'-'+Math.random().toString(36).slice(2),query},dataType:'json'});}
+$('launcher').onclick=expand;$('close').onclick=()=>{collapse();$('launcher').focus()};$('form').onsubmit=e=>{e.preventDefault();send($('query').value)};document.querySelectorAll('#suggestions button').forEach(b=>b.onclick=()=>send(b.textContent));
+for(const event of ['pointermove','pointerdown','keydown','input','wheel','touchstart'])$('panel').addEventListener(event,arm,{passive:true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open){collapse();$('launcher').focus();}});
+window.addEventListener('message',e=>{if(e.source!==parent||e.data.type!=='streamlit:render')return;const args=e.data.args;panelHeight=Math.min(540,args.panel_height||540);$('panel').style.height='min('+panelHeight+'px, calc(100vh - 16px))';const next=JSON.stringify(args.history||[]);if(next!==signature){const wasPending=pending;signature=next;messages=args.history||[];pending=false;answered=messages.length>1;render();hint();if(wasPending)arm();}resize();});
+post('streamlit:componentReady',{apiVersion:1});resize();
+</script></body></html>
